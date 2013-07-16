@@ -1,8 +1,5 @@
 Temp/
-Library/
-obj/
-*.svd
- 
+
 /Project/Project.userprefs
 /Project/Assembly-CSharp.csproj
 /Project/Assembly-CSharp.pidb

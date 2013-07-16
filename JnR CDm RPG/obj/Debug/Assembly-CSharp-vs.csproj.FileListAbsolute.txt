@@ -1,0 +1,20 @@
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\Temp\bin\Debug\Assembly-CSharp.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\Temp\bin\Debug\UnityEditor.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\Temp\bin\Debug\UnityEngine.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\Temp\bin\Debug\nunit.framework.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\obj\Debug\Assembly-CSharp.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\JnR CDm RPG\Temp\bin\Debug\Assembly-CSharp.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\JnR CDm RPG\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\JnR CDm RPG\Temp\bin\Debug\UnityEditor.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\JnR CDm RPG\Temp\bin\Debug\UnityEngine.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\JnR CDm RPG\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\JnR CDm RPG\Temp\bin\Debug\nunit.framework.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\JnR CDm RPG\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\JnR CDm RPG\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\JnR CDm RPG\obj\Debug\Assembly-CSharp.dll
+C:\Users\Christian\Dropbox\MyDir\JnR CDm RPG\JnR CDm RPG\obj\Debug\Assembly-CSharp.pdb

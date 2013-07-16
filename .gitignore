@@ -3,7 +3,6 @@ Library/
 obj/
 *.svd
  
-!Library/*.asset
 !Library/AssetImportState
 !Library/AssetVersioning.db
 !Library/BuildPlayer.prefs

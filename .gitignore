@@ -1,16 +1,10 @@
-Temp/
-
-/Project/Project.userprefs
-/Project/Assembly-CSharp.csproj
-/Project/Assembly-CSharp.pidb
-/Project/Assembly-CSharp-Editor.csproj
-/Project/Assembly-CSharp-Editor.pidb
-/Project/Assembly-CSharp-Editor-vs.csproj
-/Project/Assembly-CSharp-firstpass.csproj
-/Project/Assembly-CSharp-firstpass.pidb
-/Project/Assembly-CSharp-firstpass-vs.csproj
-/Project/Assembly-CSharp-vs.csproj
-/Project/Assembly-UnityScript-firstpass.pidb
-/Project/Assembly-UnityScript-firstpass.unityproj
-/Project/Assembly-UnityScript-firstpass-vs.unityproj
-/Project/Project.suo
+# Unity .gitignore file.
+.DS_Store
+Library
+Library/*
+*.csproj
+*.sln
+*.userprefs
+Temp
+*.pidb
+Build

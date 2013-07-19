@@ -1,15 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\DemoStuff\CamControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\Movement.cs">
     <Files>
-      <File FileName="Assets\DemoStuff\CamControl.cs" Line="59" Column="4" />
-      <File FileName="Assets\DemoStuff\ChangeShader.cs" Line="19" Column="59" />
-      <File FileName="Assets\DemoStuff\SelectTarget.cs" Line="11" Column="27" />
-      <File FileName="Assets\DemoStuff\PlayerAttack.cs" Line="19" Column="17" />
-      <File FileName="Assets\DemoStuff\TargetListUpdate.cs" Line="23" Column="38" />
-      <File FileName="Assets\Scripts\ThirdPersonController.js" Line="193" Column="54" />
-      <File FileName="Assets\Scripts\CharacterMotor.js" Line="29" Column="55" />
-      <File FileName="Assets\Scripts\FPSInputController.js" Line="1" Column="6" />
+      <File FileName="Assets\Scripts\Player\Movement.cs" Line="68" Column="14" />
+      <File FileName="Assets\DemoStuff\CamControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\DemoStuff\ChangeShader.cs" Line="1" Column="1" />
+      <File FileName="Assets\DemoStuff\SelectTarget.cs" Line="1" Column="1" />
+      <File FileName="Assets\DemoStuff\PlayerAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets\DemoStuff\TargetListUpdate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ThirdPersonController.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CharacterMotor.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FPSInputController.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

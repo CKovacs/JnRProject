@@ -1,18 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
+using System;
+using System.Collections.Generic;
 
-[System.Serializable]
-public class LevelData : ScriptableObject 
+public class LevelData : MonoBehaviour 
 {
     public GameStateObject _state;
-
-    public const string MENUPATH = "JnR/Create/LevelData";
-    public const string ASSETPATH = "Prefabs/LevelData";
-
-    [MenuItem(MENUPATH)]
-    public static void CreateAsset()
-    {
-        ScriptableObjectUtility.CreateAsset<LevelData>(ASSETPATH);
-    }
+    public List<Cell> _cells;
+    public GameObject _gridReference;
 }

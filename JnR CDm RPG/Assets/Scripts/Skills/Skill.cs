@@ -10,9 +10,9 @@ public class Skill : ScriptableObject
     public float _casttime;         // If _castTime == 0   -> skill is instant, otherwise the skill has a cast time
     public List<Effect> _effect;
     public List<TargetType> _type;
-    
-    public const string MENUPATH  = "JnR/Create/Skill";
-    public const string ASSETPATH = "Prefabs/Skills";
+
+    private const string MENUPATH = "JnR/Create/Skill";
+    private const string ASSETPATH = "Prefabs/Skills";
 
     public bool CheckSkillConditions(Target target)
     {

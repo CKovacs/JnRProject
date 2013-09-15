@@ -7,21 +7,25 @@ public class GameStateObjectEditor : Editor
 {
     private GameStateObject _state;
 
-    public const string TEAMBLUE        = "Team blue";
-    public const string TEAMRED         = "Team red";
-    public const string ADDBLUE         = "Add blue player";
-    public const string ADDRED          = "Add red player";
-    public const string GAMETYPE        = "Game type";
-    public const string MAXTIME         = "Max time in seconds";
+    private const string TEAMBLUE = "Team blue";
+    private const string TEAMRED = "Team red";
+    private const string GAMETYPE = "Game type";
+    private const string MAXTIME = "Max time in seconds";
 
-    //CTF
-    public const string MAXFLAGCOUNT    = "Flag max count";
+    // Buttons
+    private const string ADDBLUE = "Add blue player";
+    private const string ADDRED = "Add red player";
+    private const string DELBLUE = "Delete blue player";
+    private const string DELRED = "Delete red player";
 
-    //TDM
-    public const string MAXDDEEATHBLUE  = "Blue max death count";
-    public const string MAXDDEEATHRED   = "Red max death count";
+    // CTF
+    private const string MAXFLAGCOUNT = "Flag max count";
 
-    void Awake()
+    // TDM
+    private const string MAXDDEEATHBLUE = "Blue max death count";
+    private const string MAXDDEEATHRED = "Red max death count";
+
+    public void Awake()
     {
         _state = target as GameStateObject;
     }
@@ -32,12 +36,16 @@ public class GameStateObjectEditor : Editor
 
         for (int i = 0; i < _state._blue.Count; ++i)
         {
-            _state._blue[i] = (EditorGUILayout.ObjectField(_state._blue[i], typeof(Player)) as Player);
+            _state._blue[i] = (EditorGUILayout.ObjectField(_state._blue[i], typeof(Player), false) as Player);
         }
 
         if(GUILayout.Button(ADDBLUE)) 
         {
             _state._blue.Add(new Player());
+        }
+        if (GUILayout.Button(DELBLUE)) 
+        {
+            _state._blue.RemoveAt(_state._blue.Count - 1);
         }
 
         EditorGUILayout.Space();
@@ -46,12 +54,16 @@ public class GameStateObjectEditor : Editor
 
         for (int i = 0; i < _state._red.Count; ++i)
         {
-            _state._red[i] = (EditorGUILayout.ObjectField(_state._red[i], typeof(Player)) as Player);
+            _state._red[i] = (EditorGUILayout.ObjectField(_state._red[i], typeof(Player), false) as Player);
         }
 
         if (GUILayout.Button(ADDRED))
         {
             _state._red.Add(new Player());
+        }
+        if (GUILayout.Button(DELRED))
+        {
+            _state._red.RemoveAt(_state._red.Count - 1);
         }
 
         EditorGUILayout.Space();

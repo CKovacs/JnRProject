@@ -75,6 +75,7 @@
      <Compile Include="Assets\Editor\GameStateObjectEditor.cs" />
      <Compile Include="Assets\Editor\InfoBoxEditor.cs" />
      <Compile Include="Assets\Editor\LevelEditorWindow.cs" />
+     <Compile Include="Assets\Editor\SkillEditor.cs" />
      <None Include="Assets\3rd Party\NGUI\ReadMe.txt" />
      <None Include="Assets\3rd Party\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
      <None Include="Assets\3rd Party\NGUI\Examples\Other\English.txt" />

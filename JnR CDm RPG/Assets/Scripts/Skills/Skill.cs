@@ -6,10 +6,11 @@ using System.Collections.Generic;
 public class Skill : ScriptableObject 
 {
     public float _range;
-    public float _cooldown;  
-    public float _casttime;         // If _castTime == 0   -> skill is instant, otherwise the skill has a cast time
+    public int _cooldown;  
+    public int _casttime;         // If _castTime == 0   -> skill is instant, otherwise the skill has a cast time
+    public int _effectListSize;
     public List<Effect> _effect;
-    public List<TargetType> _type;
+    public List<TargetType> _targetTypes;
 
     private const string MENUPATH = "JnR/Create/Skill";
     private const string ASSETPATH = "Prefabs/Skills";

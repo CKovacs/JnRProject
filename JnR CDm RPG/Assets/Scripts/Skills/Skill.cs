@@ -8,7 +8,10 @@ public class Skill : ScriptableObject
     public float _range;
     public int _cooldown;  
     public int _casttime;         // If _castTime == 0   -> skill is instant, otherwise the skill has a cast time
-    public int _effectListSize;
+    public bool _needToBeInFront;
+    public bool _needToHitOnBack;
+    public bool _closedCombatOnly;
+    public bool _rangedCombatOnly;
     public List<Effect> _effect;
     public List<TargetType> _targetTypes;
 

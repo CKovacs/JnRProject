@@ -5,9 +5,20 @@ public enum EffectType
 {
     damage = 0,
     heal,
-    stat,
+    lifesteal,
     run,
-    stun
+    // Stats
+    atk,
+    def,
+    range,
+    // Special effects
+    stun, 
+    reflect, 
+    immun, 
+    knockback, 
+    blink, 
+    bladedance,
+    dodgeball
 };
 
 /// <summary>
@@ -18,7 +29,9 @@ public class Effect
 {
     public EffectType _type;
     public int _duration;         // If _time == 0       -> damage is instant, otherwise: DoT or HoT   
-    public int _amount;
+    public int _amount;             
     public int _frequency;    // If _frequency == 0  -> isn't DoT or Hot
-    public int _speed;
+    public int _percentage;          // Used for speed
+    public bool _onHit;
+    public bool _onDeath;
 }

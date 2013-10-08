@@ -7,6 +7,7 @@ public class SkillEditor : Editor
 {
     private Skill _skill;
 
+    private const string ICON = "Icon";
     private const string RANGE = "Range";
     private const string COOLDOWN = "Cooldown (seconds)";
     private const string DURATION = "Duration (seconds)";
@@ -40,8 +41,8 @@ public class SkillEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        /*
-        public List<TargetType> _type;*/
+        _skill._icon = EditorGUILayout.ObjectField(ICON, _skill._icon, typeof(Texture2D), true) as Texture2D;
+
         _skill._range = EditorGUILayout.FloatField(RANGE, _skill._range);
         _skill._cooldown = EditorGUILayout.IntField(COOLDOWN, _skill._cooldown);
         _skill._needToBeInFront = EditorGUILayout.Toggle(NTBIF, _skill._needToBeInFront);

@@ -7,6 +7,8 @@ Project("{4C3C8E26-224F-11B3-6135-D526641373A7}") = "JnR CDm RPG", "Assembly-CSh
 EndProject
 Project("{4C3C8E26-224F-11B3-6135-D526641373A7}") = "JnR CDm RPG", "Assembly-UnityScript.unityproj", "{F2085B95-DAA2-FAD3-0BBD-D913FB99CB27}"
 EndProject
+Project("{4C3C8E26-224F-11B3-6135-D526641373A7}") = "JnR CDm RPG", "Assembly-UnityScript-Editor.unityproj", "{AC7B65E7-A64D-BB0A-E9C6-9E378D01D337}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,11 +27,15 @@ Global
 		{F2085B95-DAA2-FAD3-0BBD-D913FB99CB27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2085B95-DAA2-FAD3-0BBD-D913FB99CB27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2085B95-DAA2-FAD3-0BBD-D913FB99CB27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC7B65E7-A64D-BB0A-E9C6-9E378D01D337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC7B65E7-A64D-BB0A-E9C6-9E378D01D337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC7B65E7-A64D-BB0A-E9C6-9E378D01D337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC7B65E7-A64D-BB0A-E9C6-9E378D01D337}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																																																																																	GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																																																																										GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

@@ -18,13 +18,23 @@ public class Spawn
         {
             switch (c._type)
             {
-                case CellType.BlueSpawn:
-                    Player player = _state._blue.Find(p => p != null && p._name == c._playerName);
+                case CellType.BlueTeamSpawn:
+                    //Player player = _state._blue.Find(p => p != null && p._name == c._playerName);
 
-                    GameObject spawnedPlayer = GameObject.Instantiate(player._3dData, Vector3.zero, Quaternion.identity) as GameObject;
+                    foreach (Player blue in _state._blue) 
+                    {
+                        GameObject spawnedPlayer = GameObject.Instantiate(blue._3dData, Vector3.zero, Quaternion.identity) as GameObject;
+                    }
                     
-                    
-                    break;/*
+                    break;
+                case CellType.RedTeamSpawn:
+                    foreach (Player red in _state._red)
+                    {
+                        GameObject spawnedPlayer = GameObject.Instantiate(red._3dData, Vector3.zero, Quaternion.identity) as GameObject;
+                    }
+
+                    break;
+                /*
                 case CellType.BlueFlag:
                     _cell.renderer.sharedMaterial.color = Color.cyan;
                     break;

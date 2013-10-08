@@ -36,14 +36,14 @@ public class CellEditor : Editor
                 _cell.renderer.sharedMaterial.color = Color.white;
                 break;
 
-            case CellType.BlueSpawn:
+            case CellType.BlueTeamSpawn:
                 _cell.renderer.sharedMaterial.color = Color.blue;
                 break;
             case CellType.BlueFlag:
                 _cell.renderer.sharedMaterial.color = Color.cyan;
                 break;
 
-            case CellType.RedSpawn:
+            case CellType.RedTeamSpawn:
                 _cell.renderer.sharedMaterial.color = Color.red;
                 break;
             case CellType.RedFlag:

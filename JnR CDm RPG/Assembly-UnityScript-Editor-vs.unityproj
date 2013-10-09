@@ -37,115 +37,116 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\AntialiasingAsPostEffectEditor.js" />
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\BloomAndLensFlaresEditor.js" />
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\BloomEditor.js" />
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\CameraMotionBlurEditor.js" />
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\ColorCorrectionCurvesEditor.js" />
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\ColorCorrectionLutEditor.js" />
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\DepthOfField34Editor.js" />
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\DepthOfFieldScatterEditor.js" />
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\EdgeDetectEffectNormalsEditor.js" />
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\NoiseAndGrainEditor.js" />
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\SunShaftsEditor.js" />
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\TiltShiftEditor.js" />
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\TonemappingEditor.js" />
-     <Compile Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\VignettingEditor.js" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\AntialiasingAsPostEffectEditor.js" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\BloomAndLensFlaresEditor.js" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\BloomEditor.js" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\CameraMotionBlurEditor.js" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\ColorCorrectionCurvesEditor.js" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\ColorCorrectionLutEditor.js" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\DepthOfField34Editor.js" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\DepthOfFieldScatterEditor.js" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\EdgeDetectEffectNormalsEditor.js" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\NoiseAndGrainEditor.js" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\SunShaftsEditor.js" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\TiltShiftEditor.js" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\TonemappingEditor.js" />
+     <Compile Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Editor\Image Effects\VignettingEditor.js" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\3rd Party\NGUI\ReadMe.txt" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ShowAlphaChannel.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlowConeTap.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SunShaftsComposite.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionCurves.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\NFAA.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ShowAlphaChannel.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlowConeTap.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SunShaftsComposite.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionCurves.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\NFAA.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\VignetteShader.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\DepthOfFieldScatter.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\MotionBlur.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\VignetteShader.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\DepthOfFieldScatter.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\MotionBlur.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Other\English.txt" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlowCompose.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\MinMaxReduction.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\SSAA.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\RadialBlur.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlowCompose.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\MinMaxReduction.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\SSAA.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\RadialBlur.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
      <None Include="Assets\3rd Party\NGUI\Resources\Shaders\Unlit - Transparent Colored (AlphaClip).shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\DepthOfFieldDX11.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ContrastComposite.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset3.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\FisheyeShader.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Apply.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\frag_ao.cginc" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\DepthOfFieldDX11.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ContrastComposite.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset3.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\FisheyeShader.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Apply.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\frag_ao.cginc" />
      <None Include="Assets\3rd Party\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
      <None Include="Assets\3rd Party\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
      <None Include="Assets\3rd Party\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\DepthOfField34.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\TiltShift.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SSAOShader.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ConvertDepth.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionCurvesSimple.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderYUV.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\DepthOfField34.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\TiltShift.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SSAOShader.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ConvertDepth.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionCurvesSimple.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderYUV.shader" />
      <None Include="Assets\3rd Party\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlowEffectDownsample.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\CreaseApply.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlowEffectDownsample.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\CreaseApply.shader" />
      <None Include="Assets\3rd Party\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed).shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ChromaticAberrationShader.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlobalFog.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Luminance.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionSelective.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\Bokeh34.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ChromaticAberrationShader.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlobalFog.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Luminance.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionSelective.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\Bokeh34.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\CameraMotionBlurDX11.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\SeparableBlurPlus.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\BlurEffectConeTaps.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\CameraMotionBlurDX11.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\SeparableBlurPlus.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\BlurEffectConeTaps.shader" />
      <None Include="Assets\3rd Party\NGUI\Resources\Shaders\Depth.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\CameraMotionBlur.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\CameraMotionBlur.shader" />
      <None Include="Assets\3rd Party\NGUI\Resources\Shaders\Unlit - Masked Colored.shader" />
      <None Include="Assets\3rd Party\NGUI\Resources\Shaders\Unlit - Transparent Colored Overlay.shader" />
      <None Include="Assets\3rd Party\NGUI\Resources\Shaders\Unlit - Transparent Colored (SoftClip).shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\DLAA.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\DLAA.shader" />
      <None Include="Assets\3rd Party\NGUI\Resources\Shaders\Unlit - Transparent Colored (HardClip).shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseAndGrainDX11.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseAndGrainDX11.shader" />
      <None Include="Assets\3D Objects\SkeletonData\animations.txt" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BrightPassFilter2.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableBlur.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\MotionBlurClear.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionEffect.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GrayscaleEffect.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SepiaToneEffect.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\TwirlEffect.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\VortexEffect.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Adaptation.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseAndGrain.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\VignettingShader.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BrightPassFilter2.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableBlur.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\MotionBlurClear.shader" />
+     <None Include="Assets\Electricity\Shaders\lightning.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionEffect.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GrayscaleEffect.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SepiaToneEffect.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\TwirlEffect.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\VortexEffect.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Adaptation.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseAndGrain.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\VignettingShader.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Shaders\Refractive.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Tonemapper.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BrightPassFilter.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAA2.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrection3DLut.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\LensFlareCreate.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\EdgeDetectNormals.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\PrepareSunShaftsBlur.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\Blend.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\BlendModesOverlay.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Tonemapper.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BrightPassFilter.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAA2.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrection3DLut.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\LensFlareCreate.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\EdgeDetectNormals.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\PrepareSunShaftsBlur.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\Blend.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\BlendModesOverlay.shader" />
      <None Include="Assets\3rd Party\NGUI\Resources\Shaders\Unlit - Additive Colored.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SimpleClear.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SimpleClear.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAA3Console.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\EdgeDetectX.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset2.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
-     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendForBloom.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAA3Console.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\EdgeDetectX.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset2.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
+     <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendForBloom.shader" />
  <Reference Include="Assembly-UnityScript">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript.dll</HintPath>
  </Reference>
@@ -156,22 +157,22 @@
  <HintPath>Assets\3rd Party\NGUI\DLLs\Editor\NGUI_Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
- <HintPath>D:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions">
- <HintPath>D:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\iPhonePlayer\EditorExtensions\UnityEditor.iOS.Extensions.dll</HintPath>
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\iPhonePlayer\EditorExtensions\UnityEditor.iOS.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.WP8.Extensions">
- <HintPath>D:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\WP8Support\EditorExtensions\UnityEditor.WP8.Extensions.dll</HintPath>
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\WP8Support\EditorExtensions\UnityEditor.WP8.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Metro.Extensions">
- <HintPath>D:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\MetroSupport\EditorExtensions\UnityEditor.Metro.Extensions.dll</HintPath>
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\MetroSupport\EditorExtensions\UnityEditor.Metro.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.BB10.Extensions">
- <HintPath>D:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\BB10Player\EditorExtensions\UnityEditor.BB10.Extensions.dll</HintPath>
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\BB10Player\EditorExtensions\UnityEditor.BB10.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Android.Extensions">
- <HintPath>D:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

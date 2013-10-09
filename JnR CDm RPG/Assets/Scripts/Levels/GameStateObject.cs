@@ -17,13 +17,4 @@ public class GameStateObject : ScriptableObject
     //Team Deathmatch specific
     public int          _blueMaxDeaths;
     public int          _redMaxDeaths;
-
-    public const string MENUPATH    = "JnR/Create/GameState";
-    public const string ASSETPATH   = "Prefabs/GameStates";
-
-    [UnityEditor.MenuItem(MENUPATH)]
-    public static void CreateAsset()
-    {
-        ScriptableObjectUtility.CreateAsset<GameStateObject>(ASSETPATH);
-    }
 }

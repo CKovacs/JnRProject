@@ -9,6 +9,10 @@ public static class ScriptableObjectUtility
     private const string EXT = ".asset";
     private const string MENUPATHSKILL = "JnR/Create/Skill";
     private const string ASSETPATHSKILL = "Prefabs/Skills";
+    private const string MENUPATHGSO = "JnR/Create/GameState";
+    private const string ASSETPATHGSO = "Prefabs/GameStates";
+    private const string MENUPATHPLAYER = "JnR/Create/Player";
+    private const string ASSETPATHPLAYER = "Prefabs/Players";
 
     /// <summary>
     //	This makes it easy to create, name and place unique new ScriptableObject asset files.
@@ -27,9 +31,30 @@ public static class ScriptableObjectUtility
         UnityEditor.Selection.activeObject = asset;
     }
 
-    [UnityEditor.MenuItem(MENUPATHSKILL)]
-    public static void CreateAsset()
+    public class SkillMenu 
     {
-        ScriptableObjectUtility.CreateAsset<Skill>(ASSETPATHSKILL);
+        [UnityEditor.MenuItem(MENUPATHSKILL)]
+        public static void CreateAsset()
+        {
+            ScriptableObjectUtility.CreateAsset<Skill>(ASSETPATHSKILL);
+        }
+    }
+
+    public class GameStateObjectMenu
+    {
+        [UnityEditor.MenuItem(MENUPATHGSO)]
+        public static void CreateAsset()
+        {
+            ScriptableObjectUtility.CreateAsset<GameStateObject>(ASSETPATHGSO);
+        }
+    }
+
+    public class PlayerMenu
+    {
+        [UnityEditor.MenuItem(MENUPATHPLAYER)]
+        public static void CreateAsset()
+        {
+            ScriptableObjectUtility.CreateAsset<Player>(ASSETPATHPLAYER);
+        }
     }
 }

@@ -7,8 +7,13 @@ public class SkillEditor : Editor
 {
     private Skill _skill;
 
+    private const string DISPLAY = "Display";
     private const string ICON = "Icon";
+    private const string EFFECT3D = "3D effect";
+    private const string EFFECT3DTYPE = "3D effect type";
+    
     private const string RANGE = "Range";
+    private const string RESTRICTIONS = "Restrictions";
     private const string COOLDOWN = "Cooldown (seconds)";
     private const string DURATION = "Duration (seconds)";
     private const string AMOUNT = "Amount";
@@ -18,7 +23,9 @@ public class SkillEditor : Editor
     private const string NTBIF = "Need to be in front";
     private const string NTHIB = "Need to hit in back";
     private const string CLOSEDCOMBAT = "Closed combat only";
-    private const string RANGEDCOMBAT = "Ranged combat only"; 
+    private const string RANGEDCOMBAT = "Ranged combat only";
+    private const string CLASSRESTRICTION = "Class restriction"; 
+    
     private const string ONDEATH = "On death";
     private const string ONHIT = "On hit";
 
@@ -41,16 +48,47 @@ public class SkillEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        EditorGUILayout.LabelField(DISPLAY);
         _skill._icon = EditorGUILayout.ObjectField(ICON, _skill._icon, typeof(Texture2D), true) as Texture2D;
+        _skill._3dEffect = EditorGUILayout.ObjectField(EFFECT3D, _skill._3dEffect, typeof(GameObject), true) as GameObject;
+        _skill._3dEffectType = (Effect3DType)EditorGUILayout.EnumPopup(EFFECT3DTYPE, _skill._3dEffectType);
+
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+
+        EditorGUILayout.LabelField(RESTRICTIONS);
 
         _skill._range = EditorGUILayout.FloatField(RANGE, _skill._range);
-        _skill._cooldown = EditorGUILayout.IntField(COOLDOWN, _skill._cooldown);
+        _skill._cooldown = EditorGUILayout.FloatField(COOLDOWN, _skill._cooldown);
         _skill._needToBeInFront = EditorGUILayout.Toggle(NTBIF, _skill._needToBeInFront);
         _skill._needToHitOnBack = EditorGUILayout.Toggle(NTHIB, _skill._needToHitOnBack);
-
         _skill._closedCombatOnly = EditorGUILayout.Toggle(CLOSEDCOMBAT, _skill._closedCombatOnly);
         _skill._rangedCombatOnly = EditorGUILayout.Toggle(RANGEDCOMBAT, _skill._rangedCombatOnly);
 
+        _skill._classSpell = (Class)EditorGUILayout.EnumPopup(CLASSRESTRICTION, _skill._classSpell);
+
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField(TARGET);
+
+        for (int i = 0; i < _skill._targetTypes.Count; ++i)
+        {
+            _skill._targetTypes[i] = (TargetType)EditorGUILayout.EnumPopup(TARGETTYPE, _skill._targetTypes[i]);
+            EditorGUILayout.Space();
+        }
+
+        if (GUILayout.Button(ADDTARGET))
+        {
+            _skill._targetTypes.Add(new TargetType());
+        }
+        if (GUILayout.Button(DELTARGET))
+        {
+            _skill._targetTypes.RemoveAt(_skill._targetTypes.Count - 1);
+        }
+
+        EditorGUILayout.Space();
         EditorGUILayout.Space();
         EditorGUILayout.Space();
         EditorGUILayout.LabelField(EFFECTLIST);
@@ -105,27 +143,6 @@ public class SkillEditor : Editor
             _skill._effect.RemoveAt(_skill._effect.Count - 1);
         }
 
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-
-        EditorGUILayout.LabelField(TARGET);
-
-        for (int i = 0; i < _skill._targetTypes.Count; ++i)
-        {
-            _skill._targetTypes[i] = (TargetType)EditorGUILayout.EnumPopup(TARGETTYPE, _skill._targetTypes[i]);
-            EditorGUILayout.Space();
-        }
-
-        if (GUILayout.Button(ADDTARGET))
-        {
-            _skill._targetTypes.Add(new TargetType());
-        }
-        if (GUILayout.Button(DELTARGET))
-        {
-            _skill._targetTypes.RemoveAt(_skill._targetTypes.Count - 1);
-        }
-
-        EditorGUILayout.Space();
         EditorUtility.SetDirty(_skill);
     }
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor;
 using System.Collections.Generic;
 
 public class GameStateObject : ScriptableObject 
@@ -22,7 +21,7 @@ public class GameStateObject : ScriptableObject
     public const string MENUPATH    = "JnR/Create/GameState";
     public const string ASSETPATH   = "Prefabs/GameStates";
 
-    [MenuItem(MENUPATH)]
+    [UnityEditor.MenuItem(MENUPATH)]
     public static void CreateAsset()
     {
         ScriptableObjectUtility.CreateAsset<GameStateObject>(ASSETPATH);

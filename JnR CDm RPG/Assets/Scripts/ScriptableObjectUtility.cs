@@ -1,13 +1,14 @@
 using UnityEngine;
-using UnityEditor;
 using System.IO;
 
 public static class ScriptableObjectUtility
 {
-    public const string PATH    = "Assets";
-    public const string SLASH   = "/";
-    public const string NEW     = "New ";
-    public const string EXT     = ".asset";
+    private const string PATH = "Assets";
+    private const string SLASH = "/";
+    private const string NEW = "New ";
+    private const string EXT = ".asset";
+    private const string MENUPATHSKILL = "JnR/Create/Skill";
+    private const string ASSETPATHSKILL = "Prefabs/Skills";
 
     /// <summary>
     //	This makes it easy to create, name and place unique new ScriptableObject asset files.
@@ -16,13 +17,19 @@ public static class ScriptableObjectUtility
     {
         T asset = ScriptableObject.CreateInstance<T>();
 
-        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(PATH + SLASH + pathAdd + SLASH + NEW + typeof(T).ToString() + EXT);
+        string assetPathAndName = UnityEditor.AssetDatabase.GenerateUniqueAssetPath(PATH + SLASH + pathAdd + SLASH + NEW + typeof(T).ToString() + EXT);
 
         Debug.Log(assetPathAndName);
-        AssetDatabase.CreateAsset(asset, assetPathAndName);
+        UnityEditor.AssetDatabase.CreateAsset(asset, assetPathAndName);
 
-        AssetDatabase.SaveAssets();
-        EditorUtility.FocusProjectWindow();
-        Selection.activeObject = asset;
+        UnityEditor.AssetDatabase.SaveAssets();
+        UnityEditor.EditorUtility.FocusProjectWindow();
+        UnityEditor.Selection.activeObject = asset;
+    }
+
+    [UnityEditor.MenuItem(MENUPATHSKILL)]
+    public static void CreateAsset()
+    {
+        ScriptableObjectUtility.CreateAsset<Skill>(ASSETPATHSKILL);
     }
 }

@@ -1,12 +1,20 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Targets&amp;Players\Class.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\Targets&amp;Players\Class.cs" Line="8" Column="11" />
+      <File FileName="Assets\Scripts\Network\Manager\NetworkManager.cs" Line="30" Column="17" />
+      <File FileName="Assets\Scripts\Network\Movement\MovementNetworkSync.cs" Line="226" Column="30" />
+      <File FileName="Assets\Scripts\Network\Utility\InputDispatcher.cs" Line="17" Column="1" />
+      <File FileName="Assets\Scripts\Utitlity\PlayerState.cs" Line="8" Column="23" />
+      <File FileName="Assets\Scripts\Utitlity\Movement.cs" Line="17" Column="2" />
+      <File FileName="Assets\Scripts\GameManager.cs" Line="45" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="D:\Programmierung\Development Project\JnRProject\JnR CDm RPG\Assets\Scripts\Network\Movement\MovementNetworkSync.cs" line="136" />
+      <Breakpoint file="D:\Programmierung\Development Project\JnRProject\JnR CDm RPG\Assets\Scripts\Network\Movement\MovementNetworkSync.cs" line="226" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

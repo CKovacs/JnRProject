@@ -10,3 +10,7 @@ Build
 L_FG_Assets_Pack1.0
 L_FG_Assets_Pack1.0/*
 obj
+Assembly-CSharp.csproj
+Assembly-CSharp-vs.csproj
+JnR CDm RPG.sln
+JnR CDm RPG-csharp.sln

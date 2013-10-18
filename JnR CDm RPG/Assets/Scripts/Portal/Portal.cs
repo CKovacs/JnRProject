@@ -7,6 +7,8 @@ public class Portal : MonoBehaviour
 
     public void OnTriggerEnter(Collider collider) 
     {
-        collider.gameObject.transform.position = _linkedPortal.transform.position + collider.gameObject.transform.forward;
+		Vector3 tmp = _linkedPortal.transform.position;
+		tmp.y += 1;
+        collider.gameObject.transform.position = tmp + collider.gameObject.transform.forward *2;
     }
 }

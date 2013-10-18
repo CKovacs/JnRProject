@@ -152,4 +152,12 @@ public class GameManager : MonoBehaviour {
 		Debug.Log ("Player " + source + " attacks Player " + target + " for 10 DMG");
 		RemoveHP (target);
 	}
+	
+	[RPC]
+	private void ResetPositionToSpawnpoint(NetworkPlayer source)
+	{
+		GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
+		Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform;
+		GetPlayerObject(source)._playerPrefab.position = spawnPoint.position;		
+	}
 }

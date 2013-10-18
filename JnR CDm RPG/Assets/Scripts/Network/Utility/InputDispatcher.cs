@@ -12,5 +12,11 @@ public class InputDispatcher : MonoBehaviour {
 				_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
 				1);
 		}
+		
+		if(Input.GetKeyDown(KeyCode.T))
+		{
+			_gameManagementObject.networkView.RPC ("ResetPositionToSpawnpoint",RPCMode.Server,
+				_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);
+		}
 	}
 }

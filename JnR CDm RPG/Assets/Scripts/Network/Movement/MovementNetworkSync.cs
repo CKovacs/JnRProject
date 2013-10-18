@@ -3,12 +3,13 @@ using System.Collections;
 
 public class MovementNetworkSync : MonoBehaviour 
 {
+	public Transform _parentTransform;	
 	public Movement _movementScript;
 	
 	public double _interpolationBackTime = 0.1; //In Seconds
 	public double _extrapolationLimit = 0.5; //In Seconds
 	
-	private bool _isMine = false;
+	public bool _isMine = false;
 	
 	internal struct State
 	{
@@ -55,6 +56,7 @@ public class MovementNetworkSync : MonoBehaviour
 	
 	void Start()
 	{
+		_parentTransform = transform.parent.transform;
 		_movementScript = GetComponent<Movement>();
 	}
 	
@@ -105,8 +107,8 @@ public class MovementNetworkSync : MonoBehaviour
 			
 			State state;
 			state._timeStamp = Network.time;
-			state._position = transform.position;
-			state._rotation = transform.rotation;
+			state._position = _parentTransform.position;
+			state._rotation = _parentTransform.rotation;
 			_localBufState[0] = state;
 			
 			_localTimeStampCount = Mathf.Min(_localTimeStampCount + 1, _localBufState.Length);
@@ -131,7 +133,7 @@ public class MovementNetworkSync : MonoBehaviour
 			}
 			if (!match)
 			{ 
-				//Debug.Log("No match!");
+				Debug.Log("No match!");
 			}
 			//If prediction is off, move back toward last known good location.
 			else if (_predictionAccuracy > _predictionThreshold)
@@ -159,8 +161,8 @@ public class MovementNetworkSync : MonoBehaviour
 	{
 		if (stream.isWriting)
 		{
-			Vector3 pos = transform.position;
-			Quaternion rot = transform.rotation;
+			Vector3 pos = _parentTransform.position;
+			Quaternion rot = _parentTransform.rotation;
 			//Vector3 vel = rigidbody.velocity;
 
 			stream.Serialize(ref pos);
@@ -229,16 +231,16 @@ public class MovementNetworkSync : MonoBehaviour
 			_positionErrorTime += Time.deltaTime;
 			if(_positionErrorTime > _maxPositionErrorTime)
 			{
-				transform.position = _newPosition;	
+				_parentTransform.position = _newPosition;	
 			}
 			else
 			{
-				transform.position = Vector3.Lerp(transform.position, _newPosition,Time.deltaTime * _posCorrectionSpeed);	
+				_parentTransform.position = Vector3.Lerp(_parentTransform.position, _newPosition,Time.deltaTime * _posCorrectionSpeed);	
 			}
 		}
 		else if(_isMine && !_movementScript._isMoving)
 		{
-			transform.position = Vector3.Lerp (_bufferedState[0]._position, transform.position, 0.95f);
+			_parentTransform.position = Vector3.Lerp (_bufferedState[0]._position, _parentTransform.position, 0.95f);
 		}
 		else if(Network.isClient && !_isMine)
 		{
@@ -269,8 +271,8 @@ public class MovementNetworkSync : MonoBehaviour
 						}
 						//	Debug.Log(t);
 						// if t=0 => lhs is used directly
-						transform.localPosition = Vector3.Lerp(lhs._position, rhs._position, t);
-						transform.localRotation = Quaternion.Slerp(lhs._rotation, rhs._rotation, t);
+						_parentTransform.localPosition = Vector3.Lerp(lhs._position, rhs._position, t);
+						_parentTransform.localRotation = Quaternion.Slerp(lhs._rotation, rhs._rotation, t);
 						return;
 					}
 				}
@@ -280,8 +282,8 @@ public class MovementNetworkSync : MonoBehaviour
 			{
 				State latest = _bufferedState[0];
 				
-				transform.localPosition = latest._position;
-				transform.localRotation = latest._rotation;
+				_parentTransform.localPosition = latest._position;
+				_parentTransform.localRotation = latest._rotation;
 				//State latest = _bufferedState[0];
 				//
 				//float extrapolationLength = (float)(interpolationTime - latest._timeStamp);

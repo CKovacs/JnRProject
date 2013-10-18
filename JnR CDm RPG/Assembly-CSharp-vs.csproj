@@ -142,6 +142,7 @@
      <Compile Include="Assets\Scripts\GUI\SimpleConnect_GUI.cs" />
      <Compile Include="Assets\Scripts\GameCreation\MainLoop.cs" />
      <Compile Include="Assets\Scripts\GameCreation\Spawn.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GenericComponents\Console.cs" />
      <Compile Include="Assets\Scripts\GenericComponents\InfoBox.cs" />
      <Compile Include="Assets\Scripts\Levels\Cell.cs" />
@@ -155,8 +156,9 @@
      <Compile Include="Assets\Scripts\Network\Manager\NetworkManager.cs" />
      <Compile Include="Assets\Scripts\Network\Movement\MovementNetwork.cs" />
      <Compile Include="Assets\Scripts\Network\Movement\MovementNetworkSync.cs" />
+     <Compile Include="Assets\Scripts\Network\Utility\InputDispatcher.cs" />
      <Compile Include="Assets\Scripts\Network\Utility\LocalPlayer.cs" />
-     <Compile Include="Assets\Scripts\Network\Utility\PlayerInfo.cs" />
+     <Compile Include="Assets\Scripts\Network\Utility\PlayerObject.cs" />
      <Compile Include="Assets\Scripts\Old But Usable\CamControl.cs" />
      <Compile Include="Assets\Scripts\Old But Usable\ChangeShader.cs" />
      <Compile Include="Assets\Scripts\Old But Usable\PlayerAttack.cs" />
@@ -169,12 +171,15 @@
      <Compile Include="Assets\Scripts\Skills\Skill.cs" />
      <Compile Include="Assets\Scripts\Skills\TargetType.cs" />
      <Compile Include="Assets\Scripts\Targets&amp;Players\Class.cs" />
-     <Compile Include="Assets\Scripts\Targets&amp;Players\Movement.cs" />
      <Compile Include="Assets\Scripts\Targets&amp;Players\Player.cs" />
      <Compile Include="Assets\Scripts\Targets&amp;Players\Target.cs" />
      <Compile Include="Assets\Scripts\Targets&amp;Players\Team.cs" />
      <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />
+     <Compile Include="Assets\Scripts\Utitlity\Movement.cs" />
+     <Compile Include="Assets\Scripts\Utitlity\PlayerState.cs" />
+     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
+     <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\3rd Party\NGUI\ReadMe.txt" />
      <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
      <None Include="Assets\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ShowAlphaChannel.shader" />

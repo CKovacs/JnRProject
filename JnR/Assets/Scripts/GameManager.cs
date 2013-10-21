@@ -92,7 +92,8 @@ public class GameManager : MonoBehaviour {
 			playerPrefab.GetComponentInChildren<Camera>().enabled = true;
 			playerPrefab.GetComponentInChildren<AudioListener>().enabled = true;
 			playerPrefab.GetComponentInChildren<SmoothFollow>().enabled = true;
-			
+			playerPrefab.GetComponentInChildren<InputDispatcher>().enabled = true;
+			playerPrefab.GetComponentInChildren<InputDispatcher>()._gameManagementObject = this.transform;
 			
 			//playerPrefab.GetComponentInChildren<Movement>().enabled = true;
 			//playerPrefab.GetComponentInChildren<Movement>()._isLocalPlayer = true;

@@ -11,6 +11,9 @@ public class SkillEditor : Editor
     private const string ICON = "Icon";
     private const string EFFECT3D = "3D effect";
     private const string EFFECT3DTYPE = "3D effect type";
+    private const string EFFECT3DOFFSETSOURCE = "3D effect source offset";
+    private const string EFFECT3DOFFSETTARGET = "3D effect target offset";
+    private const string DESTROYTIME = "3D effect destroy time";
     
     private const string RANGE = "Range";
     private const string RESTRICTIONS = "Restrictions";
@@ -22,9 +25,10 @@ public class SkillEditor : Editor
 
     private const string NTBIF = "Need to be in front";
     private const string NTHIB = "Need to hit in back";
-    private const string CLOSEDCOMBAT = "Closed combat only";
-    private const string RANGEDCOMBAT = "Ranged combat only";
-    private const string CLASSRESTRICTION = "Class restriction"; 
+    private const string CLASSRESTRICTION = "Class restriction";
+    private const string CLASS = "Class"; 
+    private const string ADDCLASS = "Add class";
+    private const string DELCLASS = "Delete class"; 
     
     private const string ONDEATH = "On death";
     private const string ONHIT = "On hit";
@@ -51,7 +55,10 @@ public class SkillEditor : Editor
         EditorGUILayout.LabelField(DISPLAY);
         _skill._icon = EditorGUILayout.ObjectField(ICON, _skill._icon, typeof(Texture2D), true) as Texture2D;
         _skill._3dEffect = EditorGUILayout.ObjectField(EFFECT3D, _skill._3dEffect, typeof(GameObject), true) as GameObject;
-        _skill._3dEffectType = (Effect3DType)EditorGUILayout.EnumPopup(EFFECT3DTYPE, _skill._3dEffectType);
+        _skill._spellOffSetSource = EditorGUILayout.Vector3Field(EFFECT3DOFFSETSOURCE, _skill._spellOffSetSource);
+        _skill._spellOffSetTarget = EditorGUILayout.Vector3Field(EFFECT3DOFFSETTARGET, _skill._spellOffSetTarget);
+   
+        _skill._destroyTime = EditorGUILayout.FloatField(DESTROYTIME, _skill._destroyTime);
 
         EditorGUILayout.Space();
         EditorGUILayout.Space();
@@ -63,10 +70,23 @@ public class SkillEditor : Editor
         _skill._cooldown = EditorGUILayout.FloatField(COOLDOWN, _skill._cooldown);
         _skill._needToBeInFront = EditorGUILayout.Toggle(NTBIF, _skill._needToBeInFront);
         _skill._needToHitOnBack = EditorGUILayout.Toggle(NTHIB, _skill._needToHitOnBack);
-        _skill._closedCombatOnly = EditorGUILayout.Toggle(CLOSEDCOMBAT, _skill._closedCombatOnly);
-        _skill._rangedCombatOnly = EditorGUILayout.Toggle(RANGEDCOMBAT, _skill._rangedCombatOnly);
 
-        _skill._classSpell = (Class)EditorGUILayout.EnumPopup(CLASSRESTRICTION, _skill._classSpell);
+        EditorGUILayout.LabelField(CLASSRESTRICTION);
+
+        for (int i = 0; i < _skill._classSpell.Count; ++i)
+        {
+            _skill._classSpell[i] = (Class)EditorGUILayout.EnumPopup(CLASS, _skill._classSpell[i]);
+            EditorGUILayout.Space();
+        }
+
+        if (GUILayout.Button(ADDCLASS))
+        {
+            _skill._classSpell.Add(new Class());
+        }
+        if (GUILayout.Button(DELCLASS))
+        {
+            _skill._classSpell.RemoveAt(_skill._classSpell.Count - 1);
+        }
 
         EditorGUILayout.Space();
         EditorGUILayout.Space();

@@ -54,11 +54,11 @@ public class GameManager : MonoBehaviour {
 		Transform playerPrefab = Instantiate(_spawnablePlayerPrefab, spawnPosition, Quaternion.identity) as Transform;
 		NetworkView networkView = playerPrefab.GetComponent<NetworkView>();
 		networkView.viewID = transformViewID;
-		foreach (NetworkView nv in playerPrefab.GetComponentsInChildren<NetworkView>())
-		{
-			nv.viewID = transformViewID;	
-		}
-		
+		//foreach (NetworkView nv in playerPrefab.GetComponentsInChildren<NetworkView>())
+		//{
+		//	nv.viewID = transformViewID;	
+		//}
+		//
 		PlayerObject po = new PlayerObject();
 		po._networkPlayer = playerIdentifier;
 		po._networkViewID = transformViewID;
@@ -85,10 +85,10 @@ public class GameManager : MonoBehaviour {
 			//GameManager Local Player (only on Client)
 			GetComponent<LocalPlayer>()._playerPrefab = playerPrefab;
 			
-			playerPrefab.GetComponentInChildren<Movement>().enabled = true;
-			playerPrefab.GetComponentInChildren<Movement>()._isLocalPlayer = true;
-			playerPrefab.GetComponentInChildren<MovementNetwork>().enabled = true;
-			playerPrefab.GetComponentInChildren<MovementNetworkSync>().SendMessage("SetOwnership");
+			playerPrefab.GetComponent<Movement>().enabled = true;
+			playerPrefab.GetComponent<Movement>()._isLocalPlayer = true;
+			playerPrefab.GetComponent<MovementNetwork>().enabled = true;
+			playerPrefab.GetComponent<MovementNetworkSync>().SendMessage("SetOwnership");
 			playerPrefab.GetComponentInChildren<Camera>().enabled = true;
 			playerPrefab.GetComponentInChildren<AudioListener>().enabled = true;
 			playerPrefab.GetComponentInChildren<SmoothFollow>().enabled = true;
@@ -126,9 +126,9 @@ public class GameManager : MonoBehaviour {
 			playerPrefab.GetComponentInChildren<Camera>().enabled = false;
 			playerPrefab.GetComponentInChildren<AudioListener>().enabled = false;
 			playerPrefab.GetComponentInChildren<SmoothFollow>().enabled = false;
-			playerPrefab.GetComponentInChildren<Movement>().enabled = true;
-			playerPrefab.GetComponentInChildren<Movement>()._isLocalPlayer = false;
-			playerPrefab.GetComponentInChildren<MovementNetwork>().enabled = false;
+			playerPrefab.GetComponent<Movement>().enabled = true;
+			playerPrefab.GetComponent<Movement>()._isLocalPlayer = false;
+			playerPrefab.GetComponent<MovementNetwork>().enabled = false;
 
 			//playerPrefab.GetComponentInChildren<Camera>().enabled = false;
 			//playerPrefab.GetComponentInChildren<AudioListener>().enabled = false;

@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour {
 		_horizontalInput = 0.0f;
 		_verticalInput = 0.0f;
 		_jumpButtonPressed = false;
-		_parentTransform = transform.parent;
+		_parentTransform = transform;
 		_characterController = _parentTransform.GetComponent<CharacterController>();
 	}
 	

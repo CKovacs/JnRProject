@@ -161,11 +161,17 @@ public class GameManager : MonoBehaviour {
 		GetPlayerObjectAt(i)._playerPrefab.GetComponent<PlayerState>()._hp -= 10;
 	}
 	
+	private void RemoveHP(NetworkPlayer np)
+	{
+		GetPlayerObject(np)._playerPrefab.GetComponent<PlayerState>()._hp -= 10;
+	}
+	
 	[RPC]
-	private void RemoteAttack(NetworkPlayer source, int target)
+	private void RemoteAttack(NetworkPlayer source, NetworkPlayer target)
 	{
 		Debug.Log ("Player " + source + " attacks Player " + target + " for 10 DMG");
 		RemoveHP (target);
+		GetPlayerObject(target)._playerPrefab.networkView.RPC("SyncHealth",target,GetPlayerObject(target)._playerPrefab.GetComponent<PlayerState>()._hp);
 	}
 	
 	[RPC]

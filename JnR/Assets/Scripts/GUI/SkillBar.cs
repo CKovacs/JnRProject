@@ -12,6 +12,8 @@ public class SkillBar : MonoBehaviour
     public Texture2D iconCooldown; //black texture, 50% transparent, .png
     //todo: remove when skills are loaded dynamically
     public Texture2D spell1, spell2, spell3, spell4;
+    //todo: also load dynamically
+    public Texture2D iconMember1, iconMember2, iconMember3, iconMember4;
 
     private Skill[] _skills;
     private readonly int _skillBarPositionTop = Screen.height - 100;
@@ -102,6 +104,12 @@ public class SkillBar : MonoBehaviour
         GUI.DrawTexture(new Rect(_healthbarPositionLeft+3, _healthbarPositionTop+3, GetHealthbarLength(), _healthbarHeight-6), currentHealthTexture);
       
         GUI.Label(new Rect(_healthbarPositionLeft, _healthbarPositionTop, _healthbarLength, _healthbarHeight), ""+ playerHp, healthBarGUIStyle);
+
+        //team members
+        GUI.DrawTexture(new Rect(0, 80, SkillIconSize, SkillIconSize), iconMember1);
+        GUI.DrawTexture(new Rect(0, 160, SkillIconSize, SkillIconSize), iconMember2);
+        GUI.DrawTexture(new Rect(0, 240, SkillIconSize, SkillIconSize), iconMember3);
+        GUI.DrawTexture(new Rect(0, 320, SkillIconSize, SkillIconSize), iconMember4);
 
     }
 

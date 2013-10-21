@@ -85,10 +85,10 @@ public class GameManager : MonoBehaviour {
 			//GameManager Local Player (only on Client)
 			GetComponent<LocalPlayer>()._playerPrefab = playerPrefab;
 			
-			playerPrefab.GetComponentInChildren<ThirdPersonController>().enabled = true;
-			playerPrefab.GetComponentInChildren<ThirdPersonController>()._isLocalPlayer = true;
+			playerPrefab.GetComponentInChildren<Movement>().enabled = true;
+			playerPrefab.GetComponentInChildren<Movement>()._isLocalPlayer = true;
 			playerPrefab.GetComponentInChildren<MovementNetwork>().enabled = true;
-			playerPrefab.GetComponentInChildren<MovementNetworkSync_TSP>().SendMessage("SetOwnership");
+			playerPrefab.GetComponentInChildren<MovementNetworkSync>().SendMessage("SetOwnership");
 			playerPrefab.GetComponentInChildren<Camera>().enabled = true;
 			playerPrefab.GetComponentInChildren<AudioListener>().enabled = true;
 			playerPrefab.GetComponentInChildren<SmoothFollow>().enabled = true;
@@ -125,8 +125,8 @@ public class GameManager : MonoBehaviour {
 			playerPrefab.GetComponentInChildren<Camera>().enabled = false;
 			playerPrefab.GetComponentInChildren<AudioListener>().enabled = false;
 			playerPrefab.GetComponentInChildren<SmoothFollow>().enabled = false;
-			playerPrefab.GetComponentInChildren<ThirdPersonController>().enabled = true;
-			playerPrefab.GetComponentInChildren<ThirdPersonController>()._isLocalPlayer = false;
+			playerPrefab.GetComponentInChildren<Movement>().enabled = true;
+			playerPrefab.GetComponentInChildren<Movement>()._isLocalPlayer = false;
 			playerPrefab.GetComponentInChildren<MovementNetwork>().enabled = false;
 
 			//playerPrefab.GetComponentInChildren<Camera>().enabled = false;

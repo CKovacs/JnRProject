@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ThirdPersonController : MonoBehaviour {
+public class Movement : MonoBehaviour {
 	private Transform _parentTransform;
 	private CharacterController _characterController;
 	public float _gravity = 5.0f;
 	public float _movementSpeed = 5.0f;
 	public float _jumpSpeed = 50.0f;
 	public float _fallSpeed = 30.0f;
-	
-
 	
 	private Vector3 _airVelocity = Vector3.zero;
 	private bool _canJump = true;

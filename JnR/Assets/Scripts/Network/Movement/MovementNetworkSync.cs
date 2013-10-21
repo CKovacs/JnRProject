@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Reflection;
 
 // For the client which owns the player, the local transform contains 
 // the current client _predicted_ position/rotation. The buffered state
@@ -17,11 +16,10 @@ using System.Reflection;
 // choppyness. The delay needs to be higher is the ping time between the server
 // and client is larger than 100 ms.
 
-public class MovementNetworkSync_TSP : MonoBehaviour
+public class MovementNetworkSync : MonoBehaviour
 {
 	public Transform _parentTransform;	
-	Component targetController;
-	FieldInfo isMovingFieldInfo;
+	private Movement _movementScript;
 		
 	internal struct  State
 	{
@@ -75,8 +73,7 @@ public class MovementNetworkSync_TSP : MonoBehaviour
 	// We need to grab a reference to the isMoving variable in the javascript ThirdPersonController script
 	void Start()
 	{
-		targetController = GetComponent( "ThirdPersonController" );
-		isMovingFieldInfo = targetController.GetType().GetField( "_isMoving" );
+		_movementScript = GetComponent<Movement>();
 	}
 	
 	// Convert field info from character controller script to a local bool variable
@@ -84,11 +81,11 @@ public class MovementNetworkSync_TSP : MonoBehaviour
 	{
 		get
 		{
-			if( !targetController )
+			if( !_movementScript )
 			{
 				return false;
 			}
-			return (bool) isMovingFieldInfo.GetValue( targetController );
+			return _movementScript._isMoving;
 		}
 	}
 	

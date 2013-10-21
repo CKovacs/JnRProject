@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class MovementNetwork : MonoBehaviour
 {
-	public ThirdPersonController _movementScript;
-	//Public Movement _movementScript;
+	public Movement _movementScript;
 	private float _verticalInput;
 	private float _horizontalInput;
 	private float _lastVerticalInput;

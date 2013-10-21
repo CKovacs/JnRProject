@@ -29,9 +29,7 @@ public class InputDispatcher : MonoBehaviour {
 		{
 			_currentTarget = GetTarget(false);
 			Debug.Log ("GETTARGET " + _currentTarget._networkPlayer);
-			//_gameManagementObject.networkView.RPC ("RemoteAttack",RPCMode.Server,
-			//	_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-			//	1);
+			
 			_targetRingInstance.transform.position = _currentTarget._playerPrefab.transform.position;
 			_targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
 		}
@@ -49,7 +47,13 @@ public class InputDispatcher : MonoBehaviour {
 		
 		if(Input.GetButtonDown("Fire1"))
 		{
-			Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
+			if(_currentTarget != _myself)
+			{
+				Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
+				_gameManagementObject.networkView.RPC ("RemoteAttack",RPCMode.Server,
+					_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+					_currentTarget._networkPlayer);
+			}
 		}
 		
 		if(Input.GetKeyDown(KeyCode.T))

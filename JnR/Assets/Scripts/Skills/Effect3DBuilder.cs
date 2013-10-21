@@ -24,7 +24,11 @@ public class Effect3DBuilder : MonoBehaviour
         switch (_skill._3dEffectType)
         {
             case Effect3DType.CharacterEffect:
+                GameObject characterEffect = GameObject.Instantiate(_skill._3dEffect) as GameObject;
 
+                characterEffect.transform.position = newTarget;
+
+                Object.Destroy(characterEffect, _skill._destroyTime);
                 break;
             case Effect3DType.Projectile:
                 GameObject projectile = GameObject.Instantiate(_skill._3dEffect) as GameObject;

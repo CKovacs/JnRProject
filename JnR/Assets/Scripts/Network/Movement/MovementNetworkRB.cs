@@ -1,10 +1,9 @@
-using System;
+﻿using System;
 using UnityEngine;
 
-public class MovementNetwork : MonoBehaviour
+public class MovementNetworkRB : MonoBehaviour
 {
-	public ThirdPersonController _movementScript;
-	//Public Movement _movementScript;
+	public MovementRB _movementScript;
 	private float _verticalInput;
 	private float _horizontalInput;
 	private float _lastVerticalInput;
@@ -15,8 +14,7 @@ public class MovementNetwork : MonoBehaviour
 	{
 		this._verticalInput = Input.GetAxis("Vertical");
 		this._horizontalInput = Input.GetAxis("Horizontal");
-		this._jumpInput = this._movementScript._didJump;
-		this._movementScript._didJump = false;
+		this._jumpInput = Input.GetButton("Jump");
 		if (this._verticalInput != this._lastVerticalInput || this._horizontalInput != this._lastHorizontalInput || this._jumpInput)
 		{
 			if (!Network.isServer)

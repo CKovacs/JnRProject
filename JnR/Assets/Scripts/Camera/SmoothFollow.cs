@@ -10,12 +10,13 @@ public class SmoothFollow : MonoBehaviour
 	private void Awake()
 	{
 	}
-	private void LateUpdate()
+	private void Update()
 	{
 		Vector3 position = this._target.transform.position;
 		position.y += this._height;
 		position.z -= this._distance;
 		this._cam.transform.position = position;
+		//this._cam.transform.position = Vector3.Lerp(_cam.transform.position, position, Time.deltaTime * _damping);
 		this._cam.transform.LookAt(this._target.transform.position);
 	}
 }

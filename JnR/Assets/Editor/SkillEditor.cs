@@ -55,6 +55,7 @@ public class SkillEditor : Editor
         EditorGUILayout.LabelField(DISPLAY);
         _skill._icon = EditorGUILayout.ObjectField(ICON, _skill._icon, typeof(Texture2D), true) as Texture2D;
         _skill._3dEffect = EditorGUILayout.ObjectField(EFFECT3D, _skill._3dEffect, typeof(GameObject), true) as GameObject;
+        _skill._3dEffectType = (Effect3DType)EditorGUILayout.EnumPopup(EFFECT3DTYPE, _skill._3dEffectType);
         _skill._spellOffSetSource = EditorGUILayout.Vector3Field(EFFECT3DOFFSETSOURCE, _skill._spellOffSetSource);
         _skill._spellOffSetTarget = EditorGUILayout.Vector3Field(EFFECT3DOFFSETTARGET, _skill._spellOffSetTarget);
    

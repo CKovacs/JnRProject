@@ -3,10 +3,11 @@ using System.Collections;
 
 public class Strike : MonoBehaviour
 {
-    public Vector3 _transform;
+    public int _speed = 300;
 
-    public void DoEffect(Vector3 source, Vector3 newTarget)
+    public void DoEffect(Vector3 newSource, Vector3 newTarget)
     {
-        Vector3 position = Vector3.Lerp(transform.position, newTarget, Time.deltaTime * 10.1f);
+        transform.LookAt(newTarget);
+        rigidbody.AddForce(transform.forward * _speed);
     }
 }

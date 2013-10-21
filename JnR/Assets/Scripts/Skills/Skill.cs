@@ -12,12 +12,14 @@ public class Skill : ScriptableObject
     public Vector3 _spellOffSetTarget;
     public float _destroyTime;
 
+    public int _id;
     public float _range;
-    public float _cooldown;  
+    public float _cooldown;
+    public float _cooldownCounter;
     public int _casttime;         // If _castTime == 0   -> skill is instant, otherwise the skill has a cast time
     public bool _needToBeInFront;
     public bool _needToHitOnBack;
-
+    public bool _onCooldown;
     public List<Class> _classSpell;
     public List<Effect> _effect;
     public List<TargetType> _targetTypes;

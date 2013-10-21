@@ -4,6 +4,7 @@ Library/*
 *.csproj
 *.sln
 *.userprefs
+*.unityproj
 Temp
 *.pidb
 Build

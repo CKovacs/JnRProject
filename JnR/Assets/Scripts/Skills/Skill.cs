@@ -8,15 +8,17 @@ public class Skill : ScriptableObject
     public Texture2D _icon;
     public GameObject _3dEffect;
     public Effect3DType _3dEffectType;
+    public Vector3 _spellOffSetSource;
+    public Vector3 _spellOffSetTarget;
+    public float _destroyTime;
 
     public float _range;
     public float _cooldown;  
     public int _casttime;         // If _castTime == 0   -> skill is instant, otherwise the skill has a cast time
     public bool _needToBeInFront;
     public bool _needToHitOnBack;
-    public bool _closedCombatOnly;
-    public bool _rangedCombatOnly;
-    public Class _classSpell;
+
+    public List<Class> _classSpell;
     public List<Effect> _effect;
     public List<TargetType> _targetTypes;
 

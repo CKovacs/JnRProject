@@ -133,14 +133,14 @@ public class MovementNetworkSync : MonoBehaviour
 			}
 			if (!match)
 			{ 
-				Debug.Log("No match!");
+				//Debug.Log("No match!");
 			}
 			// NEW BEHAVIOR: If prediction is off, move back toward last known good location.
 			// OLD BEHAVIOR: If prediction is off, diverge current location by the amount of the offset
 			else if (m_PredictionAccuracy > m_PredictionThreshold)
 			{
-				Debug.Log("Error in prediction("+m_PredictionAccuracy+"), local is " + m_LocalBufState[j].pos + " network is " + m_BufferedState[0].pos);
-				Debug.Log("Local time: " + m_LocalBufState[j].timestamp + " Network time: " + m_BufferedState[0].timestamp);
+				//Debug.Log("Error in prediction("+m_PredictionAccuracy+"), local is " + m_LocalBufState[j].pos + " network is " + m_BufferedState[0].pos);
+				//Debug.Log("Local time: " + m_LocalBufState[j].timestamp + " Network time: " + m_BufferedState[0].timestamp);
 				
 				// Find how far we travelled since the prediction failed
 				Vector3 localMovement = m_LocalBufState[j].pos - m_LocalBufState[0].pos;
@@ -335,7 +335,7 @@ public class MovementNetworkSync : MonoBehaviour
 				
 				_parentTransform.localPosition = latest.pos;
 				_parentTransform.localRotation = latest.rot;
-				Debug.Log("Extrapolating " + latest.pos);
+				//Debug.Log("Extrapolating " + latest.pos);
 			}
 		}
 	}

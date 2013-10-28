@@ -6,6 +6,130 @@ public class GameManager : MonoBehaviour {
 	public List<PlayerObject> _playerList = new List<PlayerObject>();
 	public int _playerListCount;
 	public Transform _spawnablePlayerPrefab;
+	//BUFF / DEBUFF SPELL PROTOTYPE
+	public Dictionary<int,List<DynamicEffect>> _effectList;
+	int size = 10;
+	//Game is Running?
+	public bool _isRunning;
+	
+	private void Start()
+	{
+		if(Network.isServer)
+		{
+			//Get Memory for the list.
+
+			_effectList = new Dictionary<int, List<DynamicEffect>>(size);
+			for(int i = 0 ; i < size; ++i)
+			{
+				_effectList.Add(i,new List<DynamicEffect>(50));
+			}
+		}
+	}
+	
+	private void Update()
+	{
+		if(Network.isServer)
+		{
+			bool removeMe = false;
+			for(int i = 0;i<size;++i)
+			{
+				foreach(DynamicEffect e in _effectList[i])
+				{
+					//Check if the spell should be removed
+					removeMe = RemoveCheck(e);
+					if(removeMe)
+					{
+						Debug.Log("Removed a Spell");
+						_effectList[i].Remove(e);
+					}
+					Resolve(i,e,removeMe);
+				}
+			}
+		}
+	}	
+	
+	private bool RemoveCheck(DynamicEffect e)
+	{
+		float currentTime = Time.time;
+		if(currentTime - e._startTime < 0)
+		{
+			//REMOVE THIS SPELL
+			return true;
+		}
+		//DONT REMOVE THIS SPELL
+		return false;
+	}
+	
+	private void Resolve(int player,DynamicEffect e,bool wasRemoved)
+	{
+		float currentTime = Time.time;
+		
+		//Instant
+		if(e._duration == 0)
+		{
+			if(!e._isTriggered)
+			{
+				Debug.Log("INSTANT ATTACK/HEAL OR SOMETHING..");
+				e._isTriggered = true;
+				e._lastTriggerTime = Time.time;
+				return; //Nothing more should happen
+			}
+		}
+		
+		//Modifier Spells
+		if(e._isModifier)
+		{
+			//Check if Spell is triggered or trigger it..
+			if(!e._isTriggered)
+			{
+				Debug.Log ("APPLY SOME MODIFIER!");	
+				e._isTriggered = true;
+				e._lastTriggerTime = Time.time;
+				return; //Nothing more should happen since we are a modifier and there is no modifier with duration equals 0
+			}
+			
+			if(wasRemoved)
+			{
+				Debug.Log ("REMOVE SOME MODIFIER!");
+				return; //Nothing more should happen since we just removed a modifier
+			}
+		}
+		
+		//Those spells are mostly croud control
+		if(e._isStatusModifier) 
+		{
+			//Check if Spell is triggered or trigger it..
+			if(!e._isTriggered)
+			{
+				Debug.Log ("APPLY SOME STATUS MODIFIER!");	
+				e._isTriggered = true;
+				e._lastTriggerTime = Time.time;
+				return; //Nothing more should happen since we are a modifier and there is no modifier with duration equals 0
+			}
+			
+			if(wasRemoved)
+			{
+				Debug.Log ("REMOVE SOME STATUS MODIFIER!");	
+				return; //Nothing more should happen since we just removed a modifier
+			}	
+		}
+	}
+	
+	private void AddEffectForPlayer(int player, DynamicEffect effect)
+	{
+		//Make a copy for the gc?
+		_effectList[player].Add (effect);
+	}
+	
+	private void AddEffectForPlayer(int player, DynamicEffect[] effect)
+	{
+		foreach(DynamicEffect e in effect)
+		{
+			_effectList[player].Add (e);	
+		}
+	}
+	// END BUFF / DEBUFF SPELL PROTOTYPE
+	
 	
 	public void AddPlayerObject(PlayerObject po)
 	{

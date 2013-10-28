@@ -17,7 +17,6 @@ public enum EffectType
     immun, 
     knockback, 
     blink, 
-    bladedance,
     dodgeball
 };
 

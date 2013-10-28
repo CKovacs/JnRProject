@@ -3,15 +3,6 @@ using System.Collections;
 
 public class Effect3DBuilder : MonoBehaviour
 {
-    //public Transform source;
-    //public Transform destination;
-    //public Skill _skill;
-
-    void Start() //Player source, Player destination, Skill _skill
-    {
-        InvokeRepeating("DoEffect", 2.0f, 4.0f);
-    }
-
     public static void DoEffect(Transform source, Transform destination, Skill _skill) 
     {
         Vector3 newSource = source.position;

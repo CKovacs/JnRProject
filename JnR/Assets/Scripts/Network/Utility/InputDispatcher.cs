@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class InputDispatcher : MonoBehaviour {
+public class InputDispatcher : MonoBehaviour 
+{
 	public Transform _gameManagementObject;
 	public float _targetMaxRange = 25.0f;
 	public GameObject _targetRingPrefab;
@@ -11,7 +12,15 @@ public class InputDispatcher : MonoBehaviour {
 	private GameManager _gameManager;
 	private PlayerObject _myself, _currentTarget;
 	private GameObject _targetRingInstance;
-	
+
+    private const string LEFTSELECT = "LeftSelect";
+    private const string RIGHTSELECT = "RightSelect";
+    private const string SELFSELECT = "SelfSelect";
+
+    // Standard attacks
+    private const string AUTOHIT = "AutoHit";
+    private const string LR = "LR";
+
 	void Start()
 	{
 		_targetList = new List<PlayerObject>();
@@ -24,8 +33,8 @@ public class InputDispatcher : MonoBehaviour {
 	void Update () 
 	{
 		UpdateTargetList();
-		
-		if(Input.GetButtonDown("SelectTargetLeft"))
+
+        if (Input.GetButtonDown(LEFTSELECT))
 		{
 			_currentTarget = GetTarget(false);
 			Debug.Log ("GETTARGET " + _currentTarget._networkPlayer);
@@ -34,7 +43,7 @@ public class InputDispatcher : MonoBehaviour {
 			_targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
 		}
 		
-		if(Input.GetButtonDown("SelectTargetRight"))
+		if(Input.GetButtonDown(RIGHTSELECT))
 		{
 			_currentTarget = GetTarget(true);
 			Debug.Log ("GETTARGET " + _currentTarget._networkPlayer);
@@ -45,7 +54,7 @@ public class InputDispatcher : MonoBehaviour {
 			_targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
 		}
 		
-		if(Input.GetButtonDown("Fire1"))
+		if(Input.GetButtonDown(AUTOHIT))
 		{
 			if(_currentTarget != _myself)
 			{
@@ -55,6 +64,49 @@ public class InputDispatcher : MonoBehaviour {
 					_currentTarget._networkPlayer);
 			}
 		}
+        if (Input.GetButtonDown(SELFSELECT))
+        {
+            if (_currentTarget != _myself)
+            {
+                Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
+                _gameManagementObject.networkView.RPC("RemoteAttack", RPCMode.Server,
+                    _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+                    _currentTarget._networkPlayer);
+            }
+        }
+        if (Input.GetButtonDown(SELFSELECT))
+        {
+            if (_currentTarget != _myself)
+            {
+                Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
+                _gameManagementObject.networkView.RPC("RemoteAttack", RPCMode.Server,
+                    _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+                    _currentTarget._networkPlayer);
+            }
+        }
+        //Debug.Log(Input.GetAxis(DODGEBALL));
+        if (Input.GetAxis(LR) == 1)
+        {
+            Debug.Log("DodgeBall");
+            if (_currentTarget != _myself)
+            {
+                Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
+                _gameManagementObject.networkView.RPC("RemoteAttack", RPCMode.Server,
+                    _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+                    _currentTarget._networkPlayer);
+            }
+        }
+        if (Input.GetAxis(LR) == -1)
+        {
+            Debug.Log("Shield");
+            if (_currentTarget != _myself)
+            {
+                Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
+                _gameManagementObject.networkView.RPC("RemoteAttack", RPCMode.Server,
+                    _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+                    _currentTarget._networkPlayer);
+            }
+        }
 		
 		if(Input.GetKeyDown(KeyCode.T))
 		{

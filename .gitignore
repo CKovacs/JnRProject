@@ -15,3 +15,5 @@ Assembly-CSharp.csproj
 Assembly-CSharp-vs.csproj
 JnR CDm RPG.sln
 JnR CDm RPG-csharp.sln
+JMO Assets
+JMO Assets/*

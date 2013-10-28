@@ -66,7 +66,7 @@ public class PlayerAttack : MonoBehaviour
             attackTimer = coolDown;
         }
 
-        if ((Input.GetButton("SelectTargetRight") || Input.GetKeyUp(KeyCode.Tab)) && selectTimer == 0)
+        if ((Input.GetButton("RightSelect") || Input.GetKeyUp(KeyCode.Tab)) && selectTimer == 0)
         {
             GetTarget();
             selectTimer = coolDown * 2;

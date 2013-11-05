@@ -12,8 +12,12 @@ public class GameManager : MonoBehaviour {
 	//Game is Running?
 	public bool _isRunning;
 	
+	private ServerSkillContainer _skillContainer;
+	
 	private void Start()
 	{
+		_skillContainer = GetComponent<ServerSkillContainer>();
+
 		if(Network.isServer)
 		{
 			//Get Memory for the list.
@@ -42,6 +46,7 @@ public class GameManager : MonoBehaviour {
 						Debug.Log("Removed a Spell");
 						_effectList[i].Remove(e);
 					}
+					//Resolve the Spell with remove or not remove information
 					Resolve(i,e,removeMe);
 				}
 			}
@@ -62,6 +67,7 @@ public class GameManager : MonoBehaviour {
 	
 	private void Resolve(int player,DynamicEffect e,bool wasRemoved)
 	{
+		//Should be outside?
 		float currentTime = Time.time;
 		
 		//Instant
@@ -165,7 +171,8 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	[RPC]
-	private void SpawnPlayer(NetworkPlayer playerIdentifier, NetworkViewID transformViewID, Vector3 spawnPosition)
+	//Server and Client
+	private void SC_SpawnPlayer(NetworkPlayer playerIdentifier, NetworkViewID transformViewID, Vector3 spawnPosition)
 	{
 		if(Network.isServer) 
 		{
@@ -291,7 +298,8 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	[RPC]
-	private void RemoteAttack(NetworkPlayer source, NetworkPlayer target)
+	//Server Only
+	private void S_RemoteAttack(NetworkPlayer source, NetworkPlayer target)
 	{
 		Debug.Log ("Player " + source + " attacks Player " + target + " for 10 DMG");
 		RemoveHP (target);
@@ -299,7 +307,44 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	[RPC]
-	private void ResetPositionToSpawnpoint(NetworkPlayer source)
+	//Server Only
+	private void S_RemoteSkillUse(NetworkPlayer source, NetworkPlayer target, int skillId)
+	{
+		Debug.Log ("Player "+ source.guid + " tries to casts " + skillId + " on " + target.guid);
+		
+		//Validate if spell is possible
+		//Call RemoteSkillUseOnClient
+		////// Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
+		
+		this.networkView.RPC ("SC_UseSkill",RPCMode.All,source,target,skillId);
+		
+		
+		
+		
+		
+		
+//		Skill skill = _skillContainer.GetSkill(skillId);
+//		skill.
+		
+		
+		//Später wird die gesamte Datenmenge des Helden gesynct. --> Siehe Resolve()
+		
+//		GetPlayerObject(target)._playerPrefab.networkView.RPC("SyncHealth",target,GetPlayerObject(target)._playerPrefab.GetComponent<PlayerState>()._hp);
+	}
+	
+	[RPC]
+	//Server and Client
+	private void SC_UseSkill(NetworkPlayer source, NetworkPlayer target, int skillId)
+	{
+		Debug.Log ("Player "+ source.guid + " casts " + skillId + " on " + target.guid);
+		Skill skill = _skillContainer.GetSkill(skillId);
+		Effect3DBuilder.DoEffect(GetPlayerObject(source)._playerPrefab.transform, GetPlayerObject(target)._playerPrefab.transform, skill);
+	}
+	
+	
+	[RPC]
+	//Server only
+	private void S_ResetPositionToSpawnpoint(NetworkPlayer source)
 	{
 		GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
 		Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform;

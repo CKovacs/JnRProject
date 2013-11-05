@@ -163,6 +163,9 @@
  <Reference Include="Assembly-UnityScript">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript.dll</HintPath>
  </Reference>
+ <Reference Include="JMOAssets">
+ <HintPath>Assets\3rd Party\JMO Assets\Editor\JMOAssets.dll</HintPath>
+ </Reference>
  <Reference Include="NGUI">
  <HintPath>Assets\3rd Party\NGUI\DLLs\NGUI.dll</HintPath>
  </Reference>
@@ -186,9 +189,6 @@
  </Reference>
  <Reference Include="UnityEditor.Android.Extensions">
  <HintPath>D:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="JMOAssets">
- <HintPath>Assets\3rd Party\JMO Assets\Editor\JMOAssets.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

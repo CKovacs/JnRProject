@@ -31,6 +31,7 @@ public class InputDispatcher : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () 
+		//TODO Add Global Cooldown
 	{
 		UpdateTargetList();
 
@@ -58,10 +59,12 @@ public class InputDispatcher : MonoBehaviour
 		{
 			if(_currentTarget != _myself)
 			{
+				//der verwendete Skill wird an den Server gesendet und ein Effect wird abgebildet
+				//RemoteSkillUse ist "generisch"
 				Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
-				_gameManagementObject.networkView.RPC ("RemoteAttack",RPCMode.Server,
+				_gameManagementObject.networkView.RPC ("S_RemoteSkillUse",RPCMode.Server,
 					_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-					_currentTarget._networkPlayer);
+					_currentTarget._networkPlayer,_skill._id);
 			}
 		}
         if (Input.GetButtonDown(SELFSELECT))
@@ -69,7 +72,7 @@ public class InputDispatcher : MonoBehaviour
             if (_currentTarget != _myself)
             {
                 Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
-                _gameManagementObject.networkView.RPC("RemoteAttack", RPCMode.Server,
+                _gameManagementObject.networkView.RPC("S_RemoteAttack", RPCMode.Server,
                     _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
                     _currentTarget._networkPlayer);
             }
@@ -79,7 +82,7 @@ public class InputDispatcher : MonoBehaviour
             if (_currentTarget != _myself)
             {
                 Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
-                _gameManagementObject.networkView.RPC("RemoteAttack", RPCMode.Server,
+                _gameManagementObject.networkView.RPC("S_RemoteAttack", RPCMode.Server,
                     _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
                     _currentTarget._networkPlayer);
             }
@@ -91,7 +94,7 @@ public class InputDispatcher : MonoBehaviour
             if (_currentTarget != _myself)
             {
                 Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
-                _gameManagementObject.networkView.RPC("RemoteAttack", RPCMode.Server,
+                _gameManagementObject.networkView.RPC("S_RemoteAttack", RPCMode.Server,
                     _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
                     _currentTarget._networkPlayer);
             }
@@ -102,7 +105,7 @@ public class InputDispatcher : MonoBehaviour
             if (_currentTarget != _myself)
             {
                 Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
-                _gameManagementObject.networkView.RPC("RemoteAttack", RPCMode.Server,
+                _gameManagementObject.networkView.RPC("S_RemoteAttack", RPCMode.Server,
                     _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
                     _currentTarget._networkPlayer);
             }
@@ -110,7 +113,7 @@ public class InputDispatcher : MonoBehaviour
 		
 		if(Input.GetKeyDown(KeyCode.T))
 		{
-			_gameManagementObject.networkView.RPC ("ResetPositionToSpawnpoint",RPCMode.Server,
+			_gameManagementObject.networkView.RPC ("S_ResetPositionToSpawnpoint",RPCMode.Server,
 				_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);
 		}
 	}

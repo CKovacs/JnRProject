@@ -12,6 +12,7 @@ public class LocalPlayer : MonoBehaviour {
 	private void InitiateLocalPlayer(NetworkPlayer player, NetworkViewID viewID)
 	{
 		string text = string.Empty;
+		text += "WOWOWOWOOWOWOWOWOWOWOWOWOWOWOWWO";
 		if (Network.isServer)
 		{
 			text += "Server:";

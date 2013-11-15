@@ -9,10 +9,22 @@ public class InputDispatcher : MonoBehaviour
 	public GameObject _targetRingPrefab;
 	public Skill _skill;
 	
+	public Movement _movementScript;
+	public AnimationHandle _animHandle;
+	
+	//Rename to GameManagerScript (attention refactor-rename in monodevelop is buggy)
 	private GameManager _gameManager;
 	private PlayerObject _myself, _currentTarget;
 	private GameObject _targetRingInstance;
-
+	
+	//MovementHousekeeping
+	private float _verticalInput;
+	private float _horizontalInput;
+	private float _lastVerticalInput;
+	private float _lastHorizontalInput;
+	private bool _jumpInput;
+	private bool _isRunning = false;
+	
     private const string LEFTSELECT = "LeftSelect";
     private const string RIGHTSELECT = "RightSelect";
     private const string SELFSELECT = "SelfSelect";
@@ -29,10 +41,44 @@ public class InputDispatcher : MonoBehaviour
 		_targetRingInstance = GameObject.Instantiate(_targetRingPrefab) as GameObject;
 	}
 	
-	// Update is called once per frame
 	void Update () 
-		//TODO Add Global Cooldown
+	//TODO Add Global Cooldown
 	{
+		//Network Movement Input Dispatcher
+		this._verticalInput = Input.GetAxis("Vertical");
+		this._horizontalInput = Input.GetAxis("Horizontal");
+		this._jumpInput = this._movementScript._didJump;
+		this._movementScript._didJump = false;
+		if (this._verticalInput != this._lastVerticalInput || this._horizontalInput != this._lastHorizontalInput || this._jumpInput)
+		{
+			if (!Network.isServer)
+			{
+				if(_isRunning) 
+				{
+					_animHandle.IdleRun (false);
+				} else {
+					_isRunning = true;
+					_animHandle.IdleRun (true);
+				}
+				//Send Movement Input to Server
+				networkView.RPC("S_SendUserInput", RPCMode.Server,_verticalInput,_horizontalInput,(!this._jumpInput) ? 0 : 1);
+			}
+		}
+		if(this._verticalInput == 0 && this._horizontalInput == 0)
+		{
+			if(!_isRunning) 
+			{
+				_animHandle.IdleStand (false);
+			} else {
+				_isRunning = false;
+				_animHandle.IdleStand (true);
+			}		
+		}
+		_lastVerticalInput = _verticalInput;
+		_lastHorizontalInput = _horizontalInput;
+		
+		
+		
 		UpdateTargetList();
 
         if (Input.GetButtonDown(LEFTSELECT))
@@ -194,25 +240,18 @@ public class InputDispatcher : MonoBehaviour
 		}
 		
 		return _currentTarget;
-	
-		
-		
-		//float distance = 0.0f;
-		//PlayerObject currentPivot = null;
-		//foreach(PlayerObject po in _targetList)
-		//{
-		//	Vector3 relativePoint = _currentTarget._playerPrefab.transform.InverseTransformPoint(po._playerPrefab.transform.position);
-		//	if(isRight && relativePoint.x > distance) 
-		//	{
-		//		distance = relativePoint.x;
-		//		currentPivot = po;
-		//	} 
-		//	else if(!isRight && relativePoint.x <= distance)
-		//	{
-		//		distance = relativePoint.x;
-		//		currentPivot = po;
-		//	}
-		//}
-		//return currentPivot;
 	}
+	
+	[RPC]
+	private void S_SendUserInput(float vInput, float hInput, int jInput)
+	{
+		_movementScript._horizontalInput = hInput;
+		_movementScript._verticalInput = vInput;
+		if (jInput == 1)
+		{
+			this._movementScript._hasUnsyncedJump = true;
+		}
+	}	
 }
+
+	

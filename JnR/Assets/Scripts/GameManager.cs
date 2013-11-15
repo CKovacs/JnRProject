@@ -222,14 +222,16 @@ public class GameManager : MonoBehaviour
 
             playerPrefab.GetComponent<Movement>().enabled = true;
             playerPrefab.GetComponent<Movement>()._isLocalPlayer = true;
-            playerPrefab.GetComponent<MovementNetwork>().enabled = true;
+            //playerPrefab.GetComponent<MovementNetwork>().enabled = true;
             playerPrefab.GetComponent<MovementNetworkSync>().SendMessage("SetOwnership");
             playerPrefab.GetComponentInChildren<Camera>().enabled = true;
             playerPrefab.GetComponentInChildren<AudioListener>().enabled = true;
             playerPrefab.GetComponentInChildren<SmoothFollow>().enabled = true;
-            playerPrefab.GetComponentInChildren<InputDispatcher>().enabled = true;
-            playerPrefab.GetComponentInChildren<InputDispatcher>()._gameManagementObject = transform;
-
+            playerPrefab.GetComponent<InputDispatcher>().enabled = true;
+            playerPrefab.GetComponent<InputDispatcher>()._gameManagementObject = transform;
+			playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
+			playerPrefab.GetComponent<AnimationHandle>()._localPlayer = true;
+			
             //playerPrefab.GetComponentInChildren<Movement>().enabled = true;
             //playerPrefab.GetComponentInChildren<Movement>()._isLocalPlayer = true;
             //playerPrefab.GetComponentInChildren<MovementNetwork>().enabled = true;
@@ -263,7 +265,10 @@ public class GameManager : MonoBehaviour
             playerPrefab.GetComponentInChildren<SmoothFollow>().enabled = false;
             playerPrefab.GetComponent<Movement>().enabled = true;
             playerPrefab.GetComponent<Movement>()._isLocalPlayer = false;
-            playerPrefab.GetComponent<MovementNetwork>().enabled = false;
+            playerPrefab.GetComponent<InputDispatcher>()._gameManagementObject = transform;
+			playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
+			playerPrefab.GetComponent<AnimationHandle>()._localPlayer = false;
+            //playerPrefab.GetComponent<MovementNetwork>().enabled = false;
 
             //playerPrefab.GetComponentInChildren<Camera>().enabled = false;
             //playerPrefab.GetComponentInChildren<AudioListener>().enabled = false;
@@ -278,17 +283,17 @@ public class GameManager : MonoBehaviour
     {
         if (Network.isServer)
         {
-            for (int i = 0; i < _playerList.Count; ++i)
-            {
-                GUILayout.Label("NetworkPlayer:" + _playerList[i]._networkPlayer, new GUILayoutOption[0]);
-                GUILayout.Label("NetworkViewID:" + _playerList[i]._networkViewID, new GUILayoutOption[0]);
-                GUILayout.Label("HP = " + _playerList[i]._playerPrefab.GetComponent<PlayerState>()._hp);
-                if (GUILayout.Button("Hurt", new GUILayoutOption[0]))
-                {
-                    RemoveHP(i);
-                }
-                GUILayout.Label("---", new GUILayoutOption[0]);
-            }
+        //    for (int i = 0; i < _playerList.Count; ++i)
+        //    {
+        //        GUILayout.Label("NetworkPlayer:" + _playerList[i]._networkPlayer, new GUILayoutOption[0]);
+        //        GUILayout.Label("NetworkViewID:" + _playerList[i]._networkViewID, new GUILayoutOption[0]);
+        //        GUILayout.Label("HP = " + _playerList[i]._playerPrefab.GetComponent<PlayerState>()._hp);
+        //        if (GUILayout.Button("Hurt", new GUILayoutOption[0]))
+        //        {
+        //            RemoveHP(i);
+        //        }
+        //        GUILayout.Label("---", new GUILayoutOption[0]);
+        //    }
         }
     }
 
@@ -301,7 +306,22 @@ public class GameManager : MonoBehaviour
     {
         GetPlayerObject(np)._playerPrefab.GetComponent<PlayerState>()._hp -= 10;
     }
-
+	[RPC]
+	//Server
+	private void S_SendAnimation(NetworkPlayer source, string animation)
+	{
+		//Send animation to other clients
+		networkView.RPC ("C_SendAnimation",RPCMode.Others,source,animation);
+	}
+	
+	[RPC]
+    //Client
+    private void C_SendAnimation(NetworkPlayer source, string animation)
+    {
+		Debug.Log ("I Got It");
+        GetPlayerObject(source)._playerPrefab.GetComponent<AnimationHandle>().NetworkAnmiation(animation);
+    }
+	
     [RPC]
     //Server Only
     private void S_RemoteAttack(NetworkPlayer source, NetworkPlayer target)

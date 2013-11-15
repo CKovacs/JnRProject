@@ -47,7 +47,7 @@ public class NetworkManager : MonoBehaviour
 		{
 			Debug.Log ("A new player (" + player + ") has connected...");
 			NetworkViewID networkViewID = Network.AllocateViewID();
-			_gameManagementObject.networkView.RPC("InitiateLocalPlayer", player ,player ,networkViewID);
+			_gameManagementObject.networkView.RPC("C_InitiateLocalPlayer", player ,player ,networkViewID);
 		}
 	}
 	

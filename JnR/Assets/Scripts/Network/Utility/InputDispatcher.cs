@@ -113,9 +113,28 @@ public class InputDispatcher : MonoBehaviour
 		
 		if(Input.GetKeyDown(KeyCode.T))
 		{
+            Debug.Log("Keycode.T");
 			_gameManagementObject.networkView.RPC ("S_ResetPositionToSpawnpoint",RPCMode.Server,
 				_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);
 		}
+
+
+        //TeamSelection
+	    if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("1 pressed");
+            _gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, "Herbert", 0);
+	    }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Debug.Log("2 pressed");
+            _gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, "Herbert", 1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Debug.Log("3 pressed");
+            _gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, "Herbert", 2);
+        }
 	}
 	
 	private List<PlayerObject> _targetList = null;

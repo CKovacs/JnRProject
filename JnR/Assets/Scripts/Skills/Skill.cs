@@ -1,43 +1,41 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class Skill : ScriptableObject 
+public class Skill : ScriptableObject
 {
     // Display stuff
-    public Texture2D _icon;
     public GameObject _3dEffect;
     public Effect3DType _3dEffectType;
-    public Vector3 _spellOffSetSource;
-    public Vector3 _spellOffSetTarget;
-    public float _destroyTime;
-
-    public int _id;
-    public float _range;
+    public int _casttime; // If _castTime == 0   -> skill is instant, otherwise the skill has a cast time
+    public List<Class> _classSpell;
     public float _cooldown;
     public float _cooldownCounter;
-    public int _casttime;         // If _castTime == 0   -> skill is instant, otherwise the skill has a cast time
+    public float _destroyTime;
+    public List<Effect> _effect;
+    public Texture2D _icon;
+    public int _id;
     public bool _needToBeInFront;
     public bool _needToHitOnBack;
     public bool _onCooldown;
-    public List<Class> _classSpell;
-    public List<Effect> _effect;
+    public float _range;
+    public Vector3 _spellOffSetSource;
+    public Vector3 _spellOffSetTarget;
     public List<TargetType> _targetTypes;
 
-    private float _waitTime = 0;
+    private float _waitTime;
 
     public bool CheckSkillConditions(Target origin, Target target, float deltaTime)
     {
         // Check target
-        
-        TargetType targetType = TargetType.None;
 
-        if (origin._id == target._id) 
+        var targetType = TargetType.None;
+
+        if (origin._id == target._id)
         {
             targetType = TargetType.Myself;
         }
         else if ((origin._team == Team.Blue && target._team == Team.Blue) ||
-            (origin._team == Team.Red && target._team == Team.Red))
+                 (origin._team == Team.Red && target._team == Team.Red))
         {
             targetType = TargetType.Ally;
         }
@@ -46,15 +44,15 @@ public class Skill : ScriptableObject
             targetType = TargetType.Enemy;
         }
 
-        if (_targetTypes.Find(t => t != null && t == targetType) == TargetType.None) 
+        if (_targetTypes.Find(t => t != null && t == targetType) == TargetType.None)
         {
             return false;
         }
-        
+
         // Check cooldown
         if (_waitTime != 0)
         {
-            _waitTime =+ deltaTime;
+            _waitTime = + deltaTime;
 
             if (_waitTime < _cooldown)
             {
@@ -66,7 +64,7 @@ public class Skill : ScriptableObject
         // Check range
         float distance = Vector3.Distance(origin._3dData.transform.position, target._3dData.transform.position);
 
-        if (distance > _range) 
+        if (distance > _range)
         {
             return false;
         }

@@ -28,7 +28,7 @@ public class NetworkManager : MonoBehaviour
 				GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
 				Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform;
 				Debug.Log ("Position is..." + spawnPoint.position.ToString());
-				_gameManagementObject.networkView.RPC("SpawnPlayer", RPCMode.AllBuffered,lp._networkPlayer,lp._networkViewID,spawnPoint.position);
+				_gameManagementObject.networkView.RPC("SC_SpawnPlayer", RPCMode.AllBuffered,lp._networkPlayer,lp._networkViewID,spawnPoint.position);
 				lp._isInstantiated = true;
 				enabled = false;
 			}
@@ -47,7 +47,7 @@ public class NetworkManager : MonoBehaviour
 		{
 			Debug.Log ("A new player (" + player + ") has connected...");
 			NetworkViewID networkViewID = Network.AllocateViewID();
-			_gameManagementObject.networkView.RPC("InitiateLocalPlayer", player ,player ,networkViewID);
+			_gameManagementObject.networkView.RPC("C_InitiateLocalPlayer", player ,player ,networkViewID);
 		}
 	}
 	

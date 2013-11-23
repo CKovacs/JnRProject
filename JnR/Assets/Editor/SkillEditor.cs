@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEditor;
 
@@ -6,7 +6,8 @@ using UnityEditor;
 public class SkillEditor : Editor
 {
     private Skill _skill;
-
+	
+	private const string ID = "Id";
     private const string DISPLAY = "Display";
     private const string ICON = "Icon";
     private const string EFFECT3D = "3D effect";
@@ -52,6 +53,7 @@ public class SkillEditor : Editor
 
     public override void OnInspectorGUI()
     {
+		_skill._id = EditorGUILayout.IntField(ID, _skill._id);
         EditorGUILayout.LabelField(DISPLAY);
         _skill._icon = EditorGUILayout.ObjectField(ICON, _skill._icon, typeof(Texture2D), true) as Texture2D;
         _skill._3dEffect = EditorGUILayout.ObjectField(EFFECT3D, _skill._3dEffect, typeof(GameObject), true) as GameObject;

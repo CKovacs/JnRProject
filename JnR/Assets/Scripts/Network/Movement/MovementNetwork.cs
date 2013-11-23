@@ -20,8 +20,13 @@ public class MovementNetwork : MonoBehaviour
 		{
 			if (!Network.isServer)
 			{
+				GetComponent<AnimationHandle>().IdleRun ();
 				networkView.RPC("SendUserInput", RPCMode.Server,_verticalInput,_horizontalInput,(!this._jumpInput) ? 0 : 1);
 			}
+		}
+		if(this._verticalInput == 0 && this._horizontalInput == 0)
+		{
+			GetComponent<AnimationHandle>().IdleStand ();		
 		}
 		_lastVerticalInput = _verticalInput;
 		_lastHorizontalInput = _horizontalInput;

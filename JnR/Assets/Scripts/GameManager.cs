@@ -318,6 +318,10 @@ public class GameManager : MonoBehaviour
     //Client
     private void C_SendAnimation(NetworkPlayer source, string animation)
     {
+		if(source == GetComponent<LocalPlayer>()._networkPlayer)
+		{
+			return;	
+		}
 		Debug.Log ("I Got It");
         GetPlayerObject(source)._playerPrefab.GetComponent<AnimationHandle>().NetworkAnmiation(animation);
     }

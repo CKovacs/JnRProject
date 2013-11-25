@@ -51,17 +51,17 @@ public class LocalPlayer : MonoBehaviour {
 		GUILayout.Label ("HP: " + _playerPrefab.GetComponent<PlayerState>()._hp, new GUILayoutOption[0]);
 		
 		
-		//BUTTON IDLESTAND
-		if (GUILayout.Button("STAND", new GUILayoutOption[0]))
-        {
-            Debug.Log ("Animation Stand Invoke");
-			_playerPrefab.GetComponent<AnimationHandle>().IdleStand();
-        }
-		//BUTTON IDLERUN
-		if (GUILayout.Button("RUN", new GUILayoutOption[0]))
-        {
-            Debug.Log ("Animation Run Invoke");
-			_playerPrefab.GetComponent<AnimationHandle>().IdleRun();
-        }
+		////BUTTON IDLESTAND
+		//if (GUILayout.Button("STAND", new GUILayoutOption[0]))
+		//      {
+		//          Debug.Log ("Animation Stand Invoke");
+		//	_playerPrefab.GetComponent<AnimationHandle>().IdleStand();
+		//      }
+		////BUTTON IDLERUN
+		//if (GUILayout.Button("RUN", new GUILayoutOption[0]))
+		//      {
+		//          Debug.Log ("Animation Run Invoke");
+		//	_playerPrefab.GetComponent<AnimationHandle>().IdleRun();
+		//      }
 	}
 }

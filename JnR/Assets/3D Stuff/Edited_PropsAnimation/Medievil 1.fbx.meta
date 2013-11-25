@@ -1,0 +1,2065 @@
+fileFormatVersion: 2
+guid: f627ef767081dfa40b806af99797f32c
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: chest
+    100002: Elbow_L
+    100004: elbow_R
+    100006: Eye_L
+    100008: Eye_R
+    100010: Eyes_IK
+    100012: f_index_01_L
+    100014: f_index_01_R
+    100016: f_index_02_L
+    100018: f_index_02_R
+    100020: f_index_03_L
+    100022: f_index_03_R
+    100024: f_middle_01_L
+    100026: f_middle_01_R
+    100028: f_middle_02_L
+    100030: f_middle_02_R
+    100032: f_middle_03_L
+    100034: f_middle_03_R
+    100036: f_pinky_01_L
+    100038: f_pinky_01_R
+    100040: f_pinky_02_L
+    100042: f_pinky_02_R
+    100044: f_pinky_03_L
+    100046: f_pinky_03_R
+    100048: f_ring_01_L
+    100050: f_ring_01_R
+    100052: f_ring_02_L
+    100054: f_ring_02_R
+    100056: f_ring_03_L
+    100058: f_ring_03_R
+    100060: foot_IK_L
+    100062: Foot_IK_Main_L
+    100064: Foot_IK_Main_R
+    100066: foot_IK_R
+    100068: foot_L
+    100070: foot_R
+    100072: forearm_L
+    100074: forearm_R
+    100076: hand_IK_L
+    100078: hand_IK_R
+    100080: hand_L
+    100082: hand_R
+    100084: head
+    100086: hips
+    100088: hips_main
+    100090: Jaw
+    100092: Male_Base
+    100094: //RootNode
+    100096: metarig
+    100098: neck
+    100100: palm_01_L
+    100102: palm_01_R
+    100104: palm_02_L
+    100106: palm_02_R
+    100108: palm_03_L
+    100110: palm_03_R
+    100112: palm_04_L
+    100114: palm_04_R
+    100116: pole_target_L
+    100118: pole_target_R
+    100120: Roll_Back_L
+    100122: Roll_Back_R
+    100124: Roll_Front_L
+    100126: Roll_Front_R
+    100128: Roll_Main_L
+    100130: Roll_Main_R
+    100132: shin_L
+    100134: shin_R
+    100136: shoulder_L
+    100138: shoulder_R
+    100140: spine
+    100142: thigh_L
+    100144: thigh_R
+    100146: thumb_01_L
+    100148: thumb_01_R
+    100150: thumb_02_L
+    100152: thumb_02_R
+    100154: thumb_03_L
+    100156: thumb_03_R
+    100158: toe_L
+    100160: toe_R
+    100162: upper_arm_L
+    100164: upper_arm_R
+    100166: Cube_003
+    100168: Sphere
+    100170: Sphere_001
+    100172: Eye_L_0
+    100174: Eye_R_0
+    100176: Shield_metal
+    100178: Sword
+    400000: chest
+    400002: Elbow_L
+    400004: elbow_R
+    400006: Eye_L
+    400008: Eye_R
+    400010: Eyes_IK
+    400012: f_index_01_L
+    400014: f_index_01_R
+    400016: f_index_02_L
+    400018: f_index_02_R
+    400020: f_index_03_L
+    400022: f_index_03_R
+    400024: f_middle_01_L
+    400026: f_middle_01_R
+    400028: f_middle_02_L
+    400030: f_middle_02_R
+    400032: f_middle_03_L
+    400034: f_middle_03_R
+    400036: f_pinky_01_L
+    400038: f_pinky_01_R
+    400040: f_pinky_02_L
+    400042: f_pinky_02_R
+    400044: f_pinky_03_L
+    400046: f_pinky_03_R
+    400048: f_ring_01_L
+    400050: f_ring_01_R
+    400052: f_ring_02_L
+    400054: f_ring_02_R
+    400056: f_ring_03_L
+    400058: f_ring_03_R
+    400060: foot_IK_L
+    400062: Foot_IK_Main_L
+    400064: Foot_IK_Main_R
+    400066: foot_IK_R
+    400068: foot_L
+    400070: foot_R
+    400072: forearm_L
+    400074: forearm_R
+    400076: hand_IK_L
+    400078: hand_IK_R
+    400080: hand_L
+    400082: hand_R
+    400084: head
+    400086: hips
+    400088: hips_main
+    400090: Jaw
+    400092: Male_Base
+    400094: //RootNode
+    400096: metarig
+    400098: neck
+    400100: palm_01_L
+    400102: palm_01_R
+    400104: palm_02_L
+    400106: palm_02_R
+    400108: palm_03_L
+    400110: palm_03_R
+    400112: palm_04_L
+    400114: palm_04_R
+    400116: pole_target_L
+    400118: pole_target_R
+    400120: Roll_Back_L
+    400122: Roll_Back_R
+    400124: Roll_Front_L
+    400126: Roll_Front_R
+    400128: Roll_Main_L
+    400130: Roll_Main_R
+    400132: shin_L
+    400134: shin_R
+    400136: shoulder_L
+    400138: shoulder_R
+    400140: spine
+    400142: thigh_L
+    400144: thigh_R
+    400146: thumb_01_L
+    400148: thumb_01_R
+    400150: thumb_02_L
+    400152: thumb_02_R
+    400154: thumb_03_L
+    400156: thumb_03_R
+    400158: toe_L
+    400160: toe_R
+    400162: upper_arm_L
+    400164: upper_arm_R
+    400166: Cube_003
+    400168: Sphere
+    400170: Sphere_001
+    400172: Eye_L_0
+    400174: Eye_R_0
+    400176: Shield_metal
+    400178: Sword
+    4300000: Male_Base
+    4300002: Sphere_001
+    4300004: Sphere
+    4300006: Cube_003
+    4300008: Eye_R
+    4300010: Eye_L
+    4300012: Sword
+    4300014: Shield_metal
+    7400000: 1HandSwordBackswing
+    7400002: 1HandSwordBlock
+    7400004: 1HandSwordIdle
+    7400006: 1HandSwordJab
+    7400008: 1HandSwordReadyTransion
+    7400010: 1HandSwordSwing
+    7400012: 2_Hand_Sword_Idle
+    7400014: 1HandSwordReady
+    7400016: 1HandSwordRunTransition
+    7400018: 1HandSwordRun
+    7400020: BowIdle
+    7400022: BowReady
+    7400024: BowInstant
+    7400026: BowFire
+    7400028: BowReadyTransition
+    7400030: BowInstantTransition
+    7400032: 1HSwordStrafeRunLeftTransitions
+    7400034: 1HSwordStrafeRunLeft
+    7400036: 1HSwordStrafeRunRightTransitions
+    7400038: 1HSwordStrafeRunRight
+    7400040: 1HandSwordShieldBash
+    7400042: 1HandSwordChargeUpTransitions
+    7400044: 1HandSwordChargeUp
+    7400046: 1HandSwordChargeHeavyBash
+    7400048: 1HandSwordChargeSwipe
+    7400050: 1HandSwordShieldBash0
+    7400052: 1HandSwordRollAttack
+    7400054: 1HandSwordBlockHold
+    7400056: 1HandSwordBlockStart
+    7400058: 1HandSwordBlockEnd
+    7400060: BowReadyStart
+    7400062: BowFireShort
+    7400064: BowSink
+    9500000: //RootNode
+    13700000: Male_Base
+    13700002: Cube_003
+    13700004: Sphere
+    13700006: Sphere_001
+    13700008: Eye_L
+    13700010: Eye_R
+    13700012: Shield_metal
+    13700014: Sword
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: 1HandSwordBackswing
+      takeName: 1HandSwordBackswing
+      firstFrame: -1
+      lastFrame: 26
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          - time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: 1HandSwordBlock
+      takeName: 1HandSwordBlock
+      firstFrame: -1
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          - time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: 1HandSwordIdle
+      takeName: 1HandSwordIdle
+      firstFrame: -1
+      lastFrame: 127
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: 1HandSwordJab
+      takeName: 1HandSwordJab
+      firstFrame: -1
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          - time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: 1HandSwordReadyTransion
+      takeName: 1HandSwordReady
+      firstFrame: -1
+      lastFrame: 127
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: 1HandSwordSwing
+      takeName: 1HandSwordSwing
+      firstFrame: -1
+      lastFrame: 31
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          - time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 10
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: 1HandSwordReady
+      takeName: 1HandSwordReady
+      firstFrame: 12
+      lastFrame: 72
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: 1HandSwordRunTransition
+      takeName: 1HandSwordRun
+      firstFrame: 0
+      lastFrame: 44
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: 1HandSwordRun
+      takeName: 1HandSwordRun
+      firstFrame: 12
+      lastFrame: 32.0999985
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: BowIdle
+      takeName: BowIdle
+      firstFrame: -1
+      lastFrame: 127
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: BowReady
+      takeName: BowReady
+      firstFrame: 41
+      lastFrame: 77
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: BowInstant
+      takeName: BowInstant
+      firstFrame: 14
+      lastFrame: 36
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: BowFire
+      takeName: BowFire
+      firstFrame: -1
+      lastFrame: 57
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: BowReadyTransition
+      takeName: BowReady
+      firstFrame: -1
+      lastFrame: 119
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: BowInstantTransition
+      takeName: BowInstant
+      firstFrame: -1
+      lastFrame: 56
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: 1HSwordStrafeRunLeftTransitions
+      takeName: 1HSwordStrafeRunLeft
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: 1HSwordStrafeRunLeft
+      takeName: 1HSwordStrafeRunLeft
+      firstFrame: 13
+      lastFrame: 37
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: 1HSwordStrafeRunRightTransitions
+      takeName: 1HSwordStrafeRunRight
+      firstFrame: 0
+      lastFrame: 63
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: 1HSwordStrafeRunRight
+      takeName: 1HSwordStrafeRunRight
+      firstFrame: 13
+      lastFrame: 37
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: 1HandSwordShieldBash
+      takeName: 1HandSwordShieldBash
+      firstFrame: -1
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: 1HandSwordChargeUpTransitions
+      takeName: 1HandSwordChargeUp
+      firstFrame: -1
+      lastFrame: 63
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: 1HandSwordChargeUp
+      takeName: 1HandSwordChargeUp
+      firstFrame: 24
+      lastFrame: 49
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    - name: 1HandSwordChargeHeavyBash
+      takeName: 1HandSwordChargeHeavyBash
+      firstFrame: -1
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: 1HandSwordChargeSwipe
+      takeName: 1HandSwordChargeSwipe
+      firstFrame: -1
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: 1HandSwordShieldBash0
+      takeName: 1HandSwordShieldBash
+      firstFrame: -1
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: 1HandSwordRollAttack
+      takeName: 1HandSwordRollAttack
+      firstFrame: 0
+      lastFrame: 45
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: 1HandSwordBlockHold
+      takeName: 1HandSwordBlock
+      firstFrame: 8
+      lastFrame: 13
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: 1HandSwordBlockStart
+      takeName: 1HandSwordBlock
+      firstFrame: 0
+      lastFrame: 8
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: 1HandSwordBlockEnd
+      takeName: 1HandSwordBlock
+      firstFrame: 13
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: BowReadyStart
+      takeName: BowReady
+      firstFrame: 0
+      lastFrame: 67
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: BowFireShort
+      takeName: BowFire
+      firstFrame: 0
+      lastFrame: 12.8999996
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    - name: BowSink
+      takeName: BowInstant
+      firstFrame: 37.5
+      lastFrame: 56
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: Curve
+        curve:
+          serializedVersion: 2
+          curve:
+          - time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 2
+          postInfinity: 2
+      transformMask: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human:
+    - boneName: hips
+      humanName: Hips
+      limit:
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .131856695, y: 0, z: .0659283474}
+        preQ: {x: -.463641524, y: -.533888042, z: .463641495, w: .533888102}
+        postQ: {x: -7.63684582e-08, y: -.707106769, z: .707106769, w: 3.53902614e-08}
+        length: .164820939
+        modified: 1
+    - boneName: thigh_L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: -60.0000038, y: -60.0000038, z: -90}
+        max: {x: 60.0000038, y: 60.0000038, z: 50}
+        value: {x: .361302346, y: 0, z: .180651173}
+        preQ: {x: -.677287579, y: -.223465234, z: -.203178391, w: .670867503}
+        postQ: {x: -1.19209318e-07, y: -.70849365, z: -.705717206, w: -2.98023295e-08}
+        length: .451628059
+        modified: 1
+    - boneName: thigh_R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: -60.0000038, y: -60.0000038, z: -90}
+        max: {x: 60.0000038, y: 60.0000038, z: 50}
+        value: {x: .361302406, y: 0, z: .180651203}
+        preQ: {x: -.670867383, y: -.203177899, z: -.223465696, w: .677287698}
+        postQ: {x: -5.96046448e-08, y: -.708493471, z: -.705717266, w: -5.96046448e-08}
+        length: .451628149
+        modified: 1
+    - boneName: shin_L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .367753863, y: 0, z: .183876932}
+        preQ: {x: -.461358011, y: -.549640834, z: -.521516502, w: .46158886}
+        postQ: {x: -5.96046448e-08, y: -.707030892, z: -.707182646, w: -5.96046448e-08}
+        length: .459692478
+        modified: 1
+    - boneName: shin_R
+      humanName: RightLowerLeg
+      limit:
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .367753983, y: 0, z: .183876991}
+        preQ: {x: -.463396698, y: -.52366972, z: -.547589779, w: .459542066}
+        postQ: {x: -2.98023206e-08, y: -.707030714, z: -.707182765, w: -5.96046412e-08}
+        length: .459692627
+        modified: 1
+    - boneName: foot_L
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: -30.0000019, z: -50}
+        max: {x: 0, y: 30.0000019, z: 50}
+        value: {x: .078092806, y: 0, z: .039046403}
+        preQ: {x: .0368250906, y: -.706071258, z: -.706946731, w: -.0182633698}
+        postQ: {x: -.381083727, y: -.595630288, z: -.655452073, w: .265296489}
+        length: .0976160467
+        modified: 1
+    - boneName: foot_R
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: -30.0000019, z: -50}
+        max: {x: 0, y: 30.0000019, z: 50}
+        value: {x: .0780926645, y: 0, z: .0390463322}
+        preQ: {x: .0182549637, y: -.706795096, z: -.706222951, w: -.0368297361}
+        postQ: {x: -.265296876, y: -.655452728, z: -.595629871, w: .381082982}
+        length: .0976158679
+        modified: 1
+    - boneName: spine
+      humanName: Spine
+      limit:
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .119430512, y: 0, z: .0597152561}
+        preQ: {x: -.0122834574, y: -.707000017, z: .707000077, w: -.0122834668}
+        postQ: {x: -5.58793545e-09, y: -.70710659, z: .707106888, w: 2.60770321e-08}
+        length: .149288177
+        modified: 1
+    - boneName: chest
+      humanName: Chest
+      limit:
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .238304481, y: 0, z: .11915224}
+        preQ: {x: .0630671084, y: .704288602, z: -.704288721, w: .0630670339}
+        postQ: {x: 8.38190317e-08, y: .707106769, z: -.707106709, w: -4.93600965e-08}
+        length: .297880679
+        modified: 1
+    - boneName: neck
+      humanName: Neck
+      limit:
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .0512496196, y: 0, z: .0256248098}
+        preQ: {x: .156966016, y: -.689464688, z: .689464748, w: .156966001}
+        postQ: {x: 1.78813934e-07, y: .707106829, z: .70710665, w: -1.49011612e-07}
+        length: .064062044
+        modified: 1
+    - boneName: head
+      humanName: Head
+      limit:
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .0512496196, y: 0, z: .0256248098}
+        preQ: {x: .13178733, y: .694717288, z: .694717109, w: -.13178736}
+        postQ: {x: .0184287224, y: .706866443, z: -.706866682, w: .0184285883}
+        length: .064062044
+        modified: 1
+    - boneName: shoulder_L
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: -15.000001, z: -15.000001}
+        max: {x: 0, y: 15.000001, z: 30.0000019}
+        value: {x: .151156589, y: 0, z: .0755782947}
+        preQ: {x: -.0881723017, y: -.141404331, z: .693823397, w: -.700599432}
+        postQ: {x: .0147897564, y: -.710571587, z: .702629626, w: -.0343631245}
+        length: .188945815
+        modified: 1
+    - boneName: shoulder_R
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: -15.000001, z: -15.000001}
+        max: {x: 0, y: 15.000001, z: 30.0000019}
+        value: {x: .151156649, y: 0, z: .0755783245}
+        preQ: {x: -.0881722569, y: .141404301, z: .693823278, w: .700599551}
+        postQ: {x: .0147898942, y: .710571587, z: .702629566, w: .0343631804}
+        length: .188945875
+        modified: 1
+    - boneName: upper_arm_L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: -90, y: -100, z: -60.0000038}
+        max: {x: 90, y: 100, z: 100}
+        value: {x: .195715547, y: 0, z: .0978577733}
+        preQ: {x: .0551442094, y: -.63160181, z: .532766581, w: -.560533583}
+        postQ: {x: -3.28873262e-09, y: .0104323924, z: .999945521, w: -1.70441112e-07}
+        length: .244644508
+        modified: 1
+    - boneName: upper_arm_R
+      humanName: RightUpperArm
+      limit:
+        min: {x: -90, y: -100, z: -60.0000038}
+        max: {x: 90, y: 100, z: 100}
+        value: {x: .195715532, y: 0, z: .0978577659}
+        preQ: {x: .0551442802, y: .63160181, z: .532766521, w: .560533583}
+        postQ: {x: -7.4505806e-09, y: -.0104324212, z: .999945521, w: 5.6912544e-08}
+        length: .244644493
+        modified: 1
+    - boneName: forearm_L
+      humanName: LeftLowerArm
+      limit:
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .212161273, y: 0, z: .106080636}
+        preQ: {x: .490667731, y: .532649457, z: .53766948, w: -.431788385}
+        postQ: {x: 5.62868046e-08, y: .679018617, z: .734121025, w: 4.470348e-08}
+        length: .265201658
+        modified: 1
+    - boneName: forearm_R
+      humanName: RightLowerArm
+      limit:
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .212161362, y: 0, z: .106080681}
+        preQ: {x: -.490667582, y: .532649338, z: -.537669659, w: -.431788325}
+        postQ: {x: 1.67638081e-08, y: .679018557, z: -.734121084, w: -5.62286075e-08}
+        length: .265201777
+        modified: 1
+    - boneName: hand_L
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: -40, z: -80}
+        max: {x: 0, y: 40, z: 80}
+        value: {x: .106080636, y: 0, z: .0530403182}
+        preQ: {x: 6.51925847e-09, y: -.0401263274, z: .999194562, w: 6.72516762e-08}
+        postQ: {x: -.0329752639, y: .687617719, z: .725302339, w: -.00555657921}
+        length: .132600829
+        modified: 1
+    - boneName: hand_R
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: -40, z: -80}
+        max: {x: 0, y: 40, z: 80}
+        value: {x: .106080681, y: 0, z: .0530403405}
+        preQ: {x: 1.86264515e-08, y: .04012632, z: .999194562, w: 5.48316201e-08}
+        postQ: {x: .0244291034, y: .973731875, z: -.225228623, w: -.0228355974}
+        length: .132600889
+        modified: 1
+    - boneName: toe_L
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: -50}
+        max: {x: 0, y: 0, z: 50}
+        value: {x: .0576211438, y: 0, z: .0288105719}
+        preQ: {x: -.151707292, y: .690641046, z: .651067495, w: .275881648}
+        postQ: {x: -.0946437493, y: .700743914, z: -.700744629, w: .0946428552}
+        length: .0720264465
+        modified: 1
+    - boneName: toe_R
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: -50}
+        max: {x: 0, y: 0, z: 50}
+        value: {x: .0576211773, y: 0, z: .0288105886}
+        preQ: {x: -.275881827, y: .65106833, z: .690640271, w: .151707619}
+        postQ: {x: .0946427733, y: .700743854, z: -.700744689, w: -.0946441442}
+        length: .0720264912
+        modified: 1
+    - boneName: Jaw
+      humanName: Jaw
+      limit:
+        min: {x: 0, y: -10, z: -10}
+        max: {x: 0, y: 10, z: 10}
+        value: {x: .0799999759, y: 0, z: .0399999879}
+        preQ: {x: -.53081125, y: -.467161089, z: -.467161059, w: .530811012}
+        postQ: {x: .10654927, y: -.699033022, z: -.699032962, w: -.106549717}
+        length: .100000001
+        modified: 1
+    - boneName: thumb_01_L
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: -25, z: -20}
+        max: {x: 0, y: 25, z: 20}
+        value: {x: .0342221968, y: 0, z: .0171110984}
+        preQ: {x: .470667928, y: .878612697, z: .00789929461, w: -.0803054795}
+        postQ: {x: 6.85453358e-07, y: .776097894, z: -.630612254, w: -1.17905427e-06}
+        length: .0427777618
+        modified: 1
+    - boneName: thumb_02_L
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -40}
+        max: {x: 0, y: 0, z: 35}
+        value: {x: .0210287552, y: 0, z: .0105143776}
+        preQ: {x: -.172434926, y: .757009089, z: -.610695362, w: -.15573898}
+        postQ: {x: 3.54647614e-06, y: .756494224, z: -.654000282, w: -3.03052343e-06}
+        length: .0262859538
+        modified: 1
+    - boneName: thumb_03_L
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: -40}
+        max: {x: 0, y: 0, z: 35}
+        value: {x: .015771566, y: 0, z: .00788578298}
+        preQ: {x: -.14835681, y: .742095172, z: -.640963197, w: -.128262684}
+        postQ: {x: -.135856256, y: .742980421, z: -.652263224, w: -.0638419315}
+        length: .0197144654
+        modified: 1
+    - boneName: f_index_01_L
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: -20, z: -50}
+        max: {x: 0, y: 20, z: 50}
+        value: {x: .038204696, y: 0, z: .019102348}
+        preQ: {x: .212011918, y: .676257432, z: .687030315, w: -.160362065}
+        postQ: {x: 1.44541275e-06, y: .732310593, z: .680970669, w: -1.25888619e-06}
+        length: .0477558859
+        modified: 1
+    - boneName: f_index_02_L
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0218912866, y: 0, z: .0109456433}
+        preQ: {x: .228781179, y: .726229012, z: .601843297, w: -.240904689}
+        postQ: {x: 7.07805299e-08, y: .746319294, z: .665588081, w: 3.05823107e-07}
+        length: .0273641162
+        modified: 1
+    - boneName: f_index_03_L
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0164184626, y: 0, z: .00820923131}
+        preQ: {x: .23162511, y: .737618089, z: .599665165, w: -.206569284}
+        postQ: {x: .0641634613, y: .76045233, z: .645745158, w: -.0246693157}
+        length: .0205230862
+        modified: 1
+    - boneName: f_middle_01_L
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: -7.50000048, z: -50}
+        max: {x: 0, y: 7.50000048, z: 50}
+        value: {x: .0304536391, y: 0, z: .0152268196}
+        preQ: {x: .213774651, y: .658397019, z: .701846182, w: -.168004841}
+        postQ: {x: -4.56348033e-07, y: .708720982, z: .705488861, w: 5.65967582e-07}
+        length: .0380670577
+        modified: 1
+    - boneName: f_middle_02_L
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0244149696, y: 0, z: .0122074848}
+        preQ: {x: .241678298, y: .690702736, z: .643785834, w: -.2237432}
+        postQ: {x: -1.49011612e-06, y: .689769924, z: .724028528, w: 1.64982339e-06}
+        length: .0305187218
+        modified: 1
+    - boneName: f_middle_03_L
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0183112249, y: 0, z: .00915561244}
+        preQ: {x: .214929834, y: .679168463, z: .66455847, w: -.225604549}
+        postQ: {x: .0192707833, y: .703180075, z: .710700035, w: -.00847209431}
+        length: .0228890404
+        modified: 1
+    - boneName: f_ring_01_L
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: -7.50000048, z: -50}
+        max: {x: 0, y: 7.50000048, z: 50}
+        value: {x: .0322312973, y: 0, z: .0161156487}
+        preQ: {x: .189409822, y: .649913907, z: .716998816, w: -.166278034}
+        postQ: {x: -3.72529065e-08, y: .661996484, z: .749506891, w: 3.35879605e-07}
+        length: .0402891375
+        modified: 1
+    - boneName: f_ring_02_L
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0238572825, y: 0, z: .0119286412}
+        preQ: {x: .212688476, y: .620600343, z: .703263521, w: -.273932606}
+        postQ: {x: 8.41915664e-07, y: .673786283, z: .738926172, w: -5.76314051e-07}
+        length: .0298216119
+        modified: 1
+    - boneName: f_ring_03_L
+      humanName: Left Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0178929605, y: 0, z: .00894648023}
+        preQ: {x: .211086527, y: .634156883, z: .706893444, w: -.231493458}
+        postQ: {x: .0183798522, y: .710722506, z: .702426672, w: -.0336509049}
+        length: .022366209
+        modified: 1
+    - boneName: f_pinky_01_L
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: -20, z: -50}
+        max: {x: 0, y: 20, z: 50}
+        value: {x: .0246429667, y: 0, z: .0123214833}
+        preQ: {x: .162078202, y: .683187902, z: .705740273, w: -.0944215432}
+        postQ: {x: 4.9080694e-07, y: .611650109, z: .791128337, w: 2.37081153e-07}
+        length: .0308037177
+        modified: 1
+    - boneName: f_pinky_02_L
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0181420427, y: 0, z: .00907102134}
+        preQ: {x: .196147576, y: .566130459, z: .749483526, w: -.28159681}
+        postQ: {x: 2.31713057e-06, y: .630317211, z: .776337743, w: -1.64182813e-06}
+        length: .0226775613
+        modified: 1
+    - boneName: f_pinky_03_L
+      humanName: Left Little Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0136065325, y: 0, z: .00680326624}
+        preQ: {x: .197293267, y: .586673558, z: .746887982, w: -.242997378}
+        postQ: {x: -.0155440979, y: .646642625, z: .762117565, w: -.0280786157}
+        length: .0170081705
+        modified: 1
+    - boneName: thumb_01_R
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: -25, z: -20}
+        max: {x: 0, y: 25, z: 20}
+        value: {x: .0342221819, y: 0, z: .0171110909}
+        preQ: {x: -.473425269, y: .87825954, z: .0261498932, w: -.0620071813}
+        postQ: {x: -7.74860382e-07, y: -.803983331, z: .594651759, w: -7.78585672e-07}
+        length: .0427777432
+        modified: 1
+    - boneName: thumb_02_R
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -40}
+        max: {x: 0, y: 0, z: 35}
+        value: {x: .0210287254, y: 0, z: .0105143627}
+        preQ: {x: .193769246, y: .779940307, z: -.581122339, w: .128231913}
+        postQ: {x: 6.55651093e-07, y: -.823192894, z: .56776166, w: 3.05473804e-07}
+        length: .0262859147
+        modified: 1
+    - boneName: thumb_03_R
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: -40}
+        max: {x: 0, y: 0, z: 35}
+        value: {x: .0157715417, y: 0, z: .00788577087}
+        preQ: {x: .161440328, y: .806954741, z: -.557102323, w: .111346692}
+        postQ: {x: -.0982564688, y: -.829150736, z: .53849411, w: -.113484591}
+        length: .0197144356
+        modified: 1
+    - boneName: f_index_01_R
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: -20, z: -50}
+        max: {x: 0, y: 20, z: 50}
+        value: {x: .0382046811, y: 0, z: .0191023406}
+        preQ: {x: .218064204, y: -.70236969, z: .660312831, w: .152025163}
+        postQ: {x: 6.40749818e-07, y: .70080626, z: -.713351548, w: 5.58793431e-07}
+        length: .0477558672
+        modified: 1
+    - boneName: f_index_02_R
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0218911897, y: 0, z: .0109455949}
+        preQ: {x: .217666849, y: -.698305011, z: .634029984, w: .25099209}
+        postQ: {x: 1.04308143e-07, y: .715704441, z: -.698403239, w: 1.89989834e-07}
+        length: .0273639951
+        modified: 1
+    - boneName: f_index_03_R
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .01641839, y: 0, z: .00820919499}
+        preQ: {x: .222123459, y: -.709969819, z: .632156491, w: .21675384}
+        postQ: {x: -.0607557818, y: .677842677, z: -.731986105, w: -.0321596339}
+        length: .0205229968
+        modified: 1
+    - boneName: f_middle_01_R
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: -7.50000048, z: -50}
+        max: {x: 0, y: 7.50000048, z: 50}
+        value: {x: .0304535981, y: 0, z: .0152267991}
+        preQ: {x: .215729341, y: -.666575253, z: .694083154, w: .16548948}
+        postQ: {x: -4.20957775e-07, y: .689168692, z: -.724600852, w: -4.17232485e-07}
+        length: .0380670056
+        modified: 1
+    - boneName: f_middle_02_R
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0244150255, y: 0, z: .0122075127}
+        preQ: {x: .235472009, y: -.672843695, z: .662428021, w: .230267957}
+        postQ: {x: 4.32133703e-07, y: .704683661, z: -.709521472, w: 4.80562449e-07}
+        length: .0305187907
+        modified: 1
+    - boneName: f_middle_03_R
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0183112677, y: 0, z: .00915563386}
+        preQ: {x: .219577894, y: -.692846835, z: .650284529, w: .22108528}
+        postQ: {x: -.0193590075, y: .710538745, z: -.703343034, w: -.0082721971}
+        length: .0228890926
+        modified: 1
+    - boneName: f_ring_01_R
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: -7.50000048, z: -50}
+        max: {x: 0, y: 7.50000048, z: 50}
+        value: {x: .0322313458, y: 0, z: .0161156729}
+        preQ: {x: .192580417, y: -.663613796, z: .704337716, w: .162597016}
+        postQ: {x: -6.35161996e-07, y: .704814672, z: -.709391356, w: -6.16535544e-07}
+        length: .0402892008
+        modified: 1
+    - boneName: f_ring_02_R
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0238572042, y: 0, z: .0119286021}
+        preQ: {x: .228383914, y: -.660779059, z: .665657043, w: .260983288}
+        postQ: {x: 3.72715272e-06, y: .698469341, z: -.715639889, w: 3.63215781e-06}
+        length: .0298215151
+        modified: 1
+    - boneName: f_ring_03_R
+      humanName: Right Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0178929027, y: 0, z: .00894645136}
+        preQ: {x: .218814895, y: -.65777719, z: .684971511, w: .224194258}
+        postQ: {x: -.0185709354, y: .714803636, z: -.69827348, w: -.0335391611}
+        length: .0223661363
+        modified: 1
+    - boneName: f_pinky_01_R
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: -20, z: -50}
+        max: {x: 0, y: 20, z: 50}
+        value: {x: .024643017, y: 0, z: .0123215085}
+        preQ: {x: .156851605, y: -.644866645, z: .740919888, w: .10286992}
+        postQ: {x: 7.96746406e-07, y: .682277739, z: -.731092989, w: 1.10967073e-06}
+        length: .0308037791
+        modified: 1
+    - boneName: f_pinky_02_R
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0181420427, y: 0, z: .00907102134}
+        preQ: {x: .221378267, y: -.633097649, z: .69384259, w: .26222387}
+        postQ: {x: -9.57283305e-07, y: .679969728, z: -.733240128, w: -8.47503657e-07}
+        length: .0226775631
+        modified: 1
+    - boneName: f_pinky_03_R
+      humanName: Right Little Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0136065343, y: 0, z: .00680326717}
+        preQ: {x: .212833375, y: -.634485424, z: .706722498, w: .229507029}
+        postQ: {x: .0133215357, y: .703791261, z: -.709681451, w: -.0291987918}
+        length: .0170081723
+        modified: 1
+    skeleton:
+    - name: Medievil 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: .99999994}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: metarig
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: -.707106829, y: 0, z: -0, w: .707106709}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: hips_main
+      position: {x: -0, y: .0287325494, z: 1.11146855}
+      rotation: {x: -.463641435, y: -.463641435, z: -.533888161, w: .533888221}
+      scale: {x: .999999821, y: 1, z: .999999821}
+      transformModified: 1
+    - name: hips
+      position: {x: -.164821088, y: 1.24436346e-08, z: 0}
+      rotation: {x: 7.54978942e-08, y: .99999994, z: -4.37113776e-08, w: 7.55001466e-08}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: spine
+      position: {x: -.164820984, y: 1.24436443e-08, z: -3.72529008e-09}
+      rotation: {x: 1.33525347e-07, y: -.0173714459, z: 2.34266317e-09, w: .999849081}
+      scale: {x: .999999821, y: 1, z: .999999821}
+      transformModified: 1
+    - name: chest
+      position: {x: -.149288207, y: 1.12709504e-08, z: 5.587935e-09}
+      rotation: {x: -1.84295587e-07, y: -.0891903043, z: 1.59482703e-08, w: .996014595}
+      scale: {x: .99999994, y: 1, z: .99999994}
+      transformModified: 1
+    - name: neck
+      position: {x: -.297880799, y: 2.24893864e-08, z: -3.72529008e-09}
+      rotation: {x: .97505033, y: -5.90472524e-08, z: -.221983701, w: -8.32437692e-08}
+      scale: {x: .999999762, y: 1, z: .999999881}
+      transformModified: 1
+    - name: head
+      position: {x: -.064062126, y: 4.83654894e-09, z: 4.28408384e-08}
+      rotation: {x: .987002134, y: -4.93203665e-08, z: -.160706758, w: -8.0573713e-08}
+      scale: {x: 1.00000012, y: 1, z: 1}
+      transformModified: 1
+    - name: Eye_L_0
+      position: {x: -.0975518748, y: -.0333527699, z: .0647670254}
+      rotation: {x: .725295305, y: 9.6822049e-08, z: -.68843776, w: 1.31582851e-07}
+      scale: {x: 1.00000024, y: 1, z: 1}
+      transformModified: 1
+    - name: Eye_R_0
+      position: {x: -.0975518748, y: .0333527327, z: .0647670552}
+      rotation: {x: .725295305, y: 9.6822049e-08, z: -.68843776, w: 1.31582851e-07}
+      scale: {x: 1.00000024, y: 1, z: 1}
+      transformModified: 1
+    - name: Eyes_IK
+      position: {x: -.120207682, y: -3.29244529e-07, z: .860182643}
+      rotation: {x: 1.46765828e-07, y: -.0260620639, z: -6.36763575e-09, w: .999660254}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Jaw
+      position: {x: -.0256086104, y: -6.24479002e-09, z: .0209136065}
+      rotation: {x: 2.55757357e-07, y: .78986752, z: 5.83395519e-08, w: .613277376}
+      scale: {x: 1.00000024, y: 1, z: 1.00000024}
+      transformModified: 1
+    - name: shoulder_L
+      position: {x: -.244901836, y: -.0168662984, z: .0409841165}
+      rotation: {x: -.380264729, y: -.565180898, z: .403675884, w: .610749483}
+      scale: {x: 1.00000012, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
+    - name: upper_arm_L
+      position: {x: -.188417032, y: -.013095364, z: -.00530016795}
+      rotation: {x: .701147735, y: .132203504, z: .178546578, w: .677521348}
+      scale: {x: 1, y: 1.00000012, z: .999999881}
+      transformModified: 1
+    - name: forearm_L
+      position: {x: -.244644523, y: -5.71017154e-08, z: 0}
+      rotation: {x: -.0476205386, y: .0144841056, z: -.0468460284, w: .997661173}
+      scale: {x: .999999881, y: 1.00000024, z: 1.00000012}
+      transformModified: 1
+    - name: hand_L
+      position: {x: -.265201807, y: 1.58324838e-08, z: 0}
+      rotation: {x: .716167629, y: .0331716277, z: -.00422897656, w: .697126627}
+      scale: {x: 1, y: .999999881, z: 1}
+      transformModified: 1
+    - name: palm_01_L
+      position: {x: -.0370062366, y: .0218179785, z: -.00361074437}
+      rotation: {x: -.0422997996, y: .0498925261, z: -.0479035936, w: .996707857}
+      scale: {x: 1, y: .999999881, z: .999999881}
+      transformModified: 1
+    - name: f_index_01_L
+      position: {x: -.0540055335, y: -3.72529008e-09, z: -1.01514161e-07}
+      rotation: {x: .0994582772, y: -.0223080404, z: .0247043986, w: .994484782}
+      scale: {x: 1, y: .999999881, z: .999999881}
+      transformModified: 1
+    - name: f_index_02_L
+      position: {x: -.0477559194, y: 1.49011612e-08, z: 1.76252797e-07}
+      rotation: {x: .0169766881, y: .0254691467, z: .0195995867, w: .999339223}
+      scale: {x: .999999881, y: .999999702, z: .999999762}
+      transformModified: 1
+    - name: f_index_03_L
+      position: {x: -.0273641236, y: 2.23517418e-08, z: 3.18977982e-08}
+      rotation: {x: .0242159124, y: -.061117813, z: .0314665847, w: .997340441}
+      scale: {x: 1, y: .999999881, z: .999999821}
+      transformModified: 1
+    - name: thumb_01_L
+      position: {x: .0112397904, y: .0160487834, z: .0272074789}
+      rotation: {x: .644635737, y: -.256031394, z: -.264619559, w: .669977009}
+      scale: {x: .999999821, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: thumb_02_L
+      position: {x: -.0427778028, y: 9.89530236e-08, z: 6.86850399e-08}
+      rotation: {x: .0310328137, y: .0384006724, z: -.00583786378, w: .998763323}
+      scale: {x: 1, y: .99999994, z: .999999821}
+      transformModified: 1
+    - name: thumb_03_L
+      position: {x: -.0262859855, y: 2.4586916e-07, z: 2.42143869e-08}
+      rotation: {x: .00752328057, y: -.137146175, z: -.0610264614, w: .988640487}
+      scale: {x: 1.00000024, y: 1, z: 1}
+      transformModified: 1
+    - name: palm_02_L
+      position: {x: -.0394122787, y: .00616485998, z: -.00686945207}
+      rotation: {x: -.0288459659, y: .036294952, z: .0345860161, w: .998325765}
+      scale: {x: .999999881, y: 1, z: .999999762}
+      transformModified: 1
+    - name: f_middle_01_L
+      position: {x: -.062861681, y: 1.67638063e-08, z: 3.63215804e-08}
+      rotation: {x: .0535211898, y: -.018911114, z: -.00877497438, w: .998349011}
+      scale: {x: 1, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
+    - name: f_middle_02_L
+      position: {x: -.0380670503, y: 8.38190317e-09, z: -7.83766154e-08}
+      rotation: {x: -.0282079168, y: .0183742438, z: -.0122382119, w: .999358177}
+      scale: {x: 1, y: .999999881, z: .999999881}
+      transformModified: 1
+    - name: f_middle_03_L
+      position: {x: -.0305187311, y: 9.31322575e-09, z: -9.0803951e-08}
+      rotation: {x: .0189029276, y: -.0197986159, z: .00715824775, w: .999599576}
+      scale: {x: .999999821, y: .999999642, z: .999999821}
+      transformModified: 1
+    - name: palm_03_L
+      position: {x: -.0375928879, y: -.00838591531, z: -.00707355142}
+      rotation: {x: -.0160470288, y: .0458706655, z: .123146936, w: .991197824}
+      scale: {x: .99999994, y: .99999994, z: .999999881}
+      transformModified: 1
+    - name: f_ring_01_L
+      position: {x: -.0594128631, y: 2.23517418e-08, z: -9.77888703e-09}
+      rotation: {x: -.0230743997, y: -.0307329055, z: -.0702533871, w: .996788561}
+      scale: {x: .999999821, y: .999999762, z: .999999821}
+      transformModified: 1
+    - name: f_ring_02_L
+      position: {x: -.0402891785, y: 1.76951289e-08, z: -1.21071926e-08}
+      rotation: {x: .0158685651, y: .0319499969, z: .0269627608, w: .998999655}
+      scale: {x: 1, y: 1.00000012, z: 1.00000024}
+      transformModified: 1
+    - name: f_ring_03_L
+      position: {x: -.0298216306, y: 3.72529008e-09, z: 1.15483999e-07}
+      rotation: {x: .0518859252, y: -.0362538733, z: -.0124816382, w: .997916639}
+      scale: {x: .999999762, y: .999999881, z: .999999881}
+      transformModified: 1
+    - name: palm_04_L
+      position: {x: -.0337963216, y: -.022353109, z: -.00572899589}
+      rotation: {x: .0324460864, y: .0970634371, z: .196708366, w: .975105941}
+      scale: {x: 1, y: .99999994, z: .99999994}
+      transformModified: 1
+    - name: f_pinky_01_L
+      position: {x: -.0524634868, y: -1.86264515e-08, z: -3.72529008e-09}
+      rotation: {x: -.141325235, y: -.0900602564, z: -.137100533, w: .976278484}
+      scale: {x: 1.00000012, y: 1.00000012, z: 1.00000024}
+      transformModified: 1
+    - name: f_pinky_02_L
+      position: {x: -.0308037456, y: 1.49011612e-08, z: 6.89178705e-08}
+      rotation: {x: .0247599743, y: .0262694042, z: .0248178579, w: .999039948}
+      scale: {x: .99999994, y: 1, z: .99999994}
+      transformModified: 1
+    - name: f_pinky_03_L
+      position: {x: -.0226775464, y: 7.4505806e-09, z: 1.35973096e-07}
+      rotation: {x: .0216371566, y: -.00562813645, z: -.0315964483, w: .999250591}
+      scale: {x: .999999881, y: 1.00000012, z: 1}
+      transformModified: 1
+    - name: shoulder_R
+      position: {x: -.244901836, y: .0168663319, z: .0409841165}
+      rotation: {x: .38026464, y: -.565181017, z: -.403675914, w: .610749424}
+      scale: {x: 1.00000012, y: 1.00000024, z: 1.00000012}
+      transformModified: 1
+    - name: upper_arm_R
+      position: {x: -.188417047, y: .0130953928, z: -.00530016655}
+      rotation: {x: -.701147795, y: .132203549, z: -.178546742, w: .677521288}
+      scale: {x: 1.00000024, y: 1.00000024, z: 1}
+      transformModified: 1
+    - name: forearm_R
+      position: {x: -.244644493, y: -2.44472198e-09, z: -1.86264504e-09}
+      rotation: {x: .0476205833, y: .0144839203, z: .0468460433, w: .997661173}
+      scale: {x: .999999881, y: 1.00000024, z: 1.00000012}
+      transformModified: 1
+    - name: hand_R
+      position: {x: -.265201807, y: 7.72997737e-08, z: 1.11758709e-08}
+      rotation: {x: .981985211, y: -.0253257956, z: -.0218369588, w: -.185974926}
+      scale: {x: 1, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: palm_01_R
+      position: {x: -.0370062478, y: -.00519814715, z: -.0214951709}
+      rotation: {x: .5537135, y: .0125339879, z: .0680214465, w: .829829633}
+      scale: {x: .999999881, y: .999999881, z: 1}
+      transformModified: 1
+    - name: f_index_01_R
+      position: {x: -.0540055782, y: -1.11758709e-08, z: -1.2665987e-07}
+      rotation: {x: -.0157318693, y: -.022466287, z: -.0245605316, w: .999321997}
+      scale: {x: .99999994, y: 1, z: .999999881}
+      transformModified: 1
+    - name: f_index_02_R
+      position: {x: -.0477558859, y: 5.587935e-09, z: -4.7206413e-08}
+      rotation: {x: -.0172751974, y: .0236031003, z: -.0218109004, w: .999334097}
+      scale: {x: .999999821, y: .999999881, z: .999999821}
+      transformModified: 1
+    - name: f_index_03_R
+      position: {x: -.0273640156, y: -3.02679792e-09, z: 2.43016984e-08}
+      rotation: {x: .0504781455, y: -.0654490367, z: -.0210227259, w: .996356487}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: thumb_01_R
+      position: {x: .0112397466, y: -.01810739, z: .0258829761}
+      rotation: {x: .518668056, y: .180235922, z: .321077138, w: .771626711}
+      scale: {x: 1, y: .999999881, z: .99999994}
+      transformModified: 1
+    - name: thumb_02_R
+      position: {x: -.0427777469, y: 5.78584149e-08, z: -7.72997737e-08}
+      rotation: {x: -.0335591547, y: -.0307662375, z: -.0237169154, w: .998681486}
+      scale: {x: .99999994, y: 1, z: 1.00000024}
+      transformModified: 1
+    - name: thumb_03_R
+      position: {x: -.026285924, y: -7.82310963e-08, z: 2.04890966e-08}
+      rotation: {x: -.0274755899, y: .149206623, z: .0164522268, w: .98828727}
+      scale: {x: .99999994, y: 1, z: .999999881}
+      transformModified: 1
+    - name: palm_02_R
+      position: {x: -.0394122936, y: .00391567498, z: -.00835834816}
+      rotation: {x: .5655182, y: .0494556054, z: -.00822584238, w: .823210537}
+      scale: {x: .999999881, y: .999999821, z: 1.00000012}
+      transformModified: 1
+    - name: f_middle_01_R
+      position: {x: -.0628616661, y: -5.587935e-09, z: 1.60187483e-07}
+      rotation: {x: -.0144947637, y: -.0187716801, z: .00906937104, w: .999677539}
+      scale: {x: .999999821, y: .999999821, z: 1}
+      transformModified: 1
+    - name: f_middle_02_R
+      position: {x: -.0380670466, y: 1.86264504e-09, z: 2.93366611e-08}
+      rotation: {x: -.0199236888, y: .0184538495, z: .0121178357, w: .999557674}
+      scale: {x: .999999881, y: .999999821, z: 1}
+      transformModified: 1
+    - name: f_middle_03_R
+      position: {x: -.0305188354, y: 0, z: -4.09781933e-08}
+      rotation: {x: -.00850821845, y: -.0195655636, z: -.00777264964, w: .999742091}
+      scale: {x: .999999881, y: .999999762, z: 1}
+      transformModified: 1
+    - name: palm_03_R
+      position: {x: -.0375928953, y: .00978704914, z: .00495685264}
+      rotation: {x: .544652998, y: .107697368, z: -.0753032118, w: .828301668}
+      scale: {x: 1, y: .999999821, z: 1}
+      transformModified: 1
+    - name: f_ring_01_R
+      position: {x: -.0594127998, y: 1.49011612e-08, z: -7.26431608e-08}
+      rotation: {x: -.0162121877, y: -.0361109637, z: .0676464885, w: .996923804}
+      scale: {x: 1, y: 1.00000012, z: 1}
+      transformModified: 1
+    - name: f_ring_02_R
+      position: {x: -.0402892344, y: -9.31323019e-10, z: 6.62403181e-08}
+      rotation: {x: .00885624718, y: .0343067758, z: -.0238922834, w: .99908644}
+      scale: {x: 1, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
+    - name: f_ring_03_R
+      position: {x: -.0298215225, y: 3.92901989e-10, z: -2.75904313e-07}
+      rotation: {x: -.0238193031, y: -.0367213823, z: .0110306116, w: .998980701}
+      scale: {x: .999999821, y: .99999994, z: .999999881}
+      transformModified: 1
+    - name: palm_04_R
+      position: {x: -.0337963291, y: .0140049271, z: .0183395967}
+      rotation: {x: .554477453, y: .18340534, z: -.120324463, w: .802769661}
+      scale: {x: .999999523, y: .999999702, z: .999999702}
+      transformModified: 1
+    - name: f_pinky_01_R
+      position: {x: -.0524634607, y: -7.4505806e-09, z: -8.28877091e-08}
+      rotation: {x: -.00190902874, y: -.0954379141, z: .133411959, w: .986452818}
+      scale: {x: .99999994, y: 1, z: 1}
+      transformModified: 1
+    - name: f_pinky_02_R
+      position: {x: -.0308038164, y: -1.49011612e-08, z: -6.23986125e-08}
+      rotation: {x: .00218931027, y: .0298570581, z: -.020360807, w: .999344349}
+      scale: {x: .999999881, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: f_pinky_03_R
+      position: {x: -.0226775706, y: 0, z: 8.19563866e-08}
+      rotation: {x: -.0334861316, y: -.0100851366, z: .0304680392, w: .998923719}
+      scale: {x: .999999821, y: .99999994, z: .99999994}
+      transformModified: 1
+    - name: thigh_L
+      position: {x: -.0633673444, y: -.0920198634, z: .0316196494}
+      rotation: {x: -.0149434311, y: .998887181, z: -.00263253949, w: .0446556434}
+      scale: {x: 1, y: .999999821, z: 1}
+      transformModified: 1
+    - name: shin_L
+      position: {x: -.451628208, y: 2.98823579e-08, z: 4.19095203e-09}
+      rotation: {x: -.00244534342, y: .0133046741, z: .00188210909, w: .999906719}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: foot_L
+      position: {x: -.459692568, y: 3.29018803e-08, z: 2.94312508e-09}
+      rotation: {x: -.0389072634, y: -.491739452, z: .0914851651, w: .865048528}
+      scale: {x: .99999994, y: .999999881, z: .999999881}
+      transformModified: 1
+    - name: toe_L
+      position: {x: -.144052967, y: 1.74622983e-08, z: 6.17569285e-09}
+      rotation: {x: .951947212, y: .0399693958, z: .295884669, w: .068198882}
+      scale: {x: 1, y: .999999821, z: .999999881}
+      transformModified: 1
+    - name: thigh_R
+      position: {x: -.0633673295, y: .0920198783, z: .0316196494}
+      rotation: {x: .0151195554, y: .998889804, z: -.00128928758, w: .0445965081}
+      scale: {x: .99999994, y: .999999821, z: .999999821}
+      transformModified: 1
+    - name: shin_R
+      position: {x: -.451628298, y: 2.92347977e-08, z: -7.85803422e-09}
+      rotation: {x: -.00169523654, y: .0132975969, z: -.00193147291, w: .999908209}
+      scale: {x: 1, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: foot_R
+      position: {x: -.459692717, y: 3.7252903e-08, z: -2.98496206e-09}
+      rotation: {x: .0390933231, y: -.491719753, z: -.0915906802, w: .865040243}
+      scale: {x: 1, y: .99999994, z: 1}
+      transformModified: 1
+    - name: toe_R
+      position: {x: -.144053012, y: 8.26548785e-09, z: 4.40406989e-10}
+      rotation: {x: .951947212, y: -.0399693027, z: .295884669, w: -.0681989118}
+      scale: {x: .999999762, y: .999999821, z: .999999762}
+      transformModified: 1
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 3
+  userData: 

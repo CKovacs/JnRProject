@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    public Dictionary<int, List<DynamicEffect>> _effectList;
+    public Dictionary<NetworkPlayer, List<DynamicEffect>> _effectList;
     public bool _isRunning;
     public List<PlayerObject> _playerList = new List<PlayerObject>();
     public int _playerListCount;
@@ -24,11 +24,7 @@ public class GameManager : MonoBehaviour
         {
             //Get Memory for the list.
 
-            _effectList = new Dictionary<int, List<DynamicEffect>>(size);
-            for (int i = 0; i < size; ++i)
-            {
-                _effectList.Add(i, new List<DynamicEffect>(50));
-            }
+            _effectList = new Dictionary<NetworkPlayer, List<DynamicEffect>>(size);
         }
     }
 
@@ -37,19 +33,20 @@ public class GameManager : MonoBehaviour
         if (Network.isServer)
         {
             bool removeMe = false;
-            for (int i = 0; i < size; ++i)
+
+            foreach (KeyValuePair<NetworkPlayer, List<DynamicEffect>> pair in _effectList)
             {
-                foreach (DynamicEffect e in _effectList[i])
+                foreach (DynamicEffect e in pair.Value)
                 {
                     //Check if the spell should be removed
                     removeMe = RemoveCheck(e);
                     if (removeMe)
                     {
                         Debug.Log("Removed a Spell");
-                        _effectList[i].Remove(e);
+                        pair.Value.Remove(e);
                     }
                     //Resolve the Spell with remove or not remove information
-                    Resolve(i, e, removeMe);
+                    Resolve(pair.Key, e, removeMe);
                 }
             }
         }
@@ -67,7 +64,7 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    private void Resolve(int player, DynamicEffect e, bool wasRemoved)
+    private void Resolve(NetworkPlayer player, DynamicEffect e, bool wasRemoved)
     {
         //Should be outside?
         float currentTime = Time.time;
@@ -124,13 +121,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void AddEffectForPlayer(int player, DynamicEffect effect)
+    private void AddEffectForPlayer(NetworkPlayer player, DynamicEffect effect)
     {
         //Make a copy for the gc?
         _effectList[player].Add(effect);
     }
 
-    private void AddEffectForPlayer(int player, DynamicEffect[] effect)
+    private void AddEffectForPlayer(NetworkPlayer player, DynamicEffect[] effect)
     {
         foreach (DynamicEffect e in effect)
         {
@@ -139,7 +136,7 @@ public class GameManager : MonoBehaviour
     }
 
     // END BUFF / DEBUFF SPELL PROTOTYPE
-
+    
 
     public void AddPlayerObject(PlayerObject po)
     {
@@ -229,9 +226,9 @@ public class GameManager : MonoBehaviour
             playerPrefab.GetComponentInChildren<SmoothFollow>().enabled = true;
             playerPrefab.GetComponent<InputDispatcher>().enabled = true;
             playerPrefab.GetComponent<InputDispatcher>()._gameManagementObject = transform;
-			playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
-			playerPrefab.GetComponent<AnimationHandle>()._localPlayer = true;
-			
+            playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
+            playerPrefab.GetComponent<AnimationHandle>()._localPlayer = true;
+
             //playerPrefab.GetComponentInChildren<Movement>().enabled = true;
             //playerPrefab.GetComponentInChildren<Movement>()._isLocalPlayer = true;
             //playerPrefab.GetComponentInChildren<MovementNetwork>().enabled = true;
@@ -266,8 +263,8 @@ public class GameManager : MonoBehaviour
             playerPrefab.GetComponent<Movement>().enabled = true;
             playerPrefab.GetComponent<Movement>()._isLocalPlayer = false;
             playerPrefab.GetComponent<InputDispatcher>()._gameManagementObject = transform;
-			playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
-			playerPrefab.GetComponent<AnimationHandle>()._localPlayer = false;
+            playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
+            playerPrefab.GetComponent<AnimationHandle>()._localPlayer = false;
             //playerPrefab.GetComponent<MovementNetwork>().enabled = false;
 
             //playerPrefab.GetComponentInChildren<Camera>().enabled = false;
@@ -283,17 +280,17 @@ public class GameManager : MonoBehaviour
     {
         if (Network.isServer)
         {
-        //    for (int i = 0; i < _playerList.Count; ++i)
-        //    {
-        //        GUILayout.Label("NetworkPlayer:" + _playerList[i]._networkPlayer, new GUILayoutOption[0]);
-        //        GUILayout.Label("NetworkViewID:" + _playerList[i]._networkViewID, new GUILayoutOption[0]);
-        //        GUILayout.Label("HP = " + _playerList[i]._playerPrefab.GetComponent<PlayerState>()._hp);
-        //        if (GUILayout.Button("Hurt", new GUILayoutOption[0]))
-        //        {
-        //            RemoveHP(i);
-        //        }
-        //        GUILayout.Label("---", new GUILayoutOption[0]);
-        //    }
+            //    for (int i = 0; i < _playerList.Count; ++i)
+            //    {
+            //        GUILayout.Label("NetworkPlayer:" + _playerList[i]._networkPlayer, new GUILayoutOption[0]);
+            //        GUILayout.Label("NetworkViewID:" + _playerList[i]._networkViewID, new GUILayoutOption[0]);
+            //        GUILayout.Label("HP = " + _playerList[i]._playerPrefab.GetComponent<PlayerState>()._hp);
+            //        if (GUILayout.Button("Hurt", new GUILayoutOption[0]))
+            //        {
+            //            RemoveHP(i);
+            //        }
+            //        GUILayout.Label("---", new GUILayoutOption[0]);
+            //    }
         }
     }
 
@@ -306,26 +303,26 @@ public class GameManager : MonoBehaviour
     {
         GetPlayerObject(np)._playerPrefab.GetComponent<PlayerState>()._hp -= 10;
     }
-	[RPC]
-	//Server
-	private void S_SendAnimation(NetworkPlayer source, string animation)
-	{
-		//Send animation to other clients
-		networkView.RPC ("C_SendAnimation",RPCMode.Others,source,animation);
-	}
-	
-	[RPC]
+    [RPC]
+    //Server
+    private void S_SendAnimation(NetworkPlayer source, string animation)
+    {
+        //Send animation to other clients
+        networkView.RPC("C_SendAnimation", RPCMode.Others, source, animation);
+    }
+
+    [RPC]
     //Client
     private void C_SendAnimation(NetworkPlayer source, string animation)
     {
-		if(source == GetComponent<LocalPlayer>()._networkPlayer)
-		{
-			return;	
-		}
-		Debug.Log ("I Got It");
+        if (source == GetComponent<LocalPlayer>()._networkPlayer)
+        {
+            return;
+        }
+        Debug.Log("I Got It");
         GetPlayerObject(source)._playerPrefab.GetComponent<AnimationHandle>().NetworkAnmiation(animation);
     }
-	
+
     [RPC]
     //Server Only
     private void S_RemoteAttack(NetworkPlayer source, NetworkPlayer target)
@@ -349,14 +346,16 @@ public class GameManager : MonoBehaviour
 
         networkView.RPC("SC_UseSkill", RPCMode.All, source, target, skillId);
 
+        // Skill effect
+        Skill skill = _skillContainer.GetSkill(skillId);
 
-//		Skill skill = _skillContainer.GetSkill(skillId);
-//		skill.
+        if (skill._3dEffectType != Effect3DType.Projectile)
+        {
+            DynamicEffect de = new DynamicEffect(skill._effect[0]);
 
-
-        //Später wird die gesamte Datenmenge des Helden gesynct. --> Siehe Resolve()
-
-//		GetPlayerObject(target)._playerPrefab.networkView.RPC("SyncHealth",target,GetPlayerObject(target)._playerPrefab.GetComponent<PlayerState>()._hp);
+            AddEffectForPlayer(target, de);
+            //networkView.RPC("S_DoSkillEffect", RPCMode.Server, source, target, skillId);
+        }
     }
 
     [RPC]
@@ -365,8 +364,22 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Player " + source.guid + " casts " + skillId + " on " + target.guid);
         Skill skill = _skillContainer.GetSkill(skillId);
-        Effect3DBuilder.DoEffect(GetPlayerObject(source)._playerPrefab.transform,
+
+        // Graphical stuff
+        if (skill._3dEffect)
+        {
+            Effect3DBuilder.DoEffect(GetPlayerObject(source)._playerPrefab.transform,
             GetPlayerObject(target)._playerPrefab.transform, skill);
+        }
+    }
+
+    [RPC]
+    //Server
+    private void S_DoSkillEffect(NetworkPlayer source, NetworkPlayer target, int skillId)
+    {
+        Skill skill = _skillContainer.GetSkill(skillId);
+        
+        // Effect list
     }
 
     [RPC]
@@ -395,15 +408,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("AddPlayerToTeam");
         foreach (var player in players.Where(player => player.name == name))
         {
-            player.team =  (SelectedTeam)team;
+            player.team = (SelectedTeam)team;
 
             networkView.RPC("SC_RemoteAddPlayerToTeam", RPCMode.All, player.name, (int)player.team);
         }
     }
 
-    
+
     public IEnumerable<PlayerMock> GetConnectedPlayers()
-    {       
+    {
         return players;
     }
 

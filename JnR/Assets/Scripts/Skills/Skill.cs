@@ -24,18 +24,20 @@ public class Skill : ScriptableObject
 
     private float _waitTime;
 
-    public bool CheckSkillConditions(Target origin, Target target, float deltaTime)
+    public bool CheckSkillConditions(PlayerObject origin, PlayerObject target)
     {
         // Check target
 
         var targetType = TargetType.None;
+        Team teamOrigin = origin._playerPrefab.GetComponent<PlayerState>()._team;
+        Team teamTarget = target._playerPrefab.GetComponent<PlayerState>()._team;
 
-        if (origin._id == target._id)
+        if (origin == target)
         {
             targetType = TargetType.Myself;
         }
-        else if ((origin._team == Team.Blue && target._team == Team.Blue) ||
-                 (origin._team == Team.Red && target._team == Team.Red))
+        else if ((teamOrigin == Team.Blue && teamTarget == Team.Blue) ||
+                 (teamOrigin == Team.Red && teamTarget == Team.Red))
         {
             targetType = TargetType.Ally;
         }
@@ -49,20 +51,8 @@ public class Skill : ScriptableObject
             return false;
         }
 
-        // Check cooldown
-        if (_waitTime != 0)
-        {
-            _waitTime = + deltaTime;
-
-            if (_waitTime < _cooldown)
-            {
-                return false;
-            }
-        }
-
-
         // Check range
-        float distance = Vector3.Distance(origin._3dData.transform.position, target._3dData.transform.position);
+        float distance = Vector3.Distance(origin._playerPrefab.position, target._playerPrefab.position);
 
         if (distance > _range)
         {

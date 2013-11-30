@@ -4,10 +4,13 @@
 //For now it is a monobehaviour and uses onSerializeNetworkView
 public class PlayerState : MonoBehaviour
 {
+    public Target _targetType;
     public int _dmg = 5;
     public int _hp = 100;
     public string name;
     public SelectedTeam team;
+    public Team _team;
+
     [RPC]
     private void SyncHealth(int hp)
     {

@@ -54,6 +54,8 @@ public class SkillEditor : Editor
     public override void OnInspectorGUI()
     {
 		_skill._id = EditorGUILayout.IntField(ID, _skill._id);
+
+        // 3d 2d stuff
         EditorGUILayout.LabelField(DISPLAY);
         _skill._icon = EditorGUILayout.ObjectField(ICON, _skill._icon, typeof(Texture2D), true) as Texture2D;
         _skill._3dEffect = EditorGUILayout.ObjectField(EFFECT3D, _skill._3dEffect, typeof(GameObject), true) as GameObject;
@@ -66,6 +68,8 @@ public class SkillEditor : Editor
         EditorGUILayout.Space();
         EditorGUILayout.Space();
         EditorGUILayout.Space();
+
+        // Restrictions
 
         EditorGUILayout.LabelField(RESTRICTIONS);
 
@@ -94,6 +98,9 @@ public class SkillEditor : Editor
         EditorGUILayout.Space();
         EditorGUILayout.Space();
         EditorGUILayout.Space();
+
+        //Target
+
         EditorGUILayout.LabelField(TARGET);
 
         for (int i = 0; i < _skill._targetTypes.Count; ++i)
@@ -115,6 +122,9 @@ public class SkillEditor : Editor
         EditorGUILayout.Space();
         EditorGUILayout.Space();
         EditorGUILayout.LabelField(EFFECTLIST);
+
+
+        // Spell effects
 
         for (int i = 0; i < _skill._effect.Count; ++i)
         {

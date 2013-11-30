@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerAttack2 : MonoBehaviour
 {
+    /*
     public GameObject target;
     public float attackRange = 3;
     public float attackTimer;
@@ -200,5 +201,5 @@ public class PlayerAttack2 : MonoBehaviour
                 currentIndex = -1;
             }
         }
-    }
+    }*/
 }

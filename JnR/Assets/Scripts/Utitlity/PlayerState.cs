@@ -10,6 +10,7 @@ public class PlayerState : MonoBehaviour
 
     public string name;
     public SelectedTeam team;
+    public Team _team;
 
 	public bool _isHoldingAFlag;
 

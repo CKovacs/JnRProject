@@ -7,7 +7,16 @@ public class InputDispatcher : MonoBehaviour
 	public Transform _gameManagementObject;
 	public float _targetMaxRange = 25.0f;
 	public GameObject _targetRingPrefab;
-	public Skill _skill;
+
+    public Skill _skillAutohit;
+    public Skill _skillBlock;
+    public Skill _skillDodgeRoll;
+
+    public Skill _skillStandard;
+    public Skill _skillUtility;
+    public Skill _skillDefence;
+    public Skill _skillUltimate;
+
 	public Movement _movementScript;
 	public AnimationHandle _animHandle;
 	
@@ -31,6 +40,9 @@ public class InputDispatcher : MonoBehaviour
 	// Standard attacks
 	private const string AUTOHIT = "AutoHit";
 	private const string LR = "LR";
+
+    private const string SKILL13 = "Skill13";
+    private const string SKILL24 = "Skill24";
 
 	void Start ()
 	{
@@ -79,86 +91,76 @@ public class InputDispatcher : MonoBehaviour
 		_lastVerticalInput = _verticalInput;
 		_lastHorizontalInput = _horizontalInput;
 		
-		
-		
-		UpdateTargetList ();
+        UpdateTargetList();
 
-		if (Input.GetButtonDown (LEFTSELECT)) {
-			_currentTarget = GetTarget (false);
-			Debug.Log ("GETTARGET " + _currentTarget._networkPlayer);
-			
-			_targetRingInstance.transform.position = _currentTarget._playerPrefab.transform.position;
-			_targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
-		}
-		
-		if (Input.GetButtonDown (RIGHTSELECT)) {
-			_currentTarget = GetTarget (true);
-			Debug.Log ("GETTARGET " + _currentTarget._networkPlayer);
-			//_gameManagementObject.networkView.RPC ("RemoteAttack",RPCMode.Server,
-			//	_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-			//	1);
-			_targetRingInstance.transform.position = _currentTarget._playerPrefab.transform.position;
-			_targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
-		}
-		
-		if(Input.GetKey (KeyCode.B))
-		{
-			//Maybe this is not an issue.
-			if (_isBlocking) {
-				_animHandle.ShieldBlock (true);
-			} else {
-				_isRunning = true;
-				_animHandle.ShieldBlock (true);
-			}
-		}
-		
-		if (Input.GetButtonDown (AUTOHIT) || Input.GetKeyDown (KeyCode.F)) {
-			//if(_currentTarget != _myself)
-			//{
-			//	//der verwendete Skill wird an den Server gesendet und ein Effect wird abgebildet
-			//	//RemoteSkillUse ist "generisch"
-			//	Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
-			//	_gameManagementObject.networkView.RPC ("S_RemoteSkillUse",RPCMode.Server,
-			//		_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-			//		_currentTarget._networkPlayer,_skill._id);
-			GetComponent<AnimationHandle> ().OneHandHit(true);
-			//}
-		}
-		if (Input.GetButtonDown (SELFSELECT)) {
-			if (_currentTarget != _myself) {
-				Effect3DBuilder.DoEffect (_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
-				_gameManagementObject.networkView.RPC ("S_RemoteAttack", RPCMode.Server,
-                    _gameManagementObject.GetComponent<LocalPlayer> ()._networkPlayer,
-                    _currentTarget._networkPlayer);
-			}
-		}
-		if (Input.GetButtonDown (SELFSELECT)) {
-			if (_currentTarget != _myself) {
-				Effect3DBuilder.DoEffect (_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
-				_gameManagementObject.networkView.RPC ("S_RemoteAttack", RPCMode.Server,
-                    _gameManagementObject.GetComponent<LocalPlayer> ()._networkPlayer,
-                    _currentTarget._networkPlayer);
-			}
-		}
-		//Debug.Log(Input.GetAxis(DODGEBALL));
-		if (Input.GetAxis (LR) == 1) {
-			Debug.Log ("DodgeBall");
-			if (_currentTarget != _myself) {
-				Effect3DBuilder.DoEffect (_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
-				_gameManagementObject.networkView.RPC ("S_RemoteAttack", RPCMode.Server,
-                    _gameManagementObject.GetComponent<LocalPlayer> ()._networkPlayer,
-                    _currentTarget._networkPlayer);
-			}
-		}
-		if (Input.GetAxis (LR) == -1) {
-			Debug.Log ("Shield");
-			if (_currentTarget != _myself) {
-				Effect3DBuilder.DoEffect (_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
-				_gameManagementObject.networkView.RPC ("S_RemoteAttack", RPCMode.Server,
-                    _gameManagementObject.GetComponent<LocalPlayer> ()._networkPlayer,
-                    _currentTarget._networkPlayer);
-			}
-		}
+        if (Input.GetButtonDown(LEFTSELECT))
+        {
+            _currentTarget = GetTarget(false);
+            Debug.Log("GETTARGET " + _currentTarget._networkPlayer);
+
+            _targetRingInstance.transform.position = _currentTarget._playerPrefab.transform.position;
+            _targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
+        }
+
+        if (Input.GetButtonDown(RIGHTSELECT))
+        {
+            _currentTarget = GetTarget(true);
+            Debug.Log("GETTARGET " + _currentTarget._networkPlayer);
+
+            _targetRingInstance.transform.position = _currentTarget._playerPrefab.transform.position;
+            _targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
+        }
+        if (Input.GetButtonDown(SELFSELECT))
+        {
+            _currentTarget = _myself;
+        }
+
+        if (Input.GetButtonDown(AUTOHIT) && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        {
+            //der verwendete Skill wird an den Server gesendet und ein Effect wird abgebildet
+            //RemoteSkillUse ist "generisch"
+            Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skillAutohit);
+            _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+                _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+                _currentTarget._networkPlayer, _skillAutohit._id);
+        }
+
+        if (Input.GetAxis(LR) == 1)
+        {
+            Debug.Log("DodgeBall");
+
+            _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+                _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+                _currentTarget._networkPlayer, _skillDodgeRoll._id);
+        }
+        if (Input.GetAxis(LR) == -1)
+        {
+            Debug.Log("Block");
+            if (_currentTarget != _myself)
+            {
+                _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+                    _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+                    _currentTarget._networkPlayer, _skillBlock._id);
+            }
+        }
+
+        // Teh 4 skills
+        if (Input.GetAxis(SKILL13) == 1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        {
+            Debug.Log("Skill 1");
+        }
+        else if (Input.GetAxis(SKILL24) == 1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        {
+            Debug.Log("Skill 2");
+        }
+        else if (Input.GetAxis(SKILL13) == -1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        {
+            Debug.Log("Skill 3");
+        }
+        else if (Input.GetAxis(SKILL24) == -1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        {
+            Debug.Log("Skill 4");
+        }
 		
 		if (Input.GetKeyDown (KeyCode.T)) {
 			Debug.Log ("Keycode.T");

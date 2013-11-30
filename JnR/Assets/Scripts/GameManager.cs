@@ -186,11 +186,6 @@ public class GameManager : MonoBehaviour
         var playerPrefab = Instantiate(_spawnablePlayerPrefab, spawnPosition, Quaternion.identity) as Transform;
         var networkView = playerPrefab.GetComponent<NetworkView>();
         networkView.viewID = transformViewID;
-        //foreach (NetworkView nv in playerPrefab.GetComponentsInChildren<NetworkView>())
-        //{
-        //	nv.viewID = transformViewID;	
-        //}
-        //
         var po = new PlayerObject();
         po._networkPlayer = playerIdentifier;
         po._networkViewID = transformViewID;
@@ -219,7 +214,6 @@ public class GameManager : MonoBehaviour
 
             playerPrefab.GetComponent<Movement>().enabled = true;
             playerPrefab.GetComponent<Movement>()._isLocalPlayer = true;
-            //playerPrefab.GetComponent<MovementNetwork>().enabled = true;
             playerPrefab.GetComponent<MovementNetworkSync>().SendMessage("SetOwnership");
             playerPrefab.GetComponentInChildren<Camera>().enabled = true;
             playerPrefab.GetComponentInChildren<AudioListener>().enabled = true;
@@ -228,16 +222,6 @@ public class GameManager : MonoBehaviour
             playerPrefab.GetComponent<InputDispatcher>()._gameManagementObject = transform;
             playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
             playerPrefab.GetComponent<AnimationHandle>()._localPlayer = true;
-
-            //playerPrefab.GetComponentInChildren<Movement>().enabled = true;
-            //playerPrefab.GetComponentInChildren<Movement>()._isLocalPlayer = true;
-            //playerPrefab.GetComponentInChildren<MovementNetwork>().enabled = true;
-            //playerPrefab.GetComponentInChildren<MovementNetworkSync_TSP>().SendMessage("SetOwnership");
-            //playerPrefab.GetComponentInChildren<Camera>().enabled = true;
-            //playerPrefab.GetComponentInChildren<AudioListener>().enabled = true;
-            //playerPrefab.GetComponentInChildren<SmoothFollow>().enabled = true;
-            //playerPrefab.GetComponentInChildren<InputDispatcher>().enabled = true;
-            //playerPrefab.GetComponentInChildren<InputDispatcher>()._gameManagementObject = this.transform;
             return;
         }
         if (Network.isServer)
@@ -265,14 +249,6 @@ public class GameManager : MonoBehaviour
             playerPrefab.GetComponent<InputDispatcher>()._gameManagementObject = transform;
             playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
             playerPrefab.GetComponent<AnimationHandle>()._localPlayer = false;
-            //playerPrefab.GetComponent<MovementNetwork>().enabled = false;
-
-            //playerPrefab.GetComponentInChildren<Camera>().enabled = false;
-            //playerPrefab.GetComponentInChildren<AudioListener>().enabled = false;
-            //playerPrefab.GetComponentInChildren<SmoothFollow>().enabled = false;
-            //playerPrefab.GetComponentInChildren<Movement>().enabled = true;
-            //playerPrefab.GetComponentInChildren<Movement>()._isLocalPlayer = false;
-            //playerPrefab.GetComponentInChildren<MovementNetwork>().enabled = false;
         }
     }
 
@@ -280,29 +256,39 @@ public class GameManager : MonoBehaviour
     {
         if (Network.isServer)
         {
-            //    for (int i = 0; i < _playerList.Count; ++i)
-            //    {
-            //        GUILayout.Label("NetworkPlayer:" + _playerList[i]._networkPlayer, new GUILayoutOption[0]);
-            //        GUILayout.Label("NetworkViewID:" + _playerList[i]._networkViewID, new GUILayoutOption[0]);
-            //        GUILayout.Label("HP = " + _playerList[i]._playerPrefab.GetComponent<PlayerState>()._hp);
-            //        if (GUILayout.Button("Hurt", new GUILayoutOption[0]))
-            //        {
-            //            RemoveHP(i);
-            //        }
-            //        GUILayout.Label("---", new GUILayoutOption[0]);
-            //    }
+            for (int i = 0; i < _playerList.Count; ++i)
+            {
+                GUILayout.Label("NetworkPlayer:" + _playerList[i]._networkPlayer, new GUILayoutOption[0]);
+                GUILayout.Label("NetworkViewID:" + _playerList[i]._networkViewID, new GUILayoutOption[0]);
+                GUILayout.Label("HP = " + _playerList[i]._playerPrefab.GetComponent<PlayerState>()._hp);
+                if (GUILayout.Button("Hurt", new GUILayoutOption[0]))
+                {
+					AlterHealth(_playerList[i]._networkPlayer,-51);
+                }
+                GUILayout.Label("---", new GUILayoutOption[0]);
+            }
         }
     }
 
-    private void RemoveHP(int i)
+    private void AlterHealth(NetworkPlayer np, int value)
     {
-        GetPlayerObjectAt(i)._playerPrefab.GetComponent<PlayerState>()._hp -= 10;
+		Transform player = GetPlayerObject(np)._playerPrefab;
+		//Change the Health on the Server Object according to the value
+		player.GetComponent<PlayerState>()._hp += value;
+		if(player.GetComponent<PlayerState>()._hp > PlayerStateSyncValues.MAXLIFE) 
+		{
+			player.GetComponent<PlayerState>()._hp = PlayerStateSyncValues.MAXLIFE;
+		}
+		if(player.GetComponent<PlayerState>()._hp <= 0)
+		{
+			Debug.Log ("A player died");
+			//Replicate the Death to the player
+			Death(np);
+		}
+		//Replicate the Health on the client peers
+		 player.networkView.RPC("SyncValue", np, PlayerStateSyncValues.LIFE, player.GetComponent<PlayerState>()._hp);
     }
 
-    private void RemoveHP(NetworkPlayer np)
-    {
-        GetPlayerObject(np)._playerPrefab.GetComponent<PlayerState>()._hp -= 10;
-    }
     [RPC]
     //Server
     private void S_SendAnimation(NetworkPlayer source, string animation)
@@ -323,12 +309,30 @@ public class GameManager : MonoBehaviour
         GetPlayerObject(source)._playerPrefab.GetComponent<AnimationHandle>().NetworkAnmiation(animation);
     }
 
+	private void Death(NetworkPlayer player)
+	{
+		Debug.Log ("Player " + player + " died!");
+		//Reset the lifepoints
+		AlterHealth(player,PlayerStateSyncValues.MAXLIFE);
+		networkView.RPC ("S_ResetPositionToSpawnpoint",RPCMode.Server,player);
+	}
+
+	[RPC]
+	//Client
+	private void C_Death(NetworkPlayer playerToBeDead)
+	{
+		//Respawn on a Spawnpoint
+		GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
+		Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform;
+		GetPlayerObject(playerToBeDead)._playerPrefab.position = spawnPoint.position;
+	}
+
     [RPC]
     //Server Only
     private void S_RemoteAttack(NetworkPlayer source, NetworkPlayer target)
     {
         Debug.Log("Player " + source + " attacks Player " + target + " for 10 DMG");
-        RemoveHP(target);
+        AlterHealth(target,-10);
         GetPlayerObject(target)
             ._playerPrefab.networkView.RPC("SyncHealth", target,
                 GetPlayerObject(target)._playerPrefab.GetComponent<PlayerState>()._hp);

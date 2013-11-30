@@ -17,7 +17,6 @@ public class GUITeamSelection : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-       
         _gameManager = _gameManagementObject.GetComponent<GameManager>();
         _players = _gameManager.GetConnectedPlayers();
     }

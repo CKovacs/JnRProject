@@ -26,42 +26,42 @@ public class LocalPlayer : MonoBehaviour {
 		_networkViewID = viewID;
 	}
 	
-	private void OnGUI()
-	{
-		
-		if(_isInstantiated == false)
-		{
-			return;	
-		}
-		if(Network.isServer)
-		{
-			enabled = false;
-			return;	
-		}
-		GUILayout.Label("NetworkPlayer:" + this._networkPlayer.guid, new GUILayoutOption[0]);
-		GUILayout.Label("NetworkViewID:" + this._networkViewID, new GUILayoutOption[0]);
-		if (this._isInstantiated)
-		{
-			GUILayout.Label("Is instantiated!", new GUILayoutOption[0]);
-		}
-		else
-		{
-			GUILayout.Label("Is not instantiated", new GUILayoutOption[0]);
-		}
-		GUILayout.Label ("HP: " + _playerPrefab.GetComponent<PlayerState>()._hp, new GUILayoutOption[0]);
-		
-		
-		////BUTTON IDLESTAND
-		//if (GUILayout.Button("STAND", new GUILayoutOption[0]))
-		//      {
-		//          Debug.Log ("Animation Stand Invoke");
-		//	_playerPrefab.GetComponent<AnimationHandle>().IdleStand();
-		//      }
-		////BUTTON IDLERUN
-		//if (GUILayout.Button("RUN", new GUILayoutOption[0]))
-		//      {
-		//          Debug.Log ("Animation Run Invoke");
-		//	_playerPrefab.GetComponent<AnimationHandle>().IdleRun();
-		//      }
-	}
+	//private void OnGUI()
+	//{
+	//	
+	//	if(_isInstantiated == false)
+	//	{
+	//		return;	
+	//	}
+	//	if(Network.isServer)
+	//	{
+	//		enabled = false;
+	//		return;	
+	//	}
+	//	GUILayout.Label("NetworkPlayer:" + this._networkPlayer.guid, new GUILayoutOption[0]);
+	//	GUILayout.Label("NetworkViewID:" + this._networkViewID, new GUILayoutOption[0]);
+	//	if (this._isInstantiated)
+	//	{
+	//		GUILayout.Label("Is instantiated!", new GUILayoutOption[0]);
+	//	}
+	//	else
+	//	{
+	//		GUILayout.Label("Is not instantiated", new GUILayoutOption[0]);
+	//	}
+	//	GUILayout.Label ("HP: " + _playerPrefab.GetComponent<PlayerState>()._hp, new GUILayoutOption[0]);
+	//	
+	//	
+	//	////BUTTON IDLESTAND
+	//	//if (GUILayout.Button("STAND", new GUILayoutOption[0]))
+	//	//      {
+	//	//          Debug.Log ("Animation Stand Invoke");
+	//	//	_playerPrefab.GetComponent<AnimationHandle>().IdleStand();
+	//	//      }
+	//	////BUTTON IDLERUN
+	//	//if (GUILayout.Button("RUN", new GUILayoutOption[0]))
+	//	//      {
+	//	//          Debug.Log ("Animation Run Invoke");
+	//	//	_playerPrefab.GetComponent<AnimationHandle>().IdleRun();
+	//	//      }
+	//}
 }

@@ -103,6 +103,7 @@ public class InputDispatcher : MonoBehaviour
 		
 		if(Input.GetKey (KeyCode.B))
 		{
+			//Maybe this is not an issue.
 			if (_isBlocking) {
 				_animHandle.ShieldBlock (true);
 			} else {

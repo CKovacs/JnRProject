@@ -200,7 +200,7 @@ public class GameManager : MonoBehaviour
 	{
 		if(Network.isServer)
 		{
-			Debug.Log ("Player " + player + " died!");
+			Debug.Log ("Player " + np + " died!");
 			/*A player has died we need to do the following
 			 * * Trigger a respawn (this can be a coroutine)
 			 * * check if the dead player had a flag attached 
@@ -212,8 +212,8 @@ public class GameManager : MonoBehaviour
 
 
 
-			AlterHealth(player,PlayerStateSyncValues.MAXLIFE);
-			networkView.RPC ("S_ResetPositionToSpawnpoint",RPCMode.Server,player);
+			AlterHealth(np,PlayerStateSyncValues.MAXLIFE);
+			networkView.RPC ("S_ResetPositionToSpawnpoint",RPCMode.Server,np);
 		} 
 		else
 		{

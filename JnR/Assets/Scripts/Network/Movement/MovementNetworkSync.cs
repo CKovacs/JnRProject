@@ -75,7 +75,7 @@ public class MovementNetworkSync : MonoBehaviour
 	{
 		_movementScript = GetComponent<Movement>();
 	}
-	
+
 	// Convert field info from character controller script to a local bool variable
 	bool targetIsMoving
 	{

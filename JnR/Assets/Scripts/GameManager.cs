@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
                 return;
                 //Nothing more should happen since we are a modifier and there is no modifier with duration equals 0
             }
-
+			 
             if (wasRemoved)
             {
                 Debug.Log("REMOVE SOME STATUS MODIFIER!");
@@ -193,7 +193,7 @@ public class GameManager : MonoBehaviour
         AddPlayerObject(po);
 
         if (playerIdentifier == GetComponent<LocalPlayer>()._networkPlayer)
-        {
+        { 
             ////////////////////
             {
                 string text = string.Empty;
@@ -270,24 +270,68 @@ public class GameManager : MonoBehaviour
         }
     }
 
+	/*! A server-side function to change the health of a player.
+	 * 
+	 */
     private void AlterHealth(NetworkPlayer np, int value)
     {
-		Transform player = GetPlayerObject(np)._playerPrefab;
-		//Change the Health on the Server Object according to the value
-		player.GetComponent<PlayerState>()._hp += value;
-		if(player.GetComponent<PlayerState>()._hp > PlayerStateSyncValues.MAXLIFE) 
+		if(Network.isServer)
 		{
-			player.GetComponent<PlayerState>()._hp = PlayerStateSyncValues.MAXLIFE;
-		}
-		if(player.GetComponent<PlayerState>()._hp <= 0)
+			Transform player = GetPlayerObject(np)._playerPrefab;
+			//Change the Health on the Server Object according to the value
+			player.GetComponent<PlayerState>()._hp += value;
+			if(player.GetComponent<PlayerState>()._hp > PlayerStateSyncValues.MAXLIFE) 
+			{
+				player.GetComponent<PlayerState>()._hp = PlayerStateSyncValues.MAXLIFE;
+			}
+			if(player.GetComponent<PlayerState>()._hp <= 0)
+			{
+				Debug.Log ("A player died...");
+				//Replicate the Death to the player
+				Death(np);
+			}
+			//Replicate the Health on the client peers
+			 player.networkView.RPC("SyncValue", np, PlayerStateSyncValues.LIFE, player.GetComponent<PlayerState>()._hp);
+		} 
+		else
 		{
-			Debug.Log ("A player died");
-			//Replicate the Death to the player
-			Death(np);
+			Debug.LogError("Client " + Network.player + " tries to access a server function.");
 		}
-		//Replicate the Health on the client peers
-		 player.networkView.RPC("SyncValue", np, PlayerStateSyncValues.LIFE, player.GetComponent<PlayerState>()._hp);
     }
+
+	/*! A server-side function to resolve a players death
+	 */
+	private void Death(NetworkPlayer np)
+	{
+		if(Network.isServer)
+		{
+			Debug.Log ("Player " + player + " died!");
+			/*A player has died we need to do the following
+			 * * Trigger a respawn (this can be a coroutine)
+			 * * check if the dead player had a flag attached 
+			 * * * flag handling
+			 */
+
+			Transform playerPrefab = GetPlayerObject(np)._playerPrefab;
+			playerPrefab.GetComponent<InputDispatcher>().enabled = false;
+
+
+
+			AlterHealth(player,PlayerStateSyncValues.MAXLIFE);
+			networkView.RPC ("S_ResetPositionToSpawnpoint",RPCMode.Server,player);
+		} 
+		else
+		{
+			Debug.LogError("Client " + Network.player + " tries to access a server function.");
+		}
+	}
+
+	/*! Disables and enables a set of components on a specific player
+	 */
+	private void PlayerReEnabling(NetworkPlayer np, bool tralse)
+	{
+
+	}
 
     [RPC]
     //Server
@@ -308,14 +352,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("I Got It");
         GetPlayerObject(source)._playerPrefab.GetComponent<AnimationHandle>().NetworkAnmiation(animation);
     }
-
-	private void Death(NetworkPlayer player)
-	{
-		Debug.Log ("Player " + player + " died!");
-		//Reset the lifepoints
-		AlterHealth(player,PlayerStateSyncValues.MAXLIFE);
-		networkView.RPC ("S_ResetPositionToSpawnpoint",RPCMode.Server,player);
-	}
 
 	[RPC]
 	//Client

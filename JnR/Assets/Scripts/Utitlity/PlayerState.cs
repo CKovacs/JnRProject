@@ -20,7 +20,7 @@ public class PlayerState : MonoBehaviour
 		switch(id)
 		{
 		case PlayerStateSyncValues.LIFE:
-			//Do something;
+			_hp = value;
 			break;
 		case PlayerStateSyncValues.DAMAGE:
 			//Do something;

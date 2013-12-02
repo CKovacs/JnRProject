@@ -6,25 +6,22 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    public Dictionary<NetworkPlayer, List<DynamicEffect>> _effectList;
     public bool _isRunning;
     public List<PlayerObject> _playerList = new List<PlayerObject>();
     public int _playerListCount;
-    private ServerSkillContainer _skillContainer;
     public Transform _spawnablePlayerPrefab;
-    //BUFF / DEBUFF SPELL PROTOTYPE
-    private int size = 10;
-    //Game is Running?
+    private ServerSkillContainer _skillContainer;
+
+    public DynamicEffectHandler _dynamicEffectHandler;
 
     private void Start()
     {
         _skillContainer = GetComponent<ServerSkillContainer>();
         InitPlayerList();
+
         if (Network.isServer)
         {
-            //Get Memory for the list.
-
-            _effectList = new Dictionary<NetworkPlayer, List<DynamicEffect>>(size);
+            _dynamicEffectHandler = new DynamicEffectHandler();
         }
     }
 
@@ -32,111 +29,9 @@ public class GameManager : MonoBehaviour
     {
         if (Network.isServer)
         {
-            bool removeMe = false;
-
-            foreach (KeyValuePair<NetworkPlayer, List<DynamicEffect>> pair in _effectList)
-            {
-                foreach (DynamicEffect e in pair.Value)
-                {
-                    //Check if the spell should be removed
-                    removeMe = RemoveCheck(e);
-                    if (removeMe)
-                    {
-                        Debug.Log("Removed a Spell");
-                        pair.Value.Remove(e);
-                    }
-                    //Resolve the Spell with remove or not remove information
-                    Resolve(pair.Key, e, removeMe);
-                }
-            }
+            _dynamicEffectHandler.Update(Time.deltaTime);
         }
     }
-
-    private bool RemoveCheck(DynamicEffect e)
-    {
-        float currentTime = Time.time;
-        if (currentTime - e._startTime < 0)
-        {
-            //REMOVE THIS SPELL
-            return true;
-        }
-        //DONT REMOVE THIS SPELL
-        return false;
-    }
-
-    private void Resolve(NetworkPlayer player, DynamicEffect e, bool wasRemoved)
-    {
-        //Should be outside?
-        float currentTime = Time.time;
-
-        //Instant
-        if (e._duration == 0)
-        {
-            if (!e._isTriggered)
-            {
-                Debug.Log("INSTANT ATTACK/HEAL OR SOMETHING..");
-                e._isTriggered = true;
-                e._lastTriggerTime = Time.time;
-                return; //Nothing more should happen
-            }
-        }
-
-        //Modifier Spells
-        if (e._isModifier)
-        {
-            //Check if Spell is triggered or trigger it..
-            if (!e._isTriggered)
-            {
-                Debug.Log("APPLY SOME MODIFIER!");
-                e._isTriggered = true;
-                e._lastTriggerTime = Time.time;
-                return;
-                //Nothing more should happen since we are a modifier and there is no modifier with duration equals 0
-            }
-
-            if (wasRemoved)
-            {
-                Debug.Log("REMOVE SOME MODIFIER!");
-                return; //Nothing more should happen since we just removed a modifier
-            }
-        }
-
-        //Those spells are mostly croud control
-        if (e._isStatusModifier)
-        {
-            //Check if Spell is triggered or trigger it..
-            if (!e._isTriggered)
-            {
-                Debug.Log("APPLY SOME STATUS MODIFIER!");
-                e._isTriggered = true;
-                e._lastTriggerTime = Time.time;
-                return;
-                //Nothing more should happen since we are a modifier and there is no modifier with duration equals 0
-            }
-
-            if (wasRemoved)
-            {
-                Debug.Log("REMOVE SOME STATUS MODIFIER!");
-            }
-        }
-    }
-
-    private void AddEffectForPlayer(NetworkPlayer player, DynamicEffect effect)
-    {
-        //Make a copy for the gc?
-        _effectList[player].Add(effect);
-    }
-
-    private void AddEffectForPlayer(NetworkPlayer player, DynamicEffect[] effect)
-    {
-        foreach (DynamicEffect e in effect)
-        {
-            _effectList[player].Add(e);
-        }
-    }
-
-    // END BUFF / DEBUFF SPELL PROTOTYPE
-    
 
     public void AddPlayerObject(PlayerObject po)
     {
@@ -355,10 +250,7 @@ public class GameManager : MonoBehaviour
 
         if (skill._3dEffectType != Effect3DType.Projectile)
         {
-            DynamicEffect de = new DynamicEffect(skill._effect[0]);
-
-            AddEffectForPlayer(target, de);
-            //networkView.RPC("S_DoSkillEffect", RPCMode.Server, source, target, skillId);
+            _dynamicEffectHandler.AddEffectsForPlayer(target, skill._effect);
         }
     }
 

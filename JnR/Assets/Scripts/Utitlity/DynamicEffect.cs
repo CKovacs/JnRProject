@@ -30,10 +30,6 @@ public class DynamicEffect
 	    DEFENSE
 	};
 	
-	public DynamicEffect()
-	{
-	}
-	
 	public DynamicEffect(Effect effect)
 	{
 		Debug.LogError("Implement Me");

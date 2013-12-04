@@ -4,6 +4,7 @@
 //For now it is a monobehaviour and uses onSerializeNetworkView
 public class PlayerState : MonoBehaviour
 {
+	public Transform _gameManagementObject;
     public int _hp = 100;
 	public int _dmg = 5;
 	public int _movementSpeed = 1000;
@@ -13,9 +14,9 @@ public class PlayerState : MonoBehaviour
     public Team _team;
 
 	public bool _isHoldingAFlag;
+	public bool _isDead = false; 
 
-	[RPC]
-	private void SyncValue(int id, int value)
+	public void SyncValue(int id, int value)
 	{
 		switch(id)
 		{
@@ -25,6 +26,11 @@ public class PlayerState : MonoBehaviour
 		case PlayerStateSyncValues.DAMAGE:
 			//Do something;
 			break;
+		case PlayerStateSyncValues.BOOLDEATH:
+			_isDead = value>0 ? true : false;
+			break;
 		}
 	}
+
+
 }

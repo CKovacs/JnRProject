@@ -1,4 +1,5 @@
- using System;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -117,6 +118,7 @@ public class GameManager : MonoBehaviour
             playerPrefab.GetComponent<InputDispatcher>()._gameManagementObject = transform;
             playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
             playerPrefab.GetComponent<AnimationHandle>()._localPlayer = true;
+			playerPrefab.GetComponent<PlayerState>()._gameManagementObject = transform;
             return;
         }
         if (Network.isServer)
@@ -143,6 +145,7 @@ public class GameManager : MonoBehaviour
             playerPrefab.GetComponent<Movement>()._isLocalPlayer = false;
             playerPrefab.GetComponent<InputDispatcher>()._gameManagementObject = transform;
             playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
+			playerPrefab.GetComponent<PlayerState>()._gameManagementObject = transform;
             playerPrefab.GetComponent<AnimationHandle>()._localPlayer = false;
         }
     }
@@ -185,8 +188,9 @@ public class GameManager : MonoBehaviour
 				//Replicate the Death to the player
 				Death(np);
 			}
+			networkView.RPC("SyncValuesForPlayer",RPCMode.Others, np, PlayerStateSyncValues.LIFE, player.GetComponent<PlayerState>()._hp);
 			//Replicate the Health on the client peers
-			 player.networkView.RPC("SyncValue", np, PlayerStateSyncValues.LIFE, player.GetComponent<PlayerState>()._hp);
+			//player.networkView.RPC("SyncValue", RPCMode.Others, np, PlayerStateSyncValues.LIFE, player.GetComponent<PlayerState>()._hp);
 		} 
 		else
 		{
@@ -194,26 +198,36 @@ public class GameManager : MonoBehaviour
 		}
     }
 
+	/*! This networkfunction syncronizes the attributes of a certain player to all peers
+	 */
+	[RPC]
+	private void SyncValuesForPlayer(NetworkPlayer player, int id, int value)
+	{
+		GetPlayerObject(player)._playerPrefab.GetComponent<PlayerState>().SyncValue(id,value);
+	}
+
 	/*! A server-side function to resolve a players death
 	 */
-	private void Death(NetworkPlayer np)
+	private void Death(NetworkPlayer player)
 	{
 		if(Network.isServer)
 		{
-			Debug.Log ("Player " + np + " died!");
+			Debug.Log ("Player " + player + " died!");
 			/*A player has died we need to do the following
 			 * * Trigger a respawn (this can be a coroutine)
 			 * * check if the dead player had a flag attached 
 			 * * * flag handling
 			 */
 
-			Transform playerPrefab = GetPlayerObject(np)._playerPrefab;
+			Transform playerPrefab = GetPlayerObject(player)._playerPrefab;
+			playerPrefab.GetComponent<PlayerState>()._isDead = true;
+			playerPrefab.GetComponent<AnimationHandle>().Death(true);
+			networkView.RPC("SyncValuesForPlayer",RPCMode.Others, player, PlayerStateSyncValues.BOOLDEATH, playerPrefab.GetComponent<PlayerState>()._isDead ? 1 : 0);
+			//PlayerReEnabling(np,false);
 			playerPrefab.GetComponent<InputDispatcher>().enabled = false;
-
-
-
-			AlterHealth(np,PlayerStateSyncValues.MAXLIFE);
-			networkView.RPC ("S_ResetPositionToSpawnpoint",RPCMode.Server,np);
+			AlterHealth(player,PlayerStateSyncValues.MAXLIFE);
+			//networkView.RPC ("S_ResetPositionToSpawnpoint",RPCMode.Server,player);
+			StartCoroutine(Respawn(player));
 		} 
 		else
 		{
@@ -221,11 +235,33 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	/*! Disables and enables a set of components on a specific player
-	 */
-	private void PlayerReEnabling(NetworkPlayer np, bool tralse)
+	IEnumerator Respawn(NetworkPlayer player)
 	{
+		networkView.RPC ("PlayerReEnabling",RPCMode.Others,player,false ? 1 : 0);
+		yield return new WaitForSeconds(2);
 
+		GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
+		Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform;
+		Transform playerPrefab = GetPlayerObject(player)._playerPrefab;
+		playerPrefab.GetComponent<MovementNetworkSync>().ResetState();
+		GetPlayerObject(player)._playerPrefab.position = spawnPoint.position;
+		yield return new WaitForSeconds(3);
+		networkView.RPC ("PlayerReEnabling",RPCMode.Others,player,true ? 1 : 0);
+	}
+
+	[RPC]
+	/*! Disables and enables a set of components on a specific player and the corresponding peer
+	 */
+	private void PlayerReEnabling(NetworkPlayer player, int tralse)
+	{
+		if (player == GetComponent<LocalPlayer>()._networkPlayer)
+		{
+			Transform playerPrefab = GetPlayerObject(player)._playerPrefab;
+			playerPrefab.GetComponent<InputDispatcher>().enabled = tralse==0 ? false : true;
+			playerPrefab.GetComponent<MovementNetworkSync>().enabled = tralse==0 ? false : true;
+			playerPrefab.GetComponent<Movement>().enabled = tralse==0 ? false : true;
+			playerPrefab.GetComponentInChildren<SmoothFollow>().enabled = tralse==0 ? false : true;
+		}
 	}
 
     [RPC]

@@ -34,7 +34,7 @@ public class MovementNetworkSync : MonoBehaviour
 	public double m_InterpolationBackTime = 0.1; 
 	public float m_PosCorrectionSpeed = 5.0F;
 	public float m_MaxPositionErrorTime = 1.0F;
-	
+
 	float m_PositionErrorTime = 0.0F;
 
 	// We store twenty states with "playback" information
@@ -74,7 +74,16 @@ public class MovementNetworkSync : MonoBehaviour
 	void Start()
 	{
 		_movementScript = GetComponent<Movement>();
+		m_BufferedState = new State[40];
+		m_LocalBufState = new State[40];
 	}
+
+	public void ResetState()
+	{
+		m_BufferedState = new State[40];
+		m_LocalBufState = new State[40];
+	}
+
 
 	// Convert field info from character controller script to a local bool variable
 	bool targetIsMoving
@@ -94,7 +103,6 @@ public class MovementNetworkSync : MonoBehaviour
 		while (true)
 		{
 			yield return new WaitForSeconds(1/15);
-			
 			// Shift buffer contents, oldest data erased, 18 becomes 19, ... , 0 becomes 1
 			for( int i = m_LocalBufState.Length - 1; i >= 1; i-- )
 			{

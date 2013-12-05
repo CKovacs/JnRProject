@@ -102,6 +102,7 @@ public class MovementNetworkSync : MonoBehaviour
 	{
 		while (true)
 		{
+			Debug.Log ("Coroutine running..");
 			yield return new WaitForSeconds(1/15);
 			// Shift buffer contents, oldest data erased, 18 becomes 19, ... , 0 becomes 1
 			for( int i = m_LocalBufState.Length - 1; i >= 1; i-- )
@@ -147,8 +148,8 @@ public class MovementNetworkSync : MonoBehaviour
 			// OLD BEHAVIOR: If prediction is off, diverge current location by the amount of the offset
 			else if (m_PredictionAccuracy > m_PredictionThreshold)
 			{
-				//Debug.Log("Error in prediction("+m_PredictionAccuracy+"), local is " + m_LocalBufState[j].pos + " network is " + m_BufferedState[0].pos);
-				//Debug.Log("Local time: " + m_LocalBufState[j].timestamp + " Network time: " + m_BufferedState[0].timestamp);
+				Debug.Log("Error in prediction("+m_PredictionAccuracy+"), local is " + m_LocalBufState[j].pos + " network is " + m_BufferedState[0].pos);
+				Debug.Log("Local time: " + m_LocalBufState[j].timestamp + " Network time: " + m_BufferedState[0].timestamp);
 				
 				// Find how far we travelled since the prediction failed
 				Vector3 localMovement = m_LocalBufState[j].pos - m_LocalBufState[0].pos;

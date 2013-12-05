@@ -63,7 +63,7 @@ public class Connector : MonoBehaviour {
 	
 	public void Connect()
 	{
-		Network.Connect("127.0.0.1", 25000);
+		Network.Connect("127.0.0.1", _serverPort);
 	}
 	
 	public void Connect(HostData hd)
@@ -142,7 +142,7 @@ public class Connector : MonoBehaviour {
 	
 	public void StartServer()
 	{
-		Network.InitializeServer(10, 25000, false);
+		Network.InitializeServer(10, _serverPort, false);
 	}
 	
 	private void OnConnectedToServer()

@@ -239,12 +239,12 @@ public class GameManager : MonoBehaviour
 	{
 		networkView.RPC ("PlayerReEnabling",RPCMode.Others,player,false ? 1 : 0);
 		yield return new WaitForSeconds(2);
-
 		GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
 		Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform;
 		Transform playerPrefab = GetPlayerObject(player)._playerPrefab;
-		playerPrefab.GetComponent<MovementNetworkSync>().ResetState();
+		networkView.RPC ("SetRespawnPosition", RPCMode.Others,player,spawnPoint.position);
 		GetPlayerObject(player)._playerPrefab.position = spawnPoint.position;
+		playerPrefab.GetComponent<MovementNetworkSync>().ResetState();
 		yield return new WaitForSeconds(3);
 		networkView.RPC ("PlayerReEnabling",RPCMode.Others,player,true ? 1 : 0);
 	}
@@ -262,6 +262,12 @@ public class GameManager : MonoBehaviour
 			playerPrefab.GetComponent<Movement>().enabled = tralse==0 ? false : true;
 			playerPrefab.GetComponentInChildren<SmoothFollow>().enabled = tralse==0 ? false : true;
 		}
+	}
+
+	[RPC]
+	private void SetRespawnPosition(NetworkPlayer player, Vector3 newPosition)
+	{
+		GetPlayerObject(player)._playerPrefab.position = newPosition;
 	}
 
     [RPC]
@@ -283,16 +289,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("I Got It");
         GetPlayerObject(source)._playerPrefab.GetComponent<AnimationHandle>().NetworkAnmiation(animation);
     }
-
-	[RPC]
-	//Client
-	private void C_Death(NetworkPlayer playerToBeDead)
-	{
-		//Respawn on a Spawnpoint
-		GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
-		Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform;
-		GetPlayerObject(playerToBeDead)._playerPrefab.position = spawnPoint.position;
-	}
 
     [RPC]
     //Server Only
@@ -316,6 +312,8 @@ public class GameManager : MonoBehaviour
         ////// Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
 
         networkView.RPC("SC_UseSkill", RPCMode.All, source, target, skillId);
+
+		AlterHealth (target,-5);
 
         // Skill effect
         Skill skill = _skillContainer.GetSkill(skillId);

@@ -102,7 +102,6 @@ public class MovementNetworkSync : MonoBehaviour
 	{
 		while (true)
 		{
-			Debug.Log ("Coroutine running..");
 			yield return new WaitForSeconds(1/15);
 			// Shift buffer contents, oldest data erased, 18 becomes 19, ... , 0 becomes 1
 			for( int i = m_LocalBufState.Length - 1; i >= 1; i-- )

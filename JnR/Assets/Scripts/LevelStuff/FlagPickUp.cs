@@ -21,6 +21,4 @@ public class FlagPickUp : MonoBehaviour
 			enabled = false;
 		}
 	}
-
-	
 }

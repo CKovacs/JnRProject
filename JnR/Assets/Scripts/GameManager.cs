@@ -12,6 +12,12 @@ public class GameManager : MonoBehaviour
 	private ServerSkillContainer _skillContainer;
 	public Transform _spawnablePlayerPrefab;
 	private IEnumerable<PlayerMock> players;
+
+	//Todo make a "win-condition" script
+	public Transform _flagRed;
+	public Transform _flagBlue;
+	public Transform _playerHoldingFlagRed;
+	public Transform _playerHoldingFlagBlue;
 	
 
 	private void Start()
@@ -165,6 +171,11 @@ public class GameManager : MonoBehaviour
 				GUILayout.Label("---", new GUILayoutOption[0]);
 			}
 		}
+		else
+		{
+			//Wer hat die Flagge?
+			//Wie ist der Punktestand?
+		}
 	}
 
 	/*! A server-side function to change the health of a player.
@@ -213,7 +224,6 @@ public class GameManager : MonoBehaviour
 
 	private void Death(NetworkPlayer player)
 	{
-		
 		if (Network.isServer)
 		{
 			Transform playerPrefab = GetPlayerObject(player)._playerPrefab;
@@ -236,6 +246,18 @@ public class GameManager : MonoBehaviour
 
 			if (playerState._isHoldingAFlag)
 			{
+				Team t = playerState._team;
+				if(t == Team.Blue)
+				{
+					//Do something with RED flag
+					networkView.RPC ("DropFlag",RPCMode.All,0);
+				} 
+				else
+				{
+					//Do something with BLUE flag
+					networkView.RPC ("DropFlag",RPCMode.All,1);
+				}
+
 				playerState._isHoldingAFlag = false;
 				networkView.RPC("SyncValuesForPlayer", RPCMode.Others, player, PlayerStateSyncValues.BOOLFLAG, playerState._isHoldingAFlag ? 1 : 0);
 			}
@@ -273,6 +295,19 @@ public class GameManager : MonoBehaviour
 			playerPrefab.GetComponent<MovementNetworkSync>().enabled = tralse == 0 ? false : true;
 			playerPrefab.GetComponent<Movement>().enabled = tralse == 0 ? false : true;
 			playerPrefab.GetComponentInChildren<SmoothFollow>().enabled = tralse == 0 ? false : true;
+		}
+	}
+
+	[RPC]
+	private void DropFlag(int flagId)
+	{
+		if(flagId==0)
+		{
+			Debug.Log ("Dropped a flag... " + _flagRed.name);
+		}
+		else
+		{
+			Debug.Log ("Dropped a flag... " + _flagBlue.name);
 		}
 	}
 

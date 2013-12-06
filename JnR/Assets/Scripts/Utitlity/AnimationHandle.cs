@@ -29,6 +29,12 @@ public class AnimationHandle : MonoBehaviour
 				_animator.SetBool ("IdleRun", true);
 				SendToServer ("IdleRun", shouldSend);
 		}
+
+		public void Death (bool shouldSend)
+		{
+			Falses ();
+			_animator.SetBool ("Death", true);
+		}
 	
 		public void OneHandHit (bool shouldSend)
 		{
@@ -109,6 +115,6 @@ public class AnimationHandle : MonoBehaviour
 	
 		void Update ()
 		{
-		
+			
 		}
 }

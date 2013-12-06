@@ -137,14 +137,9 @@ public class SkillEditor : Editor
 
             switch (effect._type)
             {
-                case EffectType.damage:
+                case EffectType.life:
                     effect._amount = EditorGUILayout.IntField(AMOUNT, effect._amount);
                     if(effect._duration > 0)
-                        effect._frequency = EditorGUILayout.IntField(FREQUENCY, effect._frequency);
-                    break;
-                case EffectType.heal:
-                    effect._amount = EditorGUILayout.IntField(AMOUNT, effect._amount);
-                    if (effect._duration > 0)
                         effect._frequency = EditorGUILayout.IntField(FREQUENCY, effect._frequency);
                     break;
                 case EffectType.run:

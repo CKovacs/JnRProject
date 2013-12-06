@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (Network.isServer)
 		{
-			_dynamicEffectHandler.Update(Time.deltaTime);
+            _dynamicEffectHandler.Update(Time.deltaTime);
 		}
 	}
 
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
 			Debug.Log("SpawningPlayer as Client");
 		}
 		var playerPrefab = Instantiate(_spawnablePlayerPrefab, spawnPosition, Quaternion.identity) as Transform;
-		var networkView = playerPrefab.GetComponent<NetworkView>();
+        NetworkView networkView = playerPrefab.GetComponent<NetworkView>();
 		networkView.viewID = transformViewID;
 		var po = new PlayerObject();
 		po._networkPlayer = playerIdentifier;
@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
 			playerPrefab.GetComponent<PlayerState>()._gameManagementObject = transform;
 			playerPrefab.GetComponent<AnimationHandle>()._localPlayer = false;
 
-            _dynamicEffectHandler = new DynamicEffectHandler(_playerList);
+            _dynamicEffectHandler = new DynamicEffectHandler(this.networkView, _playerList);
 		}
 	}
 
@@ -327,7 +327,7 @@ public class GameManager : MonoBehaviour
 
         if (skill._3dEffectType != Effect3DType.Projectile)
         {
-            _dynamicEffectHandler.AddEffectsForPlayer(source, target, skill._effect);
+            _dynamicEffectHandler.AddEffectsForPlayer(GetPlayerObject(source), GetPlayerObject(target), skill._effect);
         }
     }
 
@@ -353,6 +353,36 @@ public class GameManager : MonoBehaviour
         Skill skill = _skillContainer.GetSkill(skillId);
 
         // Effect list
+    }
+
+    [RPC]
+    //Server Client
+    private void SC_AddEffect(NetworkPlayer player, int type, int amount, int percentage)
+    {
+        PlayerObject playerObject = GetPlayerObject(player);
+        EffectType effectType = (EffectType) type;
+
+        Debug.Log("TYPE: " + effectType);
+
+        switch (effectType)
+        {
+            case EffectType.life:
+                PlayerState playerState = playerObject._playerPrefab.GetComponent<PlayerState>();
+
+                playerState._hp += amount;
+
+                break;
+
+            case EffectType.run:
+                Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
+
+                movement._movementEditPercentage += percentage;
+                Debug.Log("New running percentage: " + percentage);
+                break;
+
+            case EffectType.stun:
+                break;
+        }
     }
 
 	[RPC]
@@ -384,7 +414,6 @@ public class GameManager : MonoBehaviour
 			networkView.RPC("SC_RemoteAddPlayerToTeam", RPCMode.All, player.name, (int) player.team);
 		}
 	}
-
 
 	public IEnumerable<PlayerMock> GetConnectedPlayers()
 	{

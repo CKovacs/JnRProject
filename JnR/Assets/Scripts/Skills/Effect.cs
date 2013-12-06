@@ -3,8 +3,7 @@ using System.Collections;
 
 public enum EffectType
 {
-    damage = 0,
-    heal,
+    life = 0,
     lifesteal,
     run,
     // Stats

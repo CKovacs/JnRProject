@@ -43,7 +43,7 @@ public class LevelEditorWindow : EditorWindow
             gameManager = new GameObject();
 
             gameManager.name = GAMEMANAGER;
-            gameManager.AddComponent<MainLoop>();
+            //gameManager.AddComponent<MainLoop>();
         }
 
         // Level Editor stuff

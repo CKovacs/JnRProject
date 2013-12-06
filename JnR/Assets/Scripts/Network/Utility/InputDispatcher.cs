@@ -126,7 +126,7 @@ public class InputDispatcher : MonoBehaviour
 			_currentTarget = _myself;
 		}
 
-		if (Input.GetButtonDown(AUTOHIT)) // && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        if (Input.GetButtonDown(AUTOHIT) && _skillAutohit.CheckSkillConditions(_myself, _currentTarget))
 		{
 			//der verwendete Skill wird an den Server gesendet und ein Effect wird abgebildet
 			//RemoteSkillUse ist "generisch"

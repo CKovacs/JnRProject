@@ -12,13 +12,7 @@ public class GameManager : MonoBehaviour
 	private ServerSkillContainer _skillContainer;
 	public Transform _spawnablePlayerPrefab;
 	private IEnumerable<PlayerMock> players;
-
-	//Todo make a "win-condition" script
-	public Transform _flagRed;
-	public Transform _flagBlue;
-	public Transform _playerHoldingFlagRed;
-	public Transform _playerHoldingFlagBlue;
-	
+	public GameScore _gameScore;
 
 	private void Start()
 	{
@@ -303,11 +297,11 @@ public class GameManager : MonoBehaviour
 	{
 		if(flagId==0)
 		{
-			Debug.Log ("Dropped a flag... " + _flagRed.name);
+		//	Debug.Log ("Dropped a flag... " + _flagRed.name);
 		}
 		else
 		{
-			Debug.Log ("Dropped a flag... " + _flagBlue.name);
+		//	Debug.Log ("Dropped a flag... " + _flagBlue.name);
 		}
 	}
 

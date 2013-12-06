@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour {
 	private CharacterController _characterController;
 	public float _gravity = 5.0f;
 	public float _movementSpeed = 5.0f;
+    public int _movementEditPercentage = 0;
 	public float _jumpSpeed = 50.0f;
 	public float _fallSpeed = 30.0f;
 	
@@ -49,7 +50,7 @@ public class Movement : MonoBehaviour {
 		{
 			Rotating(_horizontalInput,_verticalInput);
 		}
-		Vector3 _movementOffset = _movementDirection * _movementSpeed;
+        Vector3 _movementOffset = _movementDirection * _movementSpeed * (1.0f + ((float)_movementEditPercentage / 100.0f));
 		
 		if((_hasUnsyncedJump || _jumpButtonPressed) && _canJump)
 		{

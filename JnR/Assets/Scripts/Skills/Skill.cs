@@ -27,15 +27,15 @@ public class Skill : ScriptableObject
     public bool CheckSkillConditions(PlayerObject origin, PlayerObject target)
     {
         // Check target
-
+        
         var targetType = TargetType.None;
         Team teamOrigin = origin._playerPrefab.GetComponent<PlayerState>()._team;
         Team teamTarget = target._playerPrefab.GetComponent<PlayerState>()._team;
-
+        
         if (origin == target)
         {
-            targetType = TargetType.Myself;
-        }
+            targetType = TargetType.Myself; return false;
+        }/*
         else if ((teamOrigin == Team.Blue && teamTarget == Team.Blue) ||
                  (teamOrigin == Team.Red && teamTarget == Team.Red))
         {
@@ -50,10 +50,10 @@ public class Skill : ScriptableObject
         {
             return false;
         }
-
+        */
         // Check range
         float distance = Vector3.Distance(origin._playerPrefab.position, target._playerPrefab.position);
-
+        Debug.Log("Distance: " + distance + "max range: " + _range);
         if (distance > _range)
         {
             return false;

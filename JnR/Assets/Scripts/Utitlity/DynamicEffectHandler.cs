@@ -4,44 +4,70 @@ using System.Collections.Generic;
 
 public class DynamicEffectHandler
 {
-    private Dictionary<NetworkPlayer, List<DynamicEffect>> _effectList;
+    private Dictionary<PlayerObject, List<DynamicEffect>> _effectDictionary;
+    private NetworkView _nv;
     private const int SIZE = 10;
 
-    public DynamicEffectHandler()
+    public DynamicEffectHandler(NetworkView nv, List<PlayerObject> pl)
     {
-        if (Network.isServer)
+        _nv = nv;
+
+        //Get Memory for the list
+        _effectDictionary = new Dictionary<PlayerObject, List<DynamicEffect>>(SIZE);
+        Debug.Log("player size " + pl.Count);
+        foreach(PlayerObject po in pl)
         {
-            //Get Memory for the list
-            _effectList = new Dictionary<NetworkPlayer, List<DynamicEffect>>(SIZE);
+            _effectDictionary.Add(po, new List<DynamicEffect>(SIZE));   
         }
     }
 
-    public void Update(float time)
+    public void AddEffectsForPlayer(PlayerObject source, PlayerObject target, List<Effect> effect)
+    {
+        foreach (Effect e in effect)
+        {
+            DynamicEffect de = new DynamicEffect(e, source, target);
+            _effectDictionary[target].Add(de);
+        }
+    }
+
+    public void Update(float timeDelta)
     {
         bool removeMe = false;
+        List<DynamicEffect> removeList = new List<DynamicEffect>();
 
-        foreach (KeyValuePair<NetworkPlayer, List<DynamicEffect>> pair in _effectList)
+        foreach (KeyValuePair<PlayerObject, List<DynamicEffect>> pair in _effectDictionary)
         {
+            PlayerObject p = pair.Key;
+
             foreach (DynamicEffect e in pair.Value)
             {
+                ResolveEffect(p, e, removeMe);
+
+                e._currentDuration =- timeDelta;
+
+                Debug.Log("Duration: " + e._currentDuration);
                 //Check if the spell should be removed
                 removeMe = RemoveCheck(e);
+
                 if (removeMe)
                 {
-                    Debug.Log("Removed a Spell");
-                    pair.Value.Remove(e);
+                    Debug.Log("Spell added to remove list");
+                    removeList.Add(e);
                 }
-                //Resolve the Spell with remove or not remove information
-                Resolve(pair.Key, e, removeMe);
+            }
+
+            // Remove tyme
+            foreach (DynamicEffect e in removeList)
+            {
+                pair.Value.Remove(e);
+                RemoveEffect(p, e);
             }
         }
     }
 
     private bool RemoveCheck(DynamicEffect e)
     {
-        float currentTime = Time.time;
-
-        if (currentTime - e._startTime < 0)
+        if (e._currentDuration < 0)
         {
             //REMOVE THIS SPELL
             return true;
@@ -50,16 +76,16 @@ public class DynamicEffectHandler
         return false;
     }
 
-    private void Resolve(NetworkPlayer player, DynamicEffect e, bool wasRemoved)
+    private void ResolveEffect(PlayerObject player, DynamicEffect e, bool wasRemoved)
     {
-        //Should be outside?
-        float currentTime = Time.time;
-
         //Instant
-        if (e._duration == 0)
+        if (e._currentDuration == 0)
         {
             if (!e._isTriggered)
             {
+                // RPC call (Dynamic effect isn't a supported type, so you have to send the members)
+                _nv.RPC("SC_AddEffect", RPCMode.All, player._networkPlayer, (int) e._effectType, e._amount, e._percentage);
+
                 Debug.Log("INSTANT ATTACK/HEAL OR SOMETHING..");
                 e._isTriggered = true;
                 e._lastTriggerTime = Time.time;
@@ -74,8 +100,10 @@ public class DynamicEffectHandler
             if (!e._isTriggered)
             {
                 Debug.Log("APPLY SOME MODIFIER!");
+                _nv.RPC("SC_AddEffect", RPCMode.All, player._networkPlayer, (int)e._effectType, e._amount, e._percentage);
                 e._isTriggered = true;
                 e._lastTriggerTime = Time.time;
+
                 return;
                 //Nothing more should happen since we are a modifier and there is no modifier with duration equals 0
             }
@@ -107,12 +135,7 @@ public class DynamicEffectHandler
         }
     }
 
-    public void AddEffectsForPlayer(NetworkPlayer player, List<Effect> effect)
-    {
-        foreach (Effect e in effect)
-        {
-            DynamicEffect de = new DynamicEffect(e);
-            _effectList[player].Add(de);
-        }
+    private void RemoveEffect(PlayerObject player, DynamicEffect e) 
+    { 
     }
 }

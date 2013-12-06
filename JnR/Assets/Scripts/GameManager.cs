@@ -18,18 +18,13 @@ public class GameManager : MonoBehaviour
 	{
 		_skillContainer = GetComponent<ServerSkillContainer>();
 		InitPlayerList();
-		
-		if (Network.isServer)
-		{
-			_dynamicEffectHandler = new DynamicEffectHandler();
-		}
 	}
 
 	private void Update()
 	{
 		if (Network.isServer)
 		{
-			_dynamicEffectHandler.Update(Time.deltaTime);
+            _dynamicEffectHandler.Update(Time.deltaTime);
 		}
 	}
 
@@ -79,7 +74,7 @@ public class GameManager : MonoBehaviour
 			Debug.Log("SpawningPlayer as Client");
 		}
 		var playerPrefab = Instantiate(_spawnablePlayerPrefab, spawnPosition, Quaternion.identity) as Transform;
-		var networkView = playerPrefab.GetComponent<NetworkView>();
+        NetworkView networkView = playerPrefab.GetComponent<NetworkView>();
 		networkView.viewID = transformViewID;
 		var po = new PlayerObject();
 		po._networkPlayer = playerIdentifier;
@@ -146,6 +141,8 @@ public class GameManager : MonoBehaviour
 			playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
 			playerPrefab.GetComponent<PlayerState>()._gameManagementObject = transform;
 			playerPrefab.GetComponent<AnimationHandle>()._localPlayer = false;
+
+            _dynamicEffectHandler = new DynamicEffectHandler(this.networkView, _playerList);
 		}
 	}
 
@@ -342,52 +339,80 @@ public class GameManager : MonoBehaviour
 				GetPlayerObject(target)._playerPrefab.GetComponent<PlayerState>()._hp);
 	}
 
-	[RPC]
-	//Server Only
-	private void S_RemoteSkillUse(NetworkPlayer source, NetworkPlayer target, int skillId)
-	{
-		Debug.Log("Player " + source.guid + " tries to casts " + skillId + " on " + target.guid);
+    /* Server skill validate
+    !!!! here plz
+     */
 
-		//Validate if spell is possible
-		//Call RemoteSkillUseOnClient
-		////// Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skill);
+    [RPC]
+    //Server Only
+    private void S_RemoteSkillUse(NetworkPlayer source, NetworkPlayer target, int skillId)
+    {
+        Debug.Log("Player " + source.guid + " tries to casts " + skillId + " on " + target.guid);
 
-		networkView.RPC("SC_UseSkill", RPCMode.All, source, target, skillId);
+        networkView.RPC("SC_UseSkill", RPCMode.All, source, target, skillId);
 
-		AlterHealth(target, -5);
+        // Skill effect
+        Skill skill = _skillContainer.GetSkill(skillId);
 
-		// Skill effect
-		Skill skill = _skillContainer.GetSkill(skillId);
+        if (skill._3dEffectType != Effect3DType.Projectile)
+        {
+            _dynamicEffectHandler.AddEffectsForPlayer(GetPlayerObject(source), GetPlayerObject(target), skill._effect);
+        }
+    }
 
-		if (skill._3dEffectType != Effect3DType.Projectile)
-		{
-			_dynamicEffectHandler.AddEffectsForPlayer(target, skill._effect);
-		}
-	}
+    [RPC]
+    //Server and Client
+    private void SC_UseSkill(NetworkPlayer source, NetworkPlayer target, int skillId)
+    {
+        Debug.Log("Player " + source.guid + " casts " + skillId + " on " + target.guid);
+        Skill skill = _skillContainer.GetSkill(skillId);
 
-	[RPC]
-	//Server and Client
-	private void SC_UseSkill(NetworkPlayer source, NetworkPlayer target, int skillId)
-	{
-		Debug.Log("Player " + source.guid + " casts " + skillId + " on " + target.guid);
-		Skill skill = _skillContainer.GetSkill(skillId);
+        // Graphical stuff
+        if (skill._3dEffect)
+        {
+            Effect3DBuilder.DoEffect(GetPlayerObject(source)._playerPrefab.transform,
+            GetPlayerObject(target)._playerPrefab.transform, skill);
+        }
+    }
 
-		// Graphical stuff
-		if (skill._3dEffect)
-		{
-			Effect3DBuilder.DoEffect(GetPlayerObject(source)._playerPrefab.transform,
-				GetPlayerObject(target)._playerPrefab.transform, skill);
-		}
-	}
+    [RPC]
+    //Server
+    private void S_DoSkillEffect(NetworkPlayer source, NetworkPlayer target, int skillId)
+    {
+        Skill skill = _skillContainer.GetSkill(skillId);
 
-	[RPC]
-	//Server
-	private void S_DoSkillEffect(NetworkPlayer source, NetworkPlayer target, int skillId)
-	{
-		Skill skill = _skillContainer.GetSkill(skillId);
+        // Effect list
+    }
 
-		// Effect list
-	}
+    [RPC]
+    //Server Client
+    private void SC_AddEffect(NetworkPlayer player, int type, int amount, int percentage)
+    {
+        PlayerObject playerObject = GetPlayerObject(player);
+        EffectType effectType = (EffectType) type;
+
+        Debug.Log("TYPE: " + effectType);
+
+        switch (effectType)
+        {
+            case EffectType.life:
+                PlayerState playerState = playerObject._playerPrefab.GetComponent<PlayerState>();
+
+                playerState._hp += amount;
+
+                break;
+
+            case EffectType.run:
+                Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
+
+                movement._movementEditPercentage += percentage;
+                Debug.Log("New running percentage: " + percentage);
+                break;
+
+            case EffectType.stun:
+                break;
+        }
+    }
 
 	[RPC]
 	private void SC_RemoteAddPlayerToTeam(string name, int team)
@@ -418,7 +443,6 @@ public class GameManager : MonoBehaviour
 			networkView.RPC("SC_RemoteAddPlayerToTeam", RPCMode.All, player.name, (int) player.team);
 		}
 	}
-
 
 	public IEnumerable<PlayerMock> GetConnectedPlayers()
 	{

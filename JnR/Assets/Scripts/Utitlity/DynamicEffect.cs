@@ -10,15 +10,14 @@ public class DynamicEffect
 	public bool _onHit;
 	public bool _onDeath;
 	
-	public int _duration;       
     public int _frequency;  
 	public int _amount;
 	public int _percentage;
 	
 	//Housekeeping
-	public float _startTime;
-	public NetworkPlayer _target;
-	public NetworkPlayer _source;
+    public float _currentDuration;   
+    public PlayerObject _target;
+    public PlayerObject _source;
 	public bool _isTriggered;
 	public float _lastTriggerTime;
 	
@@ -29,17 +28,10 @@ public class DynamicEffect
 		ATTACKRANGE,
 	    DEFENSE
 	};
-	
-	public DynamicEffect(Effect effect)
+
+    public DynamicEffect(Effect effect, PlayerObject source, PlayerObject target)
 	{
-		Debug.LogError("Implement Me");
-	}
-	
-	public DynamicEffect(Effect effect, NetworkPlayer source, NetworkPlayer target)
-	{
-		_startTime = Time.time;
-		
-		_duration = effect._duration;
+        _currentDuration = effect._duration;
 		_frequency = effect._frequency;
 		_amount = effect._amount;
 		_percentage = effect._percentage;

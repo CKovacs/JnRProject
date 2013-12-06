@@ -133,18 +133,13 @@ public class SkillEditor : Editor
             Effect effect = _skill._effect[i];
 
             effect._type = (EffectType)EditorGUILayout.EnumPopup(EFFECTTYPE, effect._type);
-            effect._duration = EditorGUILayout.IntField(DURATION, effect._duration);
+            effect._duration = EditorGUILayout.FloatField(DURATION, effect._duration);
 
             switch (effect._type)
             {
-                case EffectType.damage:
+                case EffectType.life:
                     effect._amount = EditorGUILayout.IntField(AMOUNT, effect._amount);
                     if(effect._duration > 0)
-                        effect._frequency = EditorGUILayout.IntField(FREQUENCY, effect._frequency);
-                    break;
-                case EffectType.heal:
-                    effect._amount = EditorGUILayout.IntField(AMOUNT, effect._amount);
-                    if (effect._duration > 0)
                         effect._frequency = EditorGUILayout.IntField(FREQUENCY, effect._frequency);
                     break;
                 case EffectType.run:

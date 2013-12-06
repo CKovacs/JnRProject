@@ -197,16 +197,6 @@ public class InputDispatcher : MonoBehaviour
 			Debug.Log("3 pressed");
 			_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, "Herbert", 2);
 		}
-
-		if (Input.GetKeyDown(KeyCode.C))
-		{
-			var tmp = _gameManagementObject.GetComponent<FlagPickUp>();
-			if (tmp == null)
-			{
-				Debug.Log("tmp == null");
-			}
-			tmp.DropFlag();
-		}
 	}
 
 	public void UpdateTargetList()

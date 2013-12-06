@@ -133,7 +133,7 @@ public class SkillEditor : Editor
             Effect effect = _skill._effect[i];
 
             effect._type = (EffectType)EditorGUILayout.EnumPopup(EFFECTTYPE, effect._type);
-            effect._duration = EditorGUILayout.IntField(DURATION, effect._duration);
+            effect._duration = EditorGUILayout.FloatField(DURATION, effect._duration);
 
             switch (effect._type)
             {

@@ -10,7 +10,7 @@ public class DynamicEffect
 	public bool _onHit;
 	public bool _onDeath;
 	
-	public int _duration;       
+	public float _currentDuration;       
     public int _frequency;  
 	public int _amount;
 	public int _percentage;
@@ -30,16 +30,11 @@ public class DynamicEffect
 	    DEFENSE
 	};
 	
-	public DynamicEffect(Effect effect)
-	{
-		Debug.LogError("Implement Me");
-	}
-	
 	public DynamicEffect(Effect effect, NetworkPlayer source, NetworkPlayer target)
 	{
 		_startTime = Time.time;
-		
-		_duration = effect._duration;
+
+        _currentDuration = effect._duration;
 		_frequency = effect._frequency;
 		_amount = effect._amount;
 		_percentage = effect._percentage;

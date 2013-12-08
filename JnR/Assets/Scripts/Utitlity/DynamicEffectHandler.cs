@@ -134,8 +134,4 @@ public class DynamicEffectHandler
             }
         }
     }
-
-    private void RemoveEffect(PlayerObject player, DynamicEffect e) 
-    { 
-    }
 }

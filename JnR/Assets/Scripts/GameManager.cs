@@ -12,7 +12,12 @@ public class GameManager : MonoBehaviour
 	private ServerSkillContainer _skillContainer;
 	public Transform _spawnablePlayerPrefab;
 	private IEnumerable<PlayerMock> players;
-	public GameScore _gameScore;
+	//public GameScore _gameScore;
+
+	public Transform _flagRed; //id = 0
+	public Transform _flagBlue; //id = 1
+	public Transform _playerHoldingFlagRed;
+	public Transform _playerHoldingFlagBlue;
 
 	private void Start()
 	{
@@ -74,7 +79,7 @@ public class GameManager : MonoBehaviour
 			Debug.Log("SpawningPlayer as Client");
 		}
 		var playerPrefab = Instantiate(_spawnablePlayerPrefab, spawnPosition, Quaternion.identity) as Transform;
-        NetworkView networkView = playerPrefab.GetComponent<NetworkView>();
+        var networkView = playerPrefab.GetComponent<NetworkView>();
 		networkView.viewID = transformViewID;
 		var po = new PlayerObject();
 		po._networkPlayer = playerIdentifier;
@@ -86,7 +91,7 @@ public class GameManager : MonoBehaviour
 		{
 			////////////////////
 			{
-				string text = string.Empty;
+				var text = string.Empty;
 				if (Network.isServer)
 				{
 					text += "S: ";
@@ -237,8 +242,7 @@ public class GameManager : MonoBehaviour
 
 			if (playerState._isHoldingAFlag)
 			{
-				Team t = playerState._team;
-				if(t == Team.Blue)
+				if(playerState._team == Team.Blue)
 				{
 					//Do something with RED flag
 					networkView.RPC ("DropFlag",RPCMode.All,0);
@@ -246,6 +250,7 @@ public class GameManager : MonoBehaviour
 				else
 				{
 					//Do something with BLUE flag
+					Debug.Log("Player dead - call DropFlag for id 1");
 					networkView.RPC ("DropFlag",RPCMode.All,1);
 				}
 
@@ -294,11 +299,14 @@ public class GameManager : MonoBehaviour
 	{
 		if(flagId==0)
 		{
+			_flagRed.GetComponent<FlagHandling>().DropFlag(flagId);
 		//	Debug.Log ("Dropped a flag... " + _flagRed.name);
 		}
 		else
 		{
-		//	Debug.Log ("Dropped a flag... " + _flagBlue.name);
+			Debug.Log("Drop a flag... " + _flagBlue.name);
+			_flagBlue.GetComponent<FlagHandling>().DropFlag(flagId);
+			
 		}
 	}
 

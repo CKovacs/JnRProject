@@ -14,7 +14,7 @@ public class PlayerState : MonoBehaviour
 	public Team _team;
 
 	public string name;
-	public SelectedTeam team;
+//	public SelectedTeam team;
 
 	public void SyncValue(int id, int value)
 	{

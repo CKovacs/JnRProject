@@ -20,16 +20,16 @@ public class PlayerState : MonoBehaviour
 	{
 		switch (id)
 		{
-			case PlayerStateSyncValues.LIFE:
+			case CombatSyncValues.LIFE:
 				_hp = value;
 				break;
-			case PlayerStateSyncValues.DAMAGE:
+            case CombatSyncValues.DAMAGE:
 				//Do something;
 				break;
-			case PlayerStateSyncValues.BOOLDEATH:
+            case CombatSyncValues.BOOLDEATH:
 				_isDead = value > 0;
 				break;
-			case PlayerStateSyncValues.BOOLFLAG:
+            case CombatSyncValues.BOOLFLAG:
 				_isHoldingAFlag = value > 0;
 				break;
 		}

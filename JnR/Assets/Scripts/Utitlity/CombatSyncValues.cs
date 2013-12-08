@@ -1,9 +1,8 @@
-﻿public struct PlayerStateSyncValues
+﻿public struct CombatSyncValues
 {
 	//ID Values
 	public const int LIFE = 1;
 	public const int DAMAGE = 2;
-	public const int MOVEMENTSPEED = 3;
 
 	public const int BOOLDEATH = 100;
 	public const int BOOLFLAG = 101;

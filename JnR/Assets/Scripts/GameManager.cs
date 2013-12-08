@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	public DynamicEffectHandler _dynamicEffectHandler;
+    public CombatHandler _combatHandler;
 	public bool _isRunning;
 	public List<PlayerObject> _playerList = new List<PlayerObject>();
 	public int _playerListCount;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (Network.isServer)
 		{
-            _dynamicEffectHandler.Update(Time.deltaTime);
+            _combatHandler.Update(Time.deltaTime);
 		}
 	}
 
@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
 			playerPrefab.GetComponent<PlayerState>()._gameManagementObject = transform;
 			playerPrefab.GetComponent<AnimationHandle>()._localPlayer = false;
 
-            _dynamicEffectHandler = new DynamicEffectHandler(this.networkView, _playerList);
+            _combatHandler = new CombatHandler(this.networkView, _playerList);
 		}
 	}
 
@@ -185,9 +185,9 @@ public class GameManager : MonoBehaviour
 			Transform player = GetPlayerObject(np)._playerPrefab;
 			//Change the Health on the Server Object according to the value
 			player.GetComponent<PlayerState>()._hp += value;
-			if (player.GetComponent<PlayerState>()._hp > PlayerStateSyncValues.MAXLIFE)
+            if (player.GetComponent<PlayerState>()._hp > CombatSyncValues.MAXLIFE)
 			{
-				player.GetComponent<PlayerState>()._hp = PlayerStateSyncValues.MAXLIFE;
+                player.GetComponent<PlayerState>()._hp = CombatSyncValues.MAXLIFE;
 			}
 			if (player.GetComponent<PlayerState>()._hp <= 0)
 			{
@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
 				//Replicate the Death to the player
 				Death(np);
 			}
-			networkView.RPC("SyncValuesForPlayer", RPCMode.Others, np, PlayerStateSyncValues.LIFE,
+            networkView.RPC("SyncValuesForPlayer", RPCMode.Others, np, CombatSyncValues.LIFE,
 				player.GetComponent<PlayerState>()._hp);
 			//Replicate the Health on the client peers
 			//player.networkView.RPC("SyncValue", RPCMode.Others, np, PlayerStateSyncValues.LIFE, player.GetComponent<PlayerState>()._hp);
@@ -234,10 +234,10 @@ public class GameManager : MonoBehaviour
 			
 			playerState._isDead = true;
 			playerPrefab.GetComponent<AnimationHandle>().Death(true);
-			networkView.RPC("SyncValuesForPlayer", RPCMode.Others, player, PlayerStateSyncValues.BOOLDEATH, playerState._isDead ? 1 : 0);
+            networkView.RPC("SyncValuesForPlayer", RPCMode.Others, player, CombatSyncValues.BOOLDEATH, playerState._isDead ? 1 : 0);
 			//PlayerReEnabling(np,false);
 			playerPrefab.GetComponent<InputDispatcher>().enabled = false;
-			AlterHealth(player, PlayerStateSyncValues.MAXLIFE);
+            AlterHealth(player, CombatSyncValues.MAXLIFE);
 			//networkView.RPC ("S_ResetPositionToSpawnpoint",RPCMode.Server,player);
 
 			if (playerState._isHoldingAFlag)
@@ -255,7 +255,7 @@ public class GameManager : MonoBehaviour
 				}
 
 				playerState._isHoldingAFlag = false;
-				networkView.RPC("SyncValuesForPlayer", RPCMode.Others, player, PlayerStateSyncValues.BOOLFLAG, playerState._isHoldingAFlag ? 1 : 0);
+                networkView.RPC("SyncValuesForPlayer", RPCMode.Others, player, CombatSyncValues.BOOLFLAG, playerState._isHoldingAFlag ? 1 : 0);
 			}
 			StartCoroutine(Respawn(player));
 		}
@@ -364,7 +364,7 @@ public class GameManager : MonoBehaviour
 
         if (skill._3dEffectType != Effect3DType.Projectile)
         {
-            _dynamicEffectHandler.AddEffectsForPlayer(GetPlayerObject(source), GetPlayerObject(target), skill._effect);
+            _combatHandler.AddEffectsForPlayer(GetPlayerObject(source), GetPlayerObject(target), skill._effect);
         }
     }
 

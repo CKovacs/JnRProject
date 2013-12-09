@@ -16,7 +16,7 @@ public class DynamicEffect
 	public bool _onDeath;
 
     public float _duration;
-    public int _frequency;  
+    public float _frequency;  
 	public int _amount;
 	public int _percentage;
 
@@ -43,7 +43,7 @@ public class DynamicEffect
         {
             _dynamicType = DynamicEffectType.instant;
         }
-        else if (_currentDuration > 0.0f && _frequency == 0.0f)
+        else if (_currentDuration > 0.0f && _frequency <= 0.0f)
         {
             _dynamicType = DynamicEffectType.buff;
         }

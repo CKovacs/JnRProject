@@ -8,17 +8,27 @@ public class CombatHandler
     private NetworkView _nv;
     private const int SIZE = 10;
 
-    public CombatHandler(NetworkView nv, List<PlayerObject> pl)
+    public CombatHandler(NetworkView nv)
     {
         _nv = nv;
 
         //Get Memory for the list
         _effectDictionary = new Dictionary<PlayerObject, List<DynamicEffect>>(SIZE);
-        Debug.Log("player size " + pl.Count);
+        /*Debug.Log("player size " + pl.Count);
         foreach (PlayerObject po in pl)
         {
             _effectDictionary.Add(po, new List<DynamicEffect>(SIZE));
-        }
+        }*/
+    }
+
+    public void AddPlayer(PlayerObject player) 
+    {
+        _effectDictionary.Add(player, new List<DynamicEffect>(SIZE));
+    }
+
+    public void DeletePlayer(PlayerObject player)
+    {
+        _effectDictionary.Remove(player);
     }
 
     public void AddEffectsForPlayer(PlayerObject source, PlayerObject target, List<Effect> effect)
@@ -44,25 +54,26 @@ public class CombatHandler
                 if (!e._isResolved)
                 {
                     ResolveEffect(player, e);
+                    //Debug.Log(timeDelta + " " + e._currentDuration);
                 }
 
-                e._currentDuration = -timeDelta;
+                e._currentDuration -= timeDelta;
 
-                Debug.Log("Duration: " + e._currentDuration);
+                //Debug.Log("Duration: " + e._currentDuration);
 
                 //Check if the spell should be removed
                 if (RemoveCheck(e))
                 {
-                    Debug.Log("Spell added to remove list");
+                    //Debug.Log("Spell added to remove list");
                     removeList.Add(e);
                 }
             }
 
             // Remove tyme
-            foreach (DynamicEffect e in removeList)
+            foreach (DynamicEffect effect in removeList)
             {
-                pair.Value.Remove(e);
-                //RemoveEffect(p, e);
+                pair.Value.Remove(effect);
+                _nv.RPC("SC_UndoEffect", RPCMode.All, player._networkPlayer, (int)effect._effectType, effect._amount, effect._percentage);
             }
         }
     }

@@ -240,13 +240,6 @@ public class Spiral : MonoBehaviour
         emitter.particles = p;
     }
 
-    void Update()
-    {
-        // Spin the entire particle effect.
-        this.transform.Rotate(this.transform.up * Time.deltaTime * (-turnSpeed), Space.World);
-    }
-
-
     void LateUpdate()
     {
         // Check to see if it's time to spawn a new particle system.

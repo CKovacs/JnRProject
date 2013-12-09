@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 	{
 		_skillContainer = GetComponent<ServerSkillContainer>();
 		InitPlayerList();
+
+        _combatHandler = new CombatHandler(this.networkView);
 	}
 
 	private void Update()
@@ -147,7 +149,8 @@ public class GameManager : MonoBehaviour
 			playerPrefab.GetComponent<PlayerState>()._gameManagementObject = transform;
 			playerPrefab.GetComponent<AnimationHandle>()._localPlayer = false;
 
-            _combatHandler = new CombatHandler(this.networkView, _playerList);
+            // Add to combat system
+            _combatHandler.AddPlayer(po);
 		}
 	}
 
@@ -385,7 +388,7 @@ public class GameManager : MonoBehaviour
 
     [RPC]
     //Server
-    private void S_DoSkillEffect(NetworkPlayer source, NetworkPlayer target, int skillId)
+    private void S_ApplyProjectileEffect(NetworkPlayer source, NetworkPlayer target, int skillId)
     {
         Skill skill = _skillContainer.GetSkill(skillId);
 
@@ -427,6 +430,17 @@ public class GameManager : MonoBehaviour
 
                     playerState._stunCounter++;
 
+                    if (playerState._stunCounter == 1)
+                    {
+                        Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
+
+                        movement.enabled = false;
+
+                        InputDispatcher inputDispatcher = playerObject._playerPrefab.GetComponent<InputDispatcher>();
+
+                        inputDispatcher.enabled = false;
+                    }
+
                     break;
                 }
         }
@@ -463,6 +477,17 @@ public class GameManager : MonoBehaviour
                     PlayerState playerState = playerObject._playerPrefab.GetComponent<PlayerState>();
 
                     playerState._stunCounter--;
+
+                    if (playerState._stunCounter == 0)
+                    {
+                        Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
+
+                        movement.enabled = true;
+
+                        InputDispatcher inputDispatcher = playerObject._playerPrefab.GetComponent<InputDispatcher>();
+
+                        inputDispatcher.enabled = true;
+                    }
 
                     break;
                 }

@@ -11,6 +11,7 @@ public class PlayerState : MonoBehaviour
 	public bool _isHoldingAFlag;
 	public int _movementSpeed = 1000;
     public int _stunCounter = 0;
+    public int _forwardBlock = 0;
 	public Team _team;
 
 	public string name;

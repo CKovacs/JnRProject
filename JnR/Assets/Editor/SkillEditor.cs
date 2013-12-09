@@ -139,11 +139,29 @@ public class SkillEditor : Editor
             {
                 case EffectType.life:
                     effect._amount = EditorGUILayout.IntField(AMOUNT, effect._amount);
-                    if(effect._duration > 0)
-                        effect._frequency = EditorGUILayout.IntField(FREQUENCY, effect._frequency);
+
+                    if (effect._duration > 0)
+                    {
+                        effect._frequency = EditorGUILayout.FloatField(FREQUENCY, effect._frequency);
+                    }
+                    else
+                    {
+                        effect._frequency = 0;
+                    }
+
                     break;
                 case EffectType.run:
                     effect._percentage = EditorGUILayout.IntField(PERCENTAGE, effect._percentage);
+
+                    if (effect._duration > 0)
+                    {
+                        effect._frequency = EditorGUILayout.FloatField(FREQUENCY, effect._frequency);
+                    }
+                    else 
+                    {
+                        effect._frequency = 0;
+                    }
+
                     break;
                 case EffectType.atk:
                     effect._percentage = EditorGUILayout.IntField(PERCENTAGE, effect._percentage);

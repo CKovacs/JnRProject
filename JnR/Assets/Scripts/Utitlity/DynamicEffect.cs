@@ -1,64 +1,55 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum DynamicEffectType
+{
+    instant,
+    buff,
+    frequent
+};
+
 public class DynamicEffect
 {
 	public EffectType _effectType;
 	
-	public bool _isModifier;
-	public bool _isStatusModifier;
 	public bool _onHit;
 	public bool _onDeath;
-	
-    public int _frequency;  
+
+    public float _duration;
+    public float _frequency;  
 	public int _amount;
 	public int _percentage;
+
+    public DynamicEffectType _dynamicType;
 	
 	//Housekeeping
     public float _currentDuration;   
     public PlayerObject _target;
     public PlayerObject _source;
-	public bool _isTriggered;
-	public float _lastTriggerTime;
-	
-	enum ModifierType 
-	{
-		MOVEMENT_SPEED = 0,
-	    ATTACK,
-		ATTACKRANGE,
-	    DEFENSE
-	};
+	public bool _isResolved = false;
 
     public DynamicEffect(Effect effect, PlayerObject source, PlayerObject target)
 	{
-        _currentDuration = effect._duration;
+        _duration = _currentDuration = effect._duration;
 		_frequency = effect._frequency;
 		_amount = effect._amount;
 		_percentage = effect._percentage;
-		
 		_effectType = effect._type;
-		
-		//Check if we are a modifier spell
-		if(_effectType == EffectType.run || _effectType == EffectType.atk || _effectType == EffectType.def || _effectType == EffectType.range)
-		{
-			_isModifier = true;
-		}
-		else
-		{
-			_isModifier = false;
-		}
-		
-		//Check if we are a status modifier
-		if(_effectType == EffectType.stun || _effectType == EffectType.reflect || _effectType == EffectType.immun)
-		{
-			_isStatusModifier = true;
-		}
-		else
-		{
-			_isStatusModifier = false;	
-		}
-		
-		_target = target;
-		_source = source;
+
+        _target = target;
+        _source = source;
+
+        if (_currentDuration == 0.0f)
+        {
+            _dynamicType = DynamicEffectType.instant;
+        }
+        else if (_currentDuration > 0.0f && _frequency <= 0.0f)
+        {
+            _dynamicType = DynamicEffectType.buff;
+        }
+        else if (_currentDuration > 0.0f && _frequency > 0.0f)
+        {
+            _dynamicType = DynamicEffectType.frequent;
+        }
 	}
 }

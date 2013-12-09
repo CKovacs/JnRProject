@@ -5,26 +5,33 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	public DynamicEffectHandler _dynamicEffectHandler;
+    public CombatHandler _combatHandler;
 	public bool _isRunning;
 	public List<PlayerObject> _playerList = new List<PlayerObject>();
 	public int _playerListCount;
 	private ServerSkillContainer _skillContainer;
 	public Transform _spawnablePlayerPrefab;
 	private IEnumerable<PlayerMock> players;
-	public GameScore _gameScore;
+	//public GameScore _gameScore;
+
+	public Transform _flagRed; //id = 0
+	public Transform _flagBlue; //id = 1
+	public Transform _playerHoldingFlagRed;
+	public Transform _playerHoldingFlagBlue;
 
 	private void Start()
 	{
 		_skillContainer = GetComponent<ServerSkillContainer>();
 		InitPlayerList();
+
+        _combatHandler = new CombatHandler(this.networkView);
 	}
 
 	private void Update()
 	{
 		if (Network.isServer)
 		{
-            _dynamicEffectHandler.Update(Time.deltaTime);
+            _combatHandler.Update(Time.deltaTime);
 		}
 	}
 
@@ -74,7 +81,7 @@ public class GameManager : MonoBehaviour
 			Debug.Log("SpawningPlayer as Client");
 		}
 		var playerPrefab = Instantiate(_spawnablePlayerPrefab, spawnPosition, Quaternion.identity) as Transform;
-        NetworkView networkView = playerPrefab.GetComponent<NetworkView>();
+        var networkView = playerPrefab.GetComponent<NetworkView>();
 		networkView.viewID = transformViewID;
 		var po = new PlayerObject();
 		po._networkPlayer = playerIdentifier;
@@ -86,7 +93,7 @@ public class GameManager : MonoBehaviour
 		{
 			////////////////////
 			{
-				string text = string.Empty;
+				var text = string.Empty;
 				if (Network.isServer)
 				{
 					text += "S: ";
@@ -142,7 +149,8 @@ public class GameManager : MonoBehaviour
 			playerPrefab.GetComponent<PlayerState>()._gameManagementObject = transform;
 			playerPrefab.GetComponent<AnimationHandle>()._localPlayer = false;
 
-            _dynamicEffectHandler = new DynamicEffectHandler(this.networkView, _playerList);
+            // Add to combat system
+            _combatHandler.AddPlayer(po);
 		}
 	}
 
@@ -180,9 +188,9 @@ public class GameManager : MonoBehaviour
 			Transform player = GetPlayerObject(np)._playerPrefab;
 			//Change the Health on the Server Object according to the value
 			player.GetComponent<PlayerState>()._hp += value;
-			if (player.GetComponent<PlayerState>()._hp > PlayerStateSyncValues.MAXLIFE)
+            if (player.GetComponent<PlayerState>()._hp > CombatSyncValues.MAXLIFE)
 			{
-				player.GetComponent<PlayerState>()._hp = PlayerStateSyncValues.MAXLIFE;
+                player.GetComponent<PlayerState>()._hp = CombatSyncValues.MAXLIFE;
 			}
 			if (player.GetComponent<PlayerState>()._hp <= 0)
 			{
@@ -190,7 +198,7 @@ public class GameManager : MonoBehaviour
 				//Replicate the Death to the player
 				Death(np);
 			}
-			networkView.RPC("SyncValuesForPlayer", RPCMode.Others, np, PlayerStateSyncValues.LIFE,
+            networkView.RPC("SyncValuesForPlayer", RPCMode.Others, np, CombatSyncValues.LIFE,
 				player.GetComponent<PlayerState>()._hp);
 			//Replicate the Health on the client peers
 			//player.networkView.RPC("SyncValue", RPCMode.Others, np, PlayerStateSyncValues.LIFE, player.GetComponent<PlayerState>()._hp);
@@ -229,16 +237,15 @@ public class GameManager : MonoBehaviour
 			
 			playerState._isDead = true;
 			playerPrefab.GetComponent<AnimationHandle>().Death(true);
-			networkView.RPC("SyncValuesForPlayer", RPCMode.Others, player, PlayerStateSyncValues.BOOLDEATH, playerState._isDead ? 1 : 0);
+            networkView.RPC("SyncValuesForPlayer", RPCMode.Others, player, CombatSyncValues.BOOLDEATH, playerState._isDead ? 1 : 0);
 			//PlayerReEnabling(np,false);
 			playerPrefab.GetComponent<InputDispatcher>().enabled = false;
-			AlterHealth(player, PlayerStateSyncValues.MAXLIFE);
+            AlterHealth(player, CombatSyncValues.MAXLIFE);
 			//networkView.RPC ("S_ResetPositionToSpawnpoint",RPCMode.Server,player);
 
 			if (playerState._isHoldingAFlag)
 			{
-				Team t = playerState._team;
-				if(t == Team.Blue)
+				if(playerState._team == Team.Blue)
 				{
 					//Do something with RED flag
 					networkView.RPC ("DropFlag",RPCMode.All,0);
@@ -246,11 +253,12 @@ public class GameManager : MonoBehaviour
 				else
 				{
 					//Do something with BLUE flag
+					Debug.Log("Player dead - call DropFlag for id 1");
 					networkView.RPC ("DropFlag",RPCMode.All,1);
 				}
 
 				playerState._isHoldingAFlag = false;
-				networkView.RPC("SyncValuesForPlayer", RPCMode.Others, player, PlayerStateSyncValues.BOOLFLAG, playerState._isHoldingAFlag ? 1 : 0);
+                networkView.RPC("SyncValuesForPlayer", RPCMode.Others, player, CombatSyncValues.BOOLFLAG, playerState._isHoldingAFlag ? 1 : 0);
 			}
 			StartCoroutine(Respawn(player));
 		}
@@ -294,11 +302,14 @@ public class GameManager : MonoBehaviour
 	{
 		if(flagId==0)
 		{
+			_flagRed.GetComponent<FlagHandling>().DropFlag(flagId);
 		//	Debug.Log ("Dropped a flag... " + _flagRed.name);
 		}
 		else
 		{
-		//	Debug.Log ("Dropped a flag... " + _flagBlue.name);
+			Debug.Log("Drop a flag... " + _flagBlue.name);
+			_flagBlue.GetComponent<FlagHandling>().DropFlag(flagId);
+			
 		}
 	}
 
@@ -356,7 +367,7 @@ public class GameManager : MonoBehaviour
 
         if (skill._3dEffectType != Effect3DType.Projectile)
         {
-            _dynamicEffectHandler.AddEffectsForPlayer(GetPlayerObject(source), GetPlayerObject(target), skill._effect);
+            _combatHandler.AddEffectsForPlayer(GetPlayerObject(source), GetPlayerObject(target), skill._effect);
         }
     }
 
@@ -377,40 +388,109 @@ public class GameManager : MonoBehaviour
 
     [RPC]
     //Server
-    private void S_DoSkillEffect(NetworkPlayer source, NetworkPlayer target, int skillId)
+    private void S_ApplyProjectileEffect(NetworkPlayer source, NetworkPlayer target, int skillId)
     {
         Skill skill = _skillContainer.GetSkill(skillId);
 
         // Effect list
     }
 
+
     [RPC]
     //Server Client
-    private void SC_AddEffect(NetworkPlayer player, int type, int amount, int percentage)
+    private void SC_DoEffect(NetworkPlayer player, int type, int amount, int percentage)
     {
         PlayerObject playerObject = GetPlayerObject(player);
-        EffectType effectType = (EffectType) type;
+        EffectType effectType = (EffectType)type;
 
         Debug.Log("TYPE: " + effectType);
 
         switch (effectType)
         {
             case EffectType.life:
-                PlayerState playerState = playerObject._playerPrefab.GetComponent<PlayerState>();
+                {
+                    PlayerState playerState = playerObject._playerPrefab.GetComponent<PlayerState>();
 
-                playerState._hp += amount;
+                    playerState._hp += amount;
 
-                break;
-
+                    break;
+                }
             case EffectType.run:
-                Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
+                {
+                    Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
 
-                movement._movementEditPercentage += percentage;
-                Debug.Log("New running percentage: " + percentage);
-                break;
-
+                    movement._movementEditPercentage += percentage;
+                    Debug.Log("New running percentage: " + percentage);
+                    break;
+                }
+            // Stun counter needed, because you need to keep track how many stuns are on the target
             case EffectType.stun:
-                break;
+                {
+                    PlayerState playerState = playerObject._playerPrefab.GetComponent<PlayerState>();
+
+                    playerState._stunCounter++;
+
+                    if (playerState._stunCounter == 1)
+                    {
+                        Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
+
+                        movement.enabled = false;
+
+                        InputDispatcher inputDispatcher = playerObject._playerPrefab.GetComponent<InputDispatcher>();
+
+                        inputDispatcher.enabled = false;
+                    }
+
+                    break;
+                }
+        }
+    }
+
+    [RPC]
+    //Server Client
+    private void SC_UndoEffect(NetworkPlayer player, int type, int amount, int percentage)
+    {
+        PlayerObject playerObject = GetPlayerObject(player);
+        EffectType effectType = (EffectType)type;
+
+        Debug.Log("TYPE: " + effectType);
+
+        switch (effectType)
+        {
+            case EffectType.life:
+                {
+                    // No work needed at the moment
+
+                    break;
+                }
+            case EffectType.run:
+                {
+                    Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
+
+                    movement._movementEditPercentage -= percentage;
+                    Debug.Log("New running percentage: " + percentage);
+                    break;
+                }
+            // Stun counter needed, because you need to keep track how many stuns are on the target
+            case EffectType.stun:
+                {
+                    PlayerState playerState = playerObject._playerPrefab.GetComponent<PlayerState>();
+
+                    playerState._stunCounter--;
+
+                    if (playerState._stunCounter == 0)
+                    {
+                        Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
+
+                        movement.enabled = true;
+
+                        InputDispatcher inputDispatcher = playerObject._playerPrefab.GetComponent<InputDispatcher>();
+
+                        inputDispatcher.enabled = true;
+                    }
+
+                    break;
+                }
         }
     }
 

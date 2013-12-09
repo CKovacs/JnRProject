@@ -4,6 +4,7 @@ public class FlagHandling : MonoBehaviour
 {
 	public string _name;
 	public Vector3 _startPosition;
+	public GameManager _gameManager;
 
 	//If a Character of the opposite team 
 	//collides with the flag it gets attached
@@ -35,13 +36,13 @@ public class FlagHandling : MonoBehaviour
 			//own flag -> reset
 			else
 			{
-				networkView.RPC("ResetFlag", RPCMode.All, player);
+				_gameManager.networkView.RPC("ResetFlag", RPCMode.All, player, _name=="FlagRed" ? 1 : 0);
 			}
 			
 		}
 	}
-	[RPC]
-	private void ResetFlag()
+	
+	public void ResetFlag()
 	{
 		Debug.Log("Reset Flag" + _name);
 		transform.parent = null;
@@ -54,6 +55,5 @@ public class FlagHandling : MonoBehaviour
 		Debug.Log("Drop flag on: " + _name);
 		transform.parent = null;
 		enabled = true;
-
 	}
 }

@@ -7,6 +7,8 @@
 	public const int BOOLDEATH = 100;
 	public const int BOOLFLAG = 101;
 
+	public const int TEAM = 200;
+
 	//Config Values
 	public const int MAXLIFE = 100;
 }

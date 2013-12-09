@@ -12,12 +12,7 @@ public class GameManager : MonoBehaviour
 	private ServerSkillContainer _skillContainer;
 	public Transform _spawnablePlayerPrefab;
 	private IEnumerable<PlayerMock> players;
-	//public GameScore _gameScore;
-
-	public Transform _flagRed; //id = 0
-	public Transform _flagBlue; //id = 1
-	public Transform _playerHoldingFlagRed;
-	public Transform _playerHoldingFlagBlue;
+	public GameScore _gameScore;
 
 	private void Start()
 	{
@@ -163,10 +158,26 @@ public class GameManager : MonoBehaviour
 				GUILayout.Label("NetworkPlayer:" + _playerList[i]._networkPlayer, new GUILayoutOption[0]);
 				GUILayout.Label("NetworkViewID:" + _playerList[i]._networkViewID, new GUILayoutOption[0]);
 				GUILayout.Label("HP = " + _playerList[i]._playerPrefab.GetComponent<PlayerState>()._hp);
+				GUILayout.BeginHorizontal();
 				if (GUILayout.Button("Hurt", new GUILayoutOption[0]))
 				{
 					AlterHealth(_playerList[i]._networkPlayer, -51);
 				}
+				if(GUILayout.Button("Team Blue", new GUILayoutOption[0]))
+				{
+					_playerList[i]._playerPrefab.GetComponent<PlayerState>()._team = Team.Blue;
+					networkView.RPC("SyncValuesForPlayer", RPCMode.OthersBuffered, _playerList[i]._networkPlayer, 
+					                CombatSyncValues.TEAM,
+					                0);
+				}
+				if(GUILayout.Button("Team Red", new GUILayoutOption[0]))
+				{
+					_playerList[i]._playerPrefab.GetComponent<PlayerState>()._team = Team.Red;
+					networkView.RPC("SyncValuesForPlayer", RPCMode.OthersBuffered, _playerList[i]._networkPlayer, 
+					                CombatSyncValues.TEAM,
+					                1);
+				}
+				GUILayout.EndHorizontal();
 				GUILayout.Label("---", new GUILayoutOption[0]);
 			}
 		}
@@ -200,8 +211,6 @@ public class GameManager : MonoBehaviour
 			}
             networkView.RPC("SyncValuesForPlayer", RPCMode.Others, np, CombatSyncValues.LIFE,
 				player.GetComponent<PlayerState>()._hp);
-			//Replicate the Health on the client peers
-			//player.networkView.RPC("SyncValue", RPCMode.Others, np, PlayerStateSyncValues.LIFE, player.GetComponent<PlayerState>()._hp);
 		}
 		else
 		{
@@ -226,7 +235,7 @@ public class GameManager : MonoBehaviour
 		if (Network.isServer)
 		{
 			Transform playerPrefab = GetPlayerObject(player)._playerPrefab;
-			var playerState = playerPrefab.GetComponent<PlayerState>();
+			PlayerState playerState = playerPrefab.GetComponent<PlayerState>();
 			Debug.Log("Player " + player + " died!");
 			/*A player has died we need to do the following
 			 * * Trigger a respawn (this can be a coroutine)
@@ -240,9 +249,8 @@ public class GameManager : MonoBehaviour
             networkView.RPC("SyncValuesForPlayer", RPCMode.Others, player, CombatSyncValues.BOOLDEATH, playerState._isDead ? 1 : 0);
 			//PlayerReEnabling(np,false);
 			playerPrefab.GetComponent<InputDispatcher>().enabled = false;
-            AlterHealth(player, CombatSyncValues.MAXLIFE);
+            
 			//networkView.RPC ("S_ResetPositionToSpawnpoint",RPCMode.Server,player);
-
 			if (playerState._isHoldingAFlag)
 			{
 				if(playerState._team == Team.Blue)
@@ -275,11 +283,16 @@ public class GameManager : MonoBehaviour
 		GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawnpoint");
 		Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform;
 		Transform playerPrefab = GetPlayerObject(player)._playerPrefab;
+		AlterHealth(player, CombatSyncValues.MAXLIFE);
 		networkView.RPC("SetRespawnPosition", RPCMode.Others, player, spawnPoint.position);
 		GetPlayerObject(player)._playerPrefab.position = spawnPoint.position;
 		playerPrefab.GetComponent<MovementNetworkSync>().ResetState();
 		yield return new WaitForSeconds(3);
 		networkView.RPC("PlayerReEnabling", RPCMode.Others, player, true ? 1 : 0);
+		PlayerState playerState = playerPrefab.GetComponent<PlayerState>();
+		playerState._isDead = false;
+		networkView.RPC("SyncValuesForPlayer", RPCMode.Others, player, CombatSyncValues.BOOLDEATH, playerState._isDead ? 1 : 0);
+
 	}
 
 	[RPC]
@@ -302,14 +315,25 @@ public class GameManager : MonoBehaviour
 	{
 		if(flagId==0)
 		{
-			_flagRed.GetComponent<FlagHandling>().DropFlag(flagId);
-		//	Debug.Log ("Dropped a flag... " + _flagRed.name);
+			_gameScore._flagRed.GetComponent<FlagHandling>().DropFlag(flagId);
 		}
 		else
 		{
-			Debug.Log("Drop a flag... " + _flagBlue.name);
-			_flagBlue.GetComponent<FlagHandling>().DropFlag(flagId);
+			_gameScore._flagBlue.GetComponent<FlagHandling>().DropFlag(flagId);
 			
+		}
+	}
+
+	[RPC]
+	private void ResetFlag(int flagId)
+	{
+		if(flagId==0)
+		{
+			_gameScore._flagRed.GetComponent<FlagHandling>().ResetFlag();
+		}
+		else
+		{
+			_gameScore._flagBlue.GetComponent<FlagHandling>().ResetFlag();
 		}
 	}
 

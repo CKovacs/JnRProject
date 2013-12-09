@@ -21,7 +21,7 @@ public class CombatHandler
         }*/
     }
 
-    public void AddPlayer(PlayerObject player) 
+    public void AddPlayer(PlayerObject player)
     {
         _effectDictionary.Add(player, new List<DynamicEffect>(SIZE));
     }
@@ -94,13 +94,25 @@ public class CombatHandler
         // Instant
         if (effect._dynamicType == DynamicEffectType.instant || effect._dynamicType == DynamicEffectType.buff)
         {
-            if (effect._effectType == EffectType.life) 
+            // Recalculation of the amount for blocking 
+            if (effect._effectType == EffectType.life)
             {
-                if (effect._amount < 0) 
+                if (effect._amount < 0)
                 {
                     PlayerState playerState = player._playerPrefab.GetComponent<PlayerState>();
 
-                    //effect._amount = effect._amount - 
+                    if (playerState._forwardBlock > 0)
+                    {
+                        Vector3 heading = effect._target._playerPrefab.transform.position - effect._source._playerPrefab.transform.position;
+                        float dot = Vector3.Dot(heading, effect._target._playerPrefab.transform.forward);
+
+                        if (dot < 0.0f)
+                        {
+                            effect._amount = effect._amount * (1 - playerState._forwardBlock);
+
+                            Debug.Log("in front");
+                        }
+                    }
                 }
             }
 
@@ -113,7 +125,7 @@ public class CombatHandler
         // Frequently effect
         else if (effect._dynamicType == DynamicEffectType.frequent)
         {
-            if(effect._currentDuration > (effect._duration - effect._frequency))
+            if (effect._currentDuration > (effect._duration - effect._frequency))
             {
                 // RPC call (Dynamic effect isn't a supported type, so you have to send the members)
                 _nv.RPC("SC_DoEffect", RPCMode.All, player._networkPlayer, (int)effect._effectType, effect._amount, effect._percentage);
@@ -122,7 +134,7 @@ public class CombatHandler
                 {
                     effect._isResolved = true;
                 }
-                else 
+                else
                 {
                     // Change the duration for the next tick
                     effect._duration = effect._duration - effect._frequency;

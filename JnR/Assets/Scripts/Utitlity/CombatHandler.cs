@@ -94,6 +94,16 @@ public class CombatHandler
         // Instant
         if (effect._dynamicType == DynamicEffectType.instant || effect._dynamicType == DynamicEffectType.buff)
         {
+            if (effect._effectType == EffectType.life) 
+            {
+                if (effect._amount < 0) 
+                {
+                    PlayerState playerState = player._playerPrefab.GetComponent<PlayerState>();
+
+                    //effect._amount = effect._amount - 
+                }
+            }
+
             // RPC call (Dynamic effect isn't a supported type, so you have to send the members)
             _nv.RPC("SC_DoEffect", RPCMode.All, player._networkPlayer, (int)effect._effectType, effect._amount, effect._percentage);
 

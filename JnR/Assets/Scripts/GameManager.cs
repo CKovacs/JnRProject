@@ -456,9 +456,10 @@ public class GameManager : MonoBehaviour
 
                     if (playerState._stunCounter == 1)
                     {
+                        /*
                         Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
 
-                        movement.enabled = false;
+                        movement.enabled = false;*/
 
                         InputDispatcher inputDispatcher = playerObject._playerPrefab.GetComponent<InputDispatcher>();
 
@@ -504,9 +505,10 @@ public class GameManager : MonoBehaviour
 
                     if (playerState._stunCounter == 0)
                     {
+                        /*
                         Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
 
-                        movement.enabled = true;
+                        movement.enabled = true;*/
 
                         InputDispatcher inputDispatcher = playerObject._playerPrefab.GetComponent<InputDispatcher>();
 

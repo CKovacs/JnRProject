@@ -469,15 +469,25 @@ public class GameManager : MonoBehaviour
 
                     if (playerState._stunCounter == 1)
                     {
-                        /*
                         Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
 
-                        movement.enabled = false;*/
+                        movement._movementEditPercentage -= 100;
 
-                        InputDispatcher inputDispatcher = playerObject._playerPrefab.GetComponent<InputDispatcher>();
+                        if (playerObject._networkPlayer == GetComponent<LocalPlayer>()._networkPlayer)
+                        {
+                            InputDispatcher inputDispatcher = playerObject._playerPrefab.GetComponent<InputDispatcher>();
 
-                        inputDispatcher.enabled = false;
+                            inputDispatcher.enabled = false;
+                        }
                     }
+
+                    break;
+                }
+            case EffectType.def:
+                {
+                    PlayerState playerState = playerObject._playerPrefab.GetComponent<PlayerState>();
+
+                    playerState._forwardBlock += percentage;
 
                     break;
                 }
@@ -490,8 +500,6 @@ public class GameManager : MonoBehaviour
     {
         PlayerObject playerObject = GetPlayerObject(player);
         EffectType effectType = (EffectType)type;
-
-        Debug.Log("TYPE: " + effectType);
 
         switch (effectType)
         {
@@ -506,7 +514,7 @@ public class GameManager : MonoBehaviour
                     Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
 
                     movement._movementEditPercentage -= percentage;
-                    Debug.Log("New running percentage: " + percentage);
+                    //Debug.Log("New running percentage: " + percentage);
                     break;
                 }
             // Stun counter needed, because you need to keep track how many stuns are on the target
@@ -518,15 +526,25 @@ public class GameManager : MonoBehaviour
 
                     if (playerState._stunCounter == 0)
                     {
-                        /*
                         Movement movement = playerObject._playerPrefab.GetComponent<Movement>();
 
-                        movement.enabled = true;*/
+                        movement._movementEditPercentage += 100;
 
-                        InputDispatcher inputDispatcher = playerObject._playerPrefab.GetComponent<InputDispatcher>();
+                        if (playerObject._networkPlayer == GetComponent<LocalPlayer>()._networkPlayer)
+                        {
+                            InputDispatcher inputDispatcher = playerObject._playerPrefab.GetComponent<InputDispatcher>();
 
-                        inputDispatcher.enabled = true;
+                            inputDispatcher.enabled = true;
+                        }
                     }
+
+                    break;
+                }
+            case EffectType.def:
+                {
+                    PlayerState playerState = playerObject._playerPrefab.GetComponent<PlayerState>();
+
+                    playerState._forwardBlock -= percentage;
 
                     break;
                 }

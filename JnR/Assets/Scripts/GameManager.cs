@@ -256,13 +256,12 @@ public class GameManager : MonoBehaviour
 				if(playerState._team == Team.Blue)
 				{
 					//Do something with RED flag
-					networkView.RPC ("DropFlag",RPCMode.All,0);
+					networkView.RPC ("DropFlag",RPCMode.All,FlagDescription.FLAGRED);
 				} 
 				else
 				{
 					//Do something with BLUE flag
-					Debug.Log("Player dead - call DropFlag for id 1");
-					networkView.RPC ("DropFlag",RPCMode.All,1);
+					networkView.RPC ("DropFlag",RPCMode.All,FlagDescription.FLAGBLUE);
 				}
 
 				playerState._isHoldingAFlag = false;
@@ -313,13 +312,13 @@ public class GameManager : MonoBehaviour
 	[RPC]
 	private void DropFlag(int flagId)
 	{
-		if(flagId==0)
+		if(flagId==FlagDescription.FLAGBLUE)
 		{
-			_gameScore._flagRed.GetComponent<FlagHandling>().DropFlag(flagId);
+			_gameScore._flagBlue.GetComponent<FlagHandling>().DropFlag(flagId);
 		}
 		else
 		{
-			_gameScore._flagBlue.GetComponent<FlagHandling>().DropFlag(flagId);
+			_gameScore._flagRed.GetComponent<FlagHandling>().DropFlag(flagId);
 			
 		}
 	}
@@ -327,13 +326,27 @@ public class GameManager : MonoBehaviour
 	[RPC]
 	private void ResetFlag(int flagId)
 	{
-		if(flagId==0)
+		if(flagId==FlagDescription.FLAGBLUE)
 		{
-			_gameScore._flagRed.GetComponent<FlagHandling>().ResetFlag();
+			_gameScore._flagBlue.GetComponent<FlagHandling>().ResetFlag();
 		}
 		else
 		{
-			_gameScore._flagBlue.GetComponent<FlagHandling>().ResetFlag();
+			_gameScore._flagRed.GetComponent<FlagHandling>().ResetFlag();
+		}
+	}
+
+	[RPC]
+	private void FlagPickUp(NetworkPlayer player, int flagId)
+	{
+		if(flagId==FlagDescription.FLAGBLUE)
+		{
+			_gameScore._flagBlue.GetComponent<FlagHandling>().FlagPickUp(player);
+		}
+		else
+		{
+			_gameScore._flagRed.GetComponent<FlagHandling>().FlagPickUp(player);
+			
 		}
 	}
 

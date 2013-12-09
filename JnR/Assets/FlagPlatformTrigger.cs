@@ -16,6 +16,7 @@ public class FlagPlatformTrigger : MonoBehaviour
 		//Check if player is of the opposing team
 		var player = collider.gameObject.transform; //-> player
 		var playerState = player.GetComponent<PlayerState>();
+		Debug.Log ("Ich bin ein tolles Log");
 		if (playerState._isHoldingAFlag)
 		{
 			if (platformName == "PlatformRed" && playerState._team == Team.Blue)

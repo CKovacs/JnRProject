@@ -104,7 +104,7 @@ public class InputDispatcher : MonoBehaviour
 
         UpdateTargetList();
 
-        if (Input.GetButtonDown(LEFTSELECT))
+        if (Input.GetButtonDown(LEFTSELECT) || Input.GetKeyDown(KeyCode.Q))
         {
             _currentTarget = GetTarget(false);
             Debug.Log("GETTARGET " + _currentTarget._networkPlayer);
@@ -113,7 +113,7 @@ public class InputDispatcher : MonoBehaviour
             _targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
         }
 
-        if (Input.GetButtonDown(RIGHTSELECT))
+        if (Input.GetButtonDown(RIGHTSELECT) || Input.GetKeyDown(KeyCode.E))
         {
             _currentTarget = GetTarget(true);
             Debug.Log("GETTARGET " + _currentTarget._networkPlayer);
@@ -121,12 +121,12 @@ public class InputDispatcher : MonoBehaviour
             _targetRingInstance.transform.position = _currentTarget._playerPrefab.transform.position;
             _targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
         }
-        if (Input.GetButtonDown(SELFSELECT))
+        if (Input.GetButtonDown(SELFSELECT) || Input.GetKeyDown(KeyCode.C))
         {
             _currentTarget = _myself;
         }
 
-        if (Input.GetButtonDown(AUTOHIT) && _skillAutohit.CheckSkillConditions(_myself, _currentTarget))
+        if ((Input.GetButtonDown(AUTOHIT) || Input.GetKeyDown(KeyCode.F)) && _skillAutohit.CheckSkillConditions(_myself, _currentTarget))
         {
             //der verwendete Skill wird an den Server gesendet und ein Effect wird abgebildet
             //RemoteSkillUse ist "generisch"
@@ -138,7 +138,7 @@ public class InputDispatcher : MonoBehaviour
             _animHandle.OneHandHit(true);
         }
 
-        if (Input.GetAxis(LR) == 1)
+        if (Input.GetAxis(LR) == 1 || Input.GetKeyDown(KeyCode.Y))
         {
             Debug.Log("DodgeBall");
 
@@ -146,7 +146,7 @@ public class InputDispatcher : MonoBehaviour
                 _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
                 _currentTarget._networkPlayer, _skillDodgeRoll._id);
         }
-        if (Input.GetAxis(LR) == -1)
+        if (Input.GetAxis(LR) == -1 || Input.GetKeyDown(KeyCode.X))
         {
             Debug.Log("Block");
             if (_currentTarget != _myself)

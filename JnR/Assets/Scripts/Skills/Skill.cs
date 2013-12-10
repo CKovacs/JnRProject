@@ -52,6 +52,11 @@ public class Skill : ScriptableObject
         }
         */
         // Check range
+        if (_range <= 0) 
+        {
+            return true;
+        }
+
         float distance = Vector3.Distance(origin._playerPrefab.position, target._playerPrefab.position);
         Debug.Log("Distance: " + distance + "max range: " + _range);
         if (distance > _range)

@@ -19,6 +19,14 @@ public class Effect3DBuilder : MonoBehaviour
                 Debug.Log("char effect");
                 characterEffect.transform.position = newTarget;
 
+                if (_skill._id == 2) 
+                {
+                    characterEffect.transform.forward = destination.forward;
+                    characterEffect.transform.position = newTarget + destination.forward;
+                }
+
+                characterEffect.transform.parent = destination;
+
                 Object.Destroy(characterEffect, _skill._destroyTime);
                 break;
             case Effect3DType.Projectile:

@@ -14,6 +14,7 @@ public class InputDispatcher : MonoBehaviour
     private const string SKILL13 = "Skill13";
     private const string SKILL24 = "Skill24";
     public AnimationHandle _animHandle;
+    public CooldownHandler _cooldownHandle;
     private PlayerObject _currentTarget;
     public Transform _gameManagementObject;
     private GameManager _gameManager;
@@ -52,10 +53,10 @@ public class InputDispatcher : MonoBehaviour
         _myself =
             _currentTarget = _gameManager.GetPlayerObject(_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);
         _targetRingInstance = Instantiate(_targetRingPrefab) as GameObject;
+        _cooldownHandle = new CooldownHandler();
     }
 
     private void Update()
-    //TODO Add Global Cooldown
     {
         //Network Movement Input Dispatcher
         _verticalInput = Input.GetAxis("Vertical");
@@ -107,7 +108,7 @@ public class InputDispatcher : MonoBehaviour
         if (Input.GetButtonDown(LEFTSELECT) || Input.GetKeyDown(KeyCode.Q))
         {
             _currentTarget = GetTarget(false);
-            Debug.Log("GETTARGET " + _currentTarget._networkPlayer);
+            //Debug.Log("GETTARGET " + _currentTarget._networkPlayer);
 
             _targetRingInstance.transform.position = _currentTarget._playerPrefab.transform.position;
             _targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
@@ -116,7 +117,7 @@ public class InputDispatcher : MonoBehaviour
         if (Input.GetButtonDown(RIGHTSELECT) || Input.GetKeyDown(KeyCode.E))
         {
             _currentTarget = GetTarget(true);
-            Debug.Log("GETTARGET " + _currentTarget._networkPlayer);
+            //Debug.Log("GETTARGET " + _currentTarget._networkPlayer);
 
             _targetRingInstance.transform.position = _currentTarget._playerPrefab.transform.position;
             _targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
@@ -126,7 +127,8 @@ public class InputDispatcher : MonoBehaviour
             _currentTarget = _myself;
         }
 
-        if ((Input.GetButtonDown(AUTOHIT) || Input.GetKeyDown(KeyCode.F)) && _skillAutohit.CheckSkillConditions(_myself, _currentTarget))
+        if ((Input.GetButtonDown(AUTOHIT) || Input.GetKeyDown(KeyCode.F)) && _skillAutohit.CheckSkillConditions(_myself, _currentTarget)
+            && !_cooldownHandle.HasCooldown(AUTOHIT))
         {
             //der verwendete Skill wird an den Server gesendet und ein Effect wird abgebildet
             //RemoteSkillUse ist "generisch"
@@ -136,9 +138,11 @@ public class InputDispatcher : MonoBehaviour
             Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skillAutohit);
             _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
                 _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-                _currentTarget._networkPlayer, _skillAutohit._id); 
-        }
+                _currentTarget._networkPlayer, _skillAutohit._id);
 
+            _cooldownHandle.AddCooldown(AUTOHIT, _skillAutohit._cooldown);
+        }
+        /*
         if (Input.GetAxis(LR) == 1 || Input.GetKeyDown(KeyCode.Y))
         {
             Debug.Log("DodgeBall");
@@ -146,20 +150,21 @@ public class InputDispatcher : MonoBehaviour
             _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
             _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
             _currentTarget._networkPlayer, _skillDodgeRoll._id);
-        }
-        if (Input.GetAxis(LR) == -1 || Input.GetKeyDown(KeyCode.X))
+        }*/
+        if ((Input.GetAxis(LR) == -1 || Input.GetKeyDown(KeyCode.X)) && !_cooldownHandle.HasCooldown(LR))
         {
             Debug.Log("Block");
-            if (_currentTarget != _myself)
-            {
-                _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
-                _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-                _currentTarget._networkPlayer, _skillBlock._id);
-            }
+
+            _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+            _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+            _myself._networkPlayer, _skillBlock._id);
+
+            _cooldownHandle.AddCooldown(LR, _skillBlock._cooldown);
         }
 
         // Teh 4 skills
-        if ((Input.GetAxis(SKILL13) == 1 || Input.GetKeyDown(KeyCode.UpArrow)) && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        if ((Input.GetAxis(SKILL13) == 1 || Input.GetKeyDown(KeyCode.UpArrow)) && _skillStandard.CheckSkillConditions(_myself, _currentTarget)
+            && !_cooldownHandle.HasCooldown(SKILL13 + "1"))
         {
             Debug.Log("Skill 1" + _skillStandard.name);
             _animHandle.OneHandHit(true);
@@ -167,8 +172,11 @@ public class InputDispatcher : MonoBehaviour
             _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
             _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
             _currentTarget._networkPlayer, _skillStandard._id);
+
+            _cooldownHandle.AddCooldown(SKILL13 + "1", _skillStandard._cooldown);
         }
-        else if ((Input.GetAxis(SKILL24) == 1 || Input.GetKeyDown(KeyCode.RightArrow)) && _skillDefence.CheckSkillConditions(_myself, _currentTarget))
+        else if ((Input.GetAxis(SKILL24) == 1 || Input.GetKeyDown(KeyCode.RightArrow)) && _skillDefence.CheckSkillConditions(_myself, _currentTarget)
+            && !_cooldownHandle.HasCooldown(SKILL24 + "1"))
         {
             Debug.Log("Skill 2" + _skillDefence.name);
             _animHandle.OneHandHit(true);
@@ -176,8 +184,11 @@ public class InputDispatcher : MonoBehaviour
             _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
             _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
             _currentTarget._networkPlayer, _skillDefence._id);
+
+            _cooldownHandle.AddCooldown(SKILL24 + "1", _skillDefence._cooldown);
         }
-        else if ((Input.GetAxis(SKILL13) == -1 || Input.GetKeyDown(KeyCode.DownArrow)) && _skillUtility.CheckSkillConditions(_myself, _currentTarget))
+        else if ((Input.GetAxis(SKILL13) == -1 || Input.GetKeyDown(KeyCode.DownArrow)) && _skillUtility.CheckSkillConditions(_myself, _currentTarget)
+             && !_cooldownHandle.HasCooldown(SKILL13 + "2"))
         {
             Debug.Log("Skill 3" + _skillUtility.name);
             _animHandle.OneHandHit(true);
@@ -185,8 +196,11 @@ public class InputDispatcher : MonoBehaviour
             _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
             _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
             _currentTarget._networkPlayer, _skillUtility._id);
+
+            _cooldownHandle.AddCooldown(SKILL13 + "2", _skillUtility._cooldown);
         }
-        else if ((Input.GetAxis(SKILL24) == -1 || Input.GetKeyDown(KeyCode.LeftArrow)) && _skillUltimate.CheckSkillConditions(_myself, _currentTarget))
+        else if ((Input.GetAxis(SKILL24) == -1 || Input.GetKeyDown(KeyCode.LeftArrow)) && _skillUltimate.CheckSkillConditions(_myself, _currentTarget)
+             && !_cooldownHandle.HasCooldown(SKILL24 + "2"))
         {
             Debug.Log("Skill 4" + _skillUltimate.name);
             _animHandle.OneHandHit(true);
@@ -194,6 +208,8 @@ public class InputDispatcher : MonoBehaviour
             _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
             _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
             _currentTarget._networkPlayer, _skillUltimate._id);
+
+            _cooldownHandle.AddCooldown(SKILL24 + "2", _skillUltimate._cooldown);
         }
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -220,6 +236,8 @@ public class InputDispatcher : MonoBehaviour
             Debug.Log("3 pressed");
             _gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, "Herbert", 2);
         }
+
+        _cooldownHandle.UpdateCooldowns(Time.deltaTime);
     }
 
     public void UpdateTargetList()

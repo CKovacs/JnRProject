@@ -14,6 +14,8 @@ public class PlayerState : MonoBehaviour
     public string name;
     public Team _team;
 
+    public float _lastPortalTime;
+
     public void SyncValue(int id, int value)
     {
         switch (id)

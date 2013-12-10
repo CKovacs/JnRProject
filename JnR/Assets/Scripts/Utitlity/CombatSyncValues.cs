@@ -9,6 +9,8 @@
 
 	public const int TEAM = 200;
 
+    public const int PORTALUSE = 300;
+
 	//Config Values
 	public const int MAXLIFE = 100;
 }

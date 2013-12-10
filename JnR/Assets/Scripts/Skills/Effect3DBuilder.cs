@@ -16,7 +16,7 @@ public class Effect3DBuilder : MonoBehaviour
         {
             case Effect3DType.CharacterEffect:
                 GameObject characterEffect = GameObject.Instantiate(_skill._3dEffect) as GameObject;
-
+                Debug.Log("char effect");
                 characterEffect.transform.position = newTarget;
 
                 Object.Destroy(characterEffect, _skill._destroyTime);

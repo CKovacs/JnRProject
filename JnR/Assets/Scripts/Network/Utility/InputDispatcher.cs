@@ -143,8 +143,8 @@ public class InputDispatcher : MonoBehaviour
             Debug.Log("DodgeBall");
 
             _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
-                _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-                _currentTarget._networkPlayer, _skillDodgeRoll._id);
+            _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+            _currentTarget._networkPlayer, _skillDodgeRoll._id);
         }
         if (Input.GetAxis(LR) == -1 || Input.GetKeyDown(KeyCode.X))
         {
@@ -152,31 +152,47 @@ public class InputDispatcher : MonoBehaviour
             if (_currentTarget != _myself)
             {
                 _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
-                    _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-                    _currentTarget._networkPlayer, _skillBlock._id);
+                _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+                _currentTarget._networkPlayer, _skillBlock._id);
             }
         }
 
         // Teh 4 skills
         if (Input.GetAxis(SKILL13) == 1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
         {
-            Debug.Log("Skill 1");
+            Debug.Log("Skill 1" + _skillStandard.name);
             _animHandle.OneHandHit(true);
+
+            _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+            _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+            _currentTarget._networkPlayer, _skillStandard._id);
         }
-        else if (Input.GetAxis(SKILL24) == 1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        else if (Input.GetAxis(SKILL24) == 1 && _skillDefence.CheckSkillConditions(_myself, _currentTarget))
         {
-            Debug.Log("Skill 2");
+            Debug.Log("Skill 2" + _skillDefence.name);
             _animHandle.OneHandHit(true);
+
+            _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+            _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+            _currentTarget._networkPlayer, _skillDefence._id);
         }
-        else if (Input.GetAxis(SKILL13) == -1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        else if (Input.GetAxis(SKILL13) == -1 && _skillUtility.CheckSkillConditions(_myself, _currentTarget))
         {
-            Debug.Log("Skill 3");
+            Debug.Log("Skill 3" + _skillUtility.name);
             _animHandle.OneHandHit(true);
+
+            _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+            _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+            _currentTarget._networkPlayer, _skillUtility._id);
         }
-        else if (Input.GetAxis(SKILL24) == -1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        else if (Input.GetAxis(SKILL24) == -1 && _skillUltimate.CheckSkillConditions(_myself, _currentTarget))
         {
-            Debug.Log("Skill 4");
+            Debug.Log("Skill 4" + _skillUltimate.name);
             _animHandle.OneHandHit(true);
+
+            _gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+            _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+            _currentTarget._networkPlayer, _skillUltimate._id);
         }
 
         if (Input.GetKeyDown(KeyCode.T))

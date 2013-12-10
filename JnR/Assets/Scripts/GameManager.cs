@@ -520,6 +520,16 @@ public class GameManager : MonoBehaviour
 
                     playerState._hp += amount;
 
+                    if (Network.isServer) 
+                    {
+                        if (playerState._hp <= 0)
+                        {
+                            Debug.Log("A player died...");
+                            //Replicate the Death to the player
+                            Death(player);
+                        }
+                    }
+
                     break;
                 }
             case EffectType.run:

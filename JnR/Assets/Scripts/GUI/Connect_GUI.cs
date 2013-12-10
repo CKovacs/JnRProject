@@ -18,7 +18,7 @@ public class Connect_GUI : MonoBehaviour
 	private float _quickPlayStart;
 	public int _maxPlayers = 10;
 	private string _ipAddress = "127.0.0.1";
-	private string _portHolder = "33333";
+	private string _portHolder = "23482";
 	private int _port;
 	private Vector2 scrollPos;
 	private string _playerName = "Player Default Name";
@@ -131,13 +131,16 @@ public class Connect_GUI : MonoBehaviour
 			if (GUILayout.Button ("Direct Connect", new GUILayoutOption[0])) 
 			{
 				Debug.Log ("Direct Connect");
-				this._connector.Connect ();
+                this._connector.Connect (_ipAddress,_port);
 			}
 			GUILayout.BeginHorizontal (new GUILayoutOption[0]);
 			this._ipAddress = GUILayout.TextField (this._ipAddress, 25, new GUILayoutOption[0]);
 			this._portHolder = GUILayout.TextField (this._portHolder, 25, new GUILayoutOption[0]);
-			this._port = int.Parse (this._portHolder);
-			GUILayout.EndHorizontal ();
+            if(_portHolder != "") 
+            {
+			    this._port = int.Parse (this._portHolder);
+			}
+            GUILayout.EndHorizontal ();
 			GUILayout.EndHorizontal ();
 		} 
 		else 

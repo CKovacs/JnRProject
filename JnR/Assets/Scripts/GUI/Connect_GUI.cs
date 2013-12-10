@@ -131,7 +131,7 @@ public class Connect_GUI : MonoBehaviour
 			if (GUILayout.Button ("Direct Connect", new GUILayoutOption[0])) 
 			{
 				Debug.Log ("Direct Connect");
-				this._connector.Connect ();
+                this._connector.Connect (_ipAddress,_port);
 			}
 			GUILayout.BeginHorizontal (new GUILayoutOption[0]);
 			this._ipAddress = GUILayout.TextField (this._ipAddress, 25, new GUILayoutOption[0]);

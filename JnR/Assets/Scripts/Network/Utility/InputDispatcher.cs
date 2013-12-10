@@ -158,22 +158,22 @@ public class InputDispatcher : MonoBehaviour
         }
 
         // Teh 4 skills
-        if (Input.GetAxis(SKILL13) == 1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        if ((Input.GetAxis(SKILL13) == 1 || Input.GetKeyDown(KeyCode.UpArrow)) && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
         {
             Debug.Log("Skill 1");
             _animHandle.OneHandHit(true);
         }
-        else if (Input.GetAxis(SKILL24) == 1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        else if ((Input.GetAxis(SKILL24) == 1 || Input.GetKeyDown(KeyCode.LeftArrow)) && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
         {
             Debug.Log("Skill 2");
             _animHandle.OneHandHit(true);
         }
-        else if (Input.GetAxis(SKILL13) == -1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        else if ((Input.GetAxis(SKILL13) == -1 || Input.GetKeyDown(KeyCode.DownArrow)) && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
         {
             Debug.Log("Skill 3");
             _animHandle.OneHandHit(true);
         }
-        else if (Input.GetAxis(SKILL24) == -1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
+        else if ((Input.GetAxis(SKILL24) == -1 || Input.GetKeyDown(KeyCode.RightArrow)) && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
         {
             Debug.Log("Skill 4");
             _animHandle.OneHandHit(true);

@@ -65,6 +65,11 @@ public class Connector : MonoBehaviour {
 	{
 		Network.Connect("127.0.0.1", _serverPort);
 	}
+    
+    public void Connect(string ip, int port)
+    {
+        Network.Connect(ip, port);
+    }
 	
 	public void Connect(HostData hd)
 	{

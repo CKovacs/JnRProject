@@ -134,6 +134,8 @@ public class InputDispatcher : MonoBehaviour
 			_gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
 				_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
 				_currentTarget._networkPlayer, _skillAutohit._id);
+
+            _animHandle.OneHandHit(true);
 		}
 
 		if (Input.GetAxis(LR) == 1)
@@ -159,18 +161,22 @@ public class InputDispatcher : MonoBehaviour
 		if (Input.GetAxis(SKILL13) == 1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
 		{
 			Debug.Log("Skill 1");
+            _animHandle.OneHandHit(true);
 		}
 		else if (Input.GetAxis(SKILL24) == 1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
 		{
 			Debug.Log("Skill 2");
+            _animHandle.OneHandHit(true);
 		}
 		else if (Input.GetAxis(SKILL13) == -1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
 		{
 			Debug.Log("Skill 3");
+            _animHandle.OneHandHit(true);
 		}
 		else if (Input.GetAxis(SKILL24) == -1 && _skillStandard.CheckSkillConditions(_myself, _currentTarget))
 		{
 			Debug.Log("Skill 4");
+            _animHandle.OneHandHit(true);
 		}
 
 		if (Input.GetKeyDown(KeyCode.T))

@@ -9,10 +9,11 @@ public class GameManager : MonoBehaviour
     public bool _isRunning;
     public List<PlayerObject> _playerList = new List<PlayerObject>();
     public int _playerListCount;
-    private ServerSkillContainer _skillContainer;
     public Transform _spawnablePlayerPrefab;
-    private IEnumerable<PlayerMock> players;
     public GameScore _gameScore;
+
+    private ServerSkillContainer _skillContainer;
+    private IEnumerable<PlayerMock> players;
 
     private void Start()
     {

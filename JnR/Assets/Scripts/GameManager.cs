@@ -561,7 +561,7 @@ public class GameManager : MonoBehaviour
                     movement._movementEditPercentage += percentage;
                     Debug.Log("New running percentage: " + percentage);
 
-                    handler.CreateFloatingSpecialText(playerObject._playerPrefab.transform.position, "run");
+                    handler.CreateFloatingSpecialText(playerObject._playerPrefab.transform.position, EffectType.run, percentage);
 
                     break;
                 }
@@ -586,7 +586,7 @@ public class GameManager : MonoBehaviour
                         }
                     }
 
-                    handler.CreateFloatingSpecialText(playerObject._playerPrefab.transform.position, "stun");
+                    handler.CreateFloatingSpecialText(playerObject._playerPrefab.transform.position, EffectType.stun, percentage);
 
                     break;
                 }
@@ -596,7 +596,7 @@ public class GameManager : MonoBehaviour
 
                     playerState._forwardBlock += percentage;
 
-                    handler.CreateFloatingSpecialText(playerObject._playerPrefab.transform.position, "def");
+                    handler.CreateFloatingSpecialText(playerObject._playerPrefab.transform.position, EffectType.def, percentage);
 
                     break;
                 }

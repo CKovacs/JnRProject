@@ -12,6 +12,7 @@ public class SkillEditor : Editor
     private const string ICON = "Icon";
     private const string EFFECT3D = "3D effect";
     private const string EFFECT3DTYPE = "3D effect type";
+    private const string PROJECTILEPENETRATION = "Projectile pentetration";
     private const string EFFECT3DOFFSETSOURCE = "3D effect source offset";
     private const string EFFECT3DOFFSETTARGET = "3D effect target offset";
     private const string DESTROYTIME = "3D effect destroy time";
@@ -62,7 +63,12 @@ public class SkillEditor : Editor
         _skill._3dEffectType = (Effect3DType)EditorGUILayout.EnumPopup(EFFECT3DTYPE, _skill._3dEffectType);
         _skill._spellOffSetSource = EditorGUILayout.Vector3Field(EFFECT3DOFFSETSOURCE, _skill._spellOffSetSource);
         _skill._spellOffSetTarget = EditorGUILayout.Vector3Field(EFFECT3DOFFSETTARGET, _skill._spellOffSetTarget);
-   
+
+        if (_skill._3dEffectType == Effect3DType.Projectile) 
+        {
+            _skill._penetrationProjectile = EditorGUILayout.Toggle(PROJECTILEPENETRATION, _skill._penetrationProjectile);
+        }
+
         _skill._destroyTime = EditorGUILayout.FloatField(DESTROYTIME, _skill._destroyTime);
 
         EditorGUILayout.Space();
@@ -126,11 +132,11 @@ public class SkillEditor : Editor
 
         // Spell effects
 
-        for (int i = 0; i < _skill._effect.Count; ++i)
+        for (int i = 0; i < _skill._effects.Count; ++i)
         {
             EditorGUILayout.LabelField(EFFECT + (i + 1));
 
-            Effect effect = _skill._effect[i];
+            Effect effect = _skill._effects[i];
 
             effect._type = (EffectType)EditorGUILayout.EnumPopup(EFFECTTYPE, effect._type);
             effect._duration = EditorGUILayout.FloatField(DURATION, effect._duration);
@@ -182,11 +188,11 @@ public class SkillEditor : Editor
 
         if (GUILayout.Button(ADDEFFECT))
         {
-            _skill._effect.Add(new Effect());
+            _skill._effects.Add(new Effect());
         }
         if (GUILayout.Button(DELEFFECT))
         {
-            _skill._effect.RemoveAt(_skill._effect.Count - 1);
+            _skill._effects.RemoveAt(_skill._effects.Count - 1);
         }
 
         EditorUtility.SetDirty(_skill);

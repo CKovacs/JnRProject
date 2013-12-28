@@ -18,7 +18,7 @@ public class CooldownHandler
         foreach (KeyValuePair<string, float> pair in _cooldownDictionary)
         {
             float newValue = pair.Value - deltaTime;
-            Debug.Log("Cooldown value " + newValue);
+            //Debug.Log("Cooldown value " + newValue);
             if(newValue > 0.0f)
             {
                 newList.Add(pair.Key, newValue);

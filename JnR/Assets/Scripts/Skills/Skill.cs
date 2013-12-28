@@ -6,12 +6,13 @@ public class Skill : ScriptableObject
     // Display stuff
     public GameObject _3dEffect;
     public Effect3DType _3dEffectType;
+    public bool _penetrationProjectile = false;
     public int _casttime; // If _castTime == 0   -> skill is instant, otherwise the skill has a cast time
     public List<Class> _classSpell;
     public float _cooldown;
     public float _cooldownCounter;
     public float _destroyTime;
-    public List<Effect> _effect;
+    public List<Effect> _effects;
     public Texture2D _icon;
     public int _id;
     public bool _needToBeInFront;
@@ -62,6 +63,23 @@ public class Skill : ScriptableObject
         if (distance > _range)
         {
             return false;
+        }
+
+        // Checks if the source  is facing the target (Expensive)
+        if (_needToBeInFront) 
+        {
+            Vector3 heading = origin._playerPrefab.transform.position - target._playerPrefab.transform.position;
+            float dot = Vector3.Dot(heading, origin._playerPrefab.transform.forward);
+
+            if (dot < 0.0f)
+            {
+                Debug.Log("in front");
+            }
+            else 
+            {
+                Debug.Log("Not in front");
+                return false;
+            }
         }
 
         return true;

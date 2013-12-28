@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Effect3DBuilder : MonoBehaviour
+public class Effect3DBuilder
 {
-    public static void DoEffect(Transform source, Transform destination, Skill _skill) 
+    public static GameObject DoEffect(Transform source, Transform destination, Skill _skill) 
     {
         Vector3 newSource = source.position;
         newSource += _skill._spellOffSetSource;
@@ -33,13 +33,13 @@ public class Effect3DBuilder : MonoBehaviour
                 GameObject projectile = GameObject.Instantiate(_skill._3dEffect) as GameObject;
 
                 projectile.transform.position = newSource;
-
-                Vector3 position = Vector3.Lerp(projectile.transform.position, newTarget, Time.deltaTime * 10.1f);
-                projectile.transform.position = position;
+                Debug.Log("Projectile prep");
+               
                 Object.Destroy(projectile, _skill._destroyTime);
-                projectile.rigidbody.AddRelativeForce((newTarget - newSource) * 200);
-                  
-                break;
+                projectile.rigidbody.AddRelativeForce((newTarget - newSource) * 700);
+                Debug.Log("Proj fin");
+
+                return projectile;
             case Effect3DType.Streaming:
                 GameObject streaming = GameObject.Instantiate(_skill._3dEffect) as GameObject;
                 Stream stream = streaming.GetComponent<Stream>();
@@ -58,5 +58,7 @@ public class Effect3DBuilder : MonoBehaviour
                 Object.Destroy(strike, _skill._destroyTime);
                 break;
         }
+
+        return null;
     }
 }

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Movement : MonoBehaviour {
+public class Movement : MonoBehaviour 
+{
 	private Transform _parentTransform;
 	private CharacterController _characterController;
 	public float _gravity = 5.0f;

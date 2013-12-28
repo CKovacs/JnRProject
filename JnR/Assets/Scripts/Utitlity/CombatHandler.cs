@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/*
+ * Combat handling (only on the server)
+ */
 public class CombatHandler
 {
     private Dictionary<PlayerObject, List<DynamicEffect>> _effectDictionary;
@@ -14,11 +17,6 @@ public class CombatHandler
 
         //Get Memory for the list
         _effectDictionary = new Dictionary<PlayerObject, List<DynamicEffect>>(SIZE);
-        /*Debug.Log("player size " + pl.Count);
-        foreach (PlayerObject po in pl)
-        {
-            _effectDictionary.Add(po, new List<DynamicEffect>(SIZE));
-        }*/
     }
 
     public void AddPlayer(PlayerObject player)
@@ -125,7 +123,7 @@ public class CombatHandler
         // Frequently effect
         else if (effect._dynamicType == DynamicEffectType.frequent)
         {
-            if (effect._currentDuration > (effect._duration - effect._frequency))
+            if (effect._currentDuration < (effect._frequentDuration - effect._frequency))
             {
                 // RPC call (Dynamic effect isn't a supported type, so you have to send the members)
                 _nv.RPC("SC_DoEffect", RPCMode.All, player._networkPlayer, (int)effect._effectType, effect._amount, effect._percentage);
@@ -137,7 +135,7 @@ public class CombatHandler
                 else
                 {
                     // Change the duration for the next tick
-                    effect._duration = effect._duration - effect._frequency;
+                    effect._frequentDuration = effect._frequentDuration - effect._frequency;
                 }
             }
 

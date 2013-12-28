@@ -478,7 +478,7 @@ public class GameManager : MonoBehaviour
 
         if (skill._3dEffectType != Effect3DType.Projectile)
         {
-            _combatHandler.AddEffectsForPlayer(GetPlayerObject(source), GetPlayerObject(target), skill._effect);
+            _combatHandler.AddEffectsForPlayer(GetPlayerObject(source), GetPlayerObject(target), skill._effects);
         }
     }
 
@@ -489,21 +489,36 @@ public class GameManager : MonoBehaviour
         Debug.Log("Player " + source.guid + " casts " + skillId + " on " + target.guid);
         Skill skill = _skillContainer.GetSkill(skillId);
 
+        PlayerObject sourceObject = GetPlayerObject(source);
+        PlayerObject targetObject = GetPlayerObject(target);
+
+        GameObject addScriptToObject = null;
+
         // Graphical stuff
         if (skill._3dEffect)
         {
-            Effect3DBuilder.DoEffect(GetPlayerObject(source)._playerPrefab.transform,
-            GetPlayerObject(target)._playerPrefab.transform, skill);
+            Debug.Log("Build skill effect");
+            addScriptToObject = Effect3DBuilder.DoEffect(sourceObject._playerPrefab.transform, targetObject._playerPrefab.transform, skill);
+        }
+        // Projectile needs a projectile handler and origin, target, skill effects and game manager
+        if (skill._3dEffectType == Effect3DType.Projectile && addScriptToObject)
+        {
+            Debug.Log("Create projectile");
+            // The projectile handler will only be attached on the server (with ultra dark magic)
+
+            ProjectileHandler projHandler = addScriptToObject.GetComponent<Collider>().gameObject.AddComponent<ProjectileHandler>();
+
+            projHandler._origin = sourceObject;
+            projHandler._target = targetObject;
+            projHandler._skill = skill;
+            projHandler._gameManager = this;    // Should be changed later...
         }
     }
 
-    [RPC]
-    //Server
-    private void S_ApplyProjectileEffect(NetworkPlayer source, NetworkPlayer target, int skillId)
+    // Was a RPC call, but was changed to a simply method, because the projectile handler operates directly on the server
+    public void S_ApplyProjectileEffect(PlayerObject source, PlayerObject target, List<Effect> effects)
     {
-        Skill skill = _skillContainer.GetSkill(skillId);
-
-        // Effect list
+        _combatHandler.AddEffectsForPlayer(source, target, effects);
     }
 
     [RPC]
@@ -514,6 +529,8 @@ public class GameManager : MonoBehaviour
         EffectType effectType = (EffectType)type;
 
         Debug.Log("TYPE: " + effectType);
+
+        FloatingTextHandler handler = GetComponent<FloatingTextHandler>();
 
         switch (effectType)
         {
@@ -533,6 +550,8 @@ public class GameManager : MonoBehaviour
                         }
                     }
 
+                    handler.CreateFloatingAmountText(playerObject._playerPrefab.transform.position, amount);
+
                     break;
                 }
             case EffectType.run:
@@ -541,6 +560,9 @@ public class GameManager : MonoBehaviour
 
                     movement._movementEditPercentage += percentage;
                     Debug.Log("New running percentage: " + percentage);
+
+                    handler.CreateFloatingSpecialText(playerObject._playerPrefab.transform.position, "run");
+
                     break;
                 }
         // Stun counter needed, because you need to keep track how many stuns are on the target
@@ -564,6 +586,8 @@ public class GameManager : MonoBehaviour
                         }
                     }
 
+                    handler.CreateFloatingSpecialText(playerObject._playerPrefab.transform.position, "stun");
+
                     break;
                 }
             case EffectType.def:
@@ -571,6 +595,8 @@ public class GameManager : MonoBehaviour
                     PlayerState playerState = playerObject._playerPrefab.GetComponent<PlayerState>();
 
                     playerState._forwardBlock += percentage;
+
+                    handler.CreateFloatingSpecialText(playerObject._playerPrefab.transform.position, "def");
 
                     break;
                 }

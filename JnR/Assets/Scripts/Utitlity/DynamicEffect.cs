@@ -14,8 +14,7 @@ public class DynamicEffect
 	
 	public bool _onHit;
 	public bool _onDeath;
-
-    public float _duration;
+    
     public float _frequency;  
 	public int _amount;
 	public int _percentage;
@@ -23,14 +22,15 @@ public class DynamicEffect
     public DynamicEffectType _dynamicType;
 	
 	//Housekeeping
-    public float _currentDuration;   
+    public float _currentDuration;
+    public float _frequentDuration;
     public PlayerObject _target;
     public PlayerObject _source;
 	public bool _isResolved = false;
 
     public DynamicEffect(Effect effect, PlayerObject source, PlayerObject target)
 	{
-        _duration = _currentDuration = effect._duration;
+        _frequentDuration = _currentDuration = effect._duration;
 		_frequency = effect._frequency;
 		_amount = effect._amount;
 		_percentage = effect._percentage;

@@ -109,8 +109,9 @@ public class InputDispatcher : MonoBehaviour
         {
             _currentTarget = GetTarget(false);
             //Debug.Log("GETTARGET " + _currentTarget._networkPlayer);
+            Vector3 newPos = new Vector3(_currentTarget._playerPrefab.transform.position.x, _currentTarget._playerPrefab.transform.position.y - 1, _currentTarget._playerPrefab.transform.position.z);
 
-            _targetRingInstance.transform.position = _currentTarget._playerPrefab.transform.position;
+            _targetRingInstance.transform.position = newPos;
             _targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
         }
 
@@ -119,7 +120,9 @@ public class InputDispatcher : MonoBehaviour
             _currentTarget = GetTarget(true);
             //Debug.Log("GETTARGET " + _currentTarget._networkPlayer);
 
-            _targetRingInstance.transform.position = _currentTarget._playerPrefab.transform.position;
+            Vector3 newPos = new Vector3(_currentTarget._playerPrefab.transform.position.x, _currentTarget._playerPrefab.transform.position.y - 1, _currentTarget._playerPrefab.transform.position.z);
+
+            _targetRingInstance.transform.position = newPos;
             _targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
         }
         if (Input.GetButtonDown(SELFSELECT) || Input.GetKeyDown(KeyCode.C))
@@ -163,7 +166,7 @@ public class InputDispatcher : MonoBehaviour
         }
 
         // Teh 4 skills
-        if ((Input.GetAxis(SKILL13) == 1 || Input.GetKeyDown(KeyCode.UpArrow)) && _skillStandard.CheckSkillConditions(_myself, _currentTarget)
+        if ((Input.GetAxis(SKILL13) == 1 || Input.GetKeyDown(KeyCode.I)) && _skillStandard.CheckSkillConditions(_myself, _currentTarget)
             && !_cooldownHandle.HasCooldown(SKILL13 + "1"))
         {
             Debug.Log("Skill 1" + _skillStandard.name);
@@ -175,7 +178,7 @@ public class InputDispatcher : MonoBehaviour
 
             _cooldownHandle.AddCooldown(SKILL13 + "1", _skillStandard._cooldown);
         }
-        else if ((Input.GetAxis(SKILL24) == 1 || Input.GetKeyDown(KeyCode.RightArrow)) && _skillDefence.CheckSkillConditions(_myself, _currentTarget)
+        else if ((Input.GetAxis(SKILL24) == 1 || Input.GetKeyDown(KeyCode.O)) && _skillDefence.CheckSkillConditions(_myself, _currentTarget)
             && !_cooldownHandle.HasCooldown(SKILL24 + "1"))
         {
             Debug.Log("Skill 2" + _skillDefence.name);
@@ -187,7 +190,7 @@ public class InputDispatcher : MonoBehaviour
 
             _cooldownHandle.AddCooldown(SKILL24 + "1", _skillDefence._cooldown);
         }
-        else if ((Input.GetAxis(SKILL13) == -1 || Input.GetKeyDown(KeyCode.DownArrow)) && _skillUtility.CheckSkillConditions(_myself, _currentTarget)
+        else if ((Input.GetAxis(SKILL13) == -1 || Input.GetKeyDown(KeyCode.K)) && _skillUtility.CheckSkillConditions(_myself, _currentTarget)
              && !_cooldownHandle.HasCooldown(SKILL13 + "2"))
         {
             Debug.Log("Skill 3" + _skillUtility.name);
@@ -199,7 +202,7 @@ public class InputDispatcher : MonoBehaviour
 
             _cooldownHandle.AddCooldown(SKILL13 + "2", _skillUtility._cooldown);
         }
-        else if ((Input.GetAxis(SKILL24) == -1 || Input.GetKeyDown(KeyCode.LeftArrow)) && _skillUltimate.CheckSkillConditions(_myself, _currentTarget)
+        else if ((Input.GetAxis(SKILL24) == -1 || Input.GetKeyDown(KeyCode.L)) && _skillUltimate.CheckSkillConditions(_myself, _currentTarget)
              && !_cooldownHandle.HasCooldown(SKILL24 + "2"))
         {
             Debug.Log("Skill 4" + _skillUltimate.name);

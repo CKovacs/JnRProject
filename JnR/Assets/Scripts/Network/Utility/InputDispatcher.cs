@@ -230,25 +230,25 @@ public class InputDispatcher : MonoBehaviour
 
 
 		//TeamSelection
-		//if (Input.GetKeyDown(KeyCode.Alpha1))
-		//{
-		//	Debug.Log(PlayerPrefs.GetString("playerName"));
-		//	_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, PlayerPrefs.GetString("playerName"), 0);
-		//}
-		//if (Input.GetKeyDown(KeyCode.Alpha2))
-		//{
-		//	Debug.Log(PlayerPrefs.GetString("playerName"));
-		//	_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, PlayerPrefs.GetString("playerName"), 1);
-		//}
-		//if (Input.GetKeyDown(KeyCode.Alpha3))
-		//{
-		//	Debug.Log(PlayerPrefs.GetString("playerName"));
-		//	_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, PlayerPrefs.GetString("playerName"), 2);
-		//}
-		//if (Input.GetKeyDown(KeyCode.KeypadEnter))
-		//{
-		//	_gameManagementObject.networkView.RPC("GetPlayers", RPCMode.Server);
-		//}
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 0);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+
+			_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 1);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+
+			_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 2);
+		}
+		if (Input.GetKeyDown(KeyCode.KeypadEnter))
+		{
+			Debug.Log("ID: selection done");
+			_gameManagementObject.networkView.RPC("S_SetTeamSelected", RPCMode.AllBuffered, _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);
+		}
 		_cooldownHandle.UpdateCooldowns(Time.deltaTime);
 	}
 

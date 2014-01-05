@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerState : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PlayerState : MonoBehaviour
 	public int _stunCounter = 0;
 	public Team _team;
 	public string name;
+	public bool _teamSelected;
+	public IEnumerable<Skill> Skills; 
 
 	public void SyncValue(int id, int value)
 	{

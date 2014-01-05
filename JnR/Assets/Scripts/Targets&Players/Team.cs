@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public enum Team
+﻿public enum Team
 {
-    Blue, 
-    Red,
-    Spectator
+	Red = 0,
+	Blue = 1,
+	None = 2,
+	Spectator = 3
 };

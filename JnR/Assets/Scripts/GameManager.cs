@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,7 +28,7 @@ public class GameManager : MonoBehaviour
 		if (Network.isServer)
 		{
 			_combatHandler.Update(Time.deltaTime);
-			if (!_teamSelectionDone)
+			if (_teamSelectionDone == false && _playerListCount != 0)
 			{
 				CheckIfTeamSelectionDone();	
 			}
@@ -185,83 +183,74 @@ public class GameManager : MonoBehaviour
 	//Debug GUI for Client and Server
 	private void OnGUI()
 	{
-		//if (Network.isClient)
-		//{
-		//	for (int i = 0; i < _playerList.Count; ++i)
-		//	{
-		//		GUILayout.Label("NetworkPlayer:" + _playerList[i]._networkPlayer, new GUILayoutOption[0]);
-		//		GUILayout.Label("NetworkViewID:" + _playerList[i]._networkViewID, new GUILayoutOption[0]);
-		//		GUILayout.Label("NetworkPlayerName: " + _playerList[i]._playerPrefab.GetComponent<PlayerState>().name,
-		//			new GUILayoutOption[0]);
-		//	}
-		//}
-		//if (Network.isServer)
-		//{
-		//	for (int i = 0; i < _playerList.Count; ++i)
-		//	{
-		//		GUILayout.Label("NetworkPlayer:" + _playerList[i]._networkPlayer, new GUILayoutOption[0]);
-		//		GUILayout.Label("NetworkViewID:" + _playerList[i]._networkViewID, new GUILayoutOption[0]);
-		//		GUILayout.Label("NetworkPlayerName: " + _playerList[i]._playerPrefab.GetComponent<PlayerState>().name, new GUILayoutOption[0]);
-		//		GUILayout.Label("HP = " + _playerList[i]._playerPrefab.GetComponent<PlayerState>()._hp);
-		//		GUILayout.BeginHorizontal();
-		//		if (GUILayout.Button("Hurt(51)", new GUILayoutOption[0]))
-		//		{
-		//			AlterHealth(_playerList[i]._networkPlayer, -51);
-		//		}
-		//		if (GUILayout.Button("Team Blue", new GUILayoutOption[0]))
-		//		{
-		//			_playerList[i]._playerPrefab.GetComponent<PlayerState>()._team = Team.Blue;
-		//			networkView.RPC("SyncValuesForPlayer", RPCMode.OthersBuffered, _playerList[i]._networkPlayer,
-		//				CombatSyncValues.TEAM,
-		//				0);
-		//		}
-		//		if (GUILayout.Button("Team Red", new GUILayoutOption[0]))
-		//		{
-		//			_playerList[i]._playerPrefab.GetComponent<PlayerState>()._team = Team.Red;
-		//			networkView.RPC("SyncValuesForPlayer", RPCMode.OthersBuffered, _playerList[i]._networkPlayer,
-		//				CombatSyncValues.TEAM,
-		//				1);
-		//		}
-		//		GUILayout.EndHorizontal();
-		//		GUILayout.Label("---", new GUILayoutOption[0]);
-		//	}
-		//}
-		//else
-		//{
-		//	var lp = GetComponent<LocalPlayer>();
-		//	GUILayout.Label("NetworkPlayer:" + lp._networkPlayer, new GUILayoutOption[0]);
-		//	GUILayout.Label("NetworkViewID:" + lp._networkPlayer, new GUILayoutOption[0]);
-		//	if (lp._playerPrefab != null)
-		//	{
-		//		GUILayout.Label("Healthpoints:" + lp._playerPrefab.GetComponent<PlayerState>()._hp, new GUILayoutOption[0]);
-		//		if (Team.Blue == lp._playerPrefab.GetComponent<PlayerState>()._team)
-		//		{
-		//			GUILayout.Label("Team: Blue");
-		//		}
-		//		else
-		//		{
-		//			GUILayout.Label("Team: Red");
-		//		}
-		//		GUILayout.Label("Redpoints:" + _gameScore._flagsCapturedTeamRed, new GUILayoutOption[0]);
-		//		GUILayout.Label("Bluepoints:" + _gameScore._flagsCapturedTeamBlue, new GUILayoutOption[0]);
-		//		GUILayout.BeginHorizontal();
-		//		GUILayout.Label("RED FLAG CARRIED BY ", new GUILayoutOption[0]);
-		//		if (_gameScore._playerHoldingFlagRed != null)
-		//		{
-		//			GUILayout.Label("PLAYER " + _gameScore._playerHoldingFlagRed.GetComponent<PlayerState>()._networkPlayer,
-		//				new GUILayoutOption[0]);
-		//		}
-		//		GUILayout.EndHorizontal();
-		//		GUILayout.BeginHorizontal();
-		//		GUILayout.Label("BLUE FLAG CARRIED BY ", new GUILayoutOption[0]);
-		//		if (_gameScore._playerHoldingFlagBlue != null)
-		//		{
-		//			GUILayout.Label("PLAYER " + _gameScore._playerHoldingFlagBlue.GetComponent<PlayerState>()._networkPlayer,
-		//				new GUILayoutOption[0]);
-		//		}
-		//		GUILayout.EndHorizontal();
-		//	}
-		//}
+		
+		if (Network.isServer)
+		{
+			for (int i = 0; i < _playerList.Count; ++i)
+			{
+				GUILayout.Label("NetworkPlayer:" + _playerList[i]._networkPlayer, new GUILayoutOption[0]);
+				GUILayout.Label("NetworkViewID:" + _playerList[i]._networkViewID, new GUILayoutOption[0]);
+				GUILayout.Label("Selection done: " + _playerList[i]._playerPrefab.GetComponent<PlayerState>()._teamSelected, new GUILayoutOption[0]);
+				GUILayout.Label("HP = " + _playerList[i]._playerPrefab.GetComponent<PlayerState>()._hp);
+				GUILayout.BeginHorizontal();
+				if (GUILayout.Button("Hurt(51)", new GUILayoutOption[0]))
+				{
+					AlterHealth(_playerList[i]._networkPlayer, -51);
+				}
+				if (GUILayout.Button("Team Blue", new GUILayoutOption[0]))
+				{
+					_playerList[i]._playerPrefab.GetComponent<PlayerState>()._team = Team.Blue;
+					networkView.RPC("SyncValuesForPlayer", RPCMode.OthersBuffered, _playerList[i]._networkPlayer,
+						CombatSyncValues.TEAM,
+						0);
+				}
+				if (GUILayout.Button("Team Red", new GUILayoutOption[0]))
+				{
+					_playerList[i]._playerPrefab.GetComponent<PlayerState>()._team = Team.Red;
+					networkView.RPC("SyncValuesForPlayer", RPCMode.OthersBuffered, _playerList[i]._networkPlayer,
+						CombatSyncValues.TEAM,
+						1);
+				}
+				GUILayout.EndHorizontal();
+				GUILayout.Label("---", new GUILayoutOption[0]);
+			}
+		}
+		else
+		{
+			//var lp = GetComponent<LocalPlayer>();
+			//GUILayout.Label("NetworkPlayer:" + lp._networkPlayer, new GUILayoutOption[0]);
+			//GUILayout.Label("NetworkViewID:" + lp._networkPlayer, new GUILayoutOption[0]);
+			//if (lp._playerPrefab != null)
+			//{
+			//	GUILayout.Label("Healthpoints:" + lp._playerPrefab.GetComponent<PlayerState>()._hp, new GUILayoutOption[0]);
+			//	if (Team.Blue == lp._playerPrefab.GetComponent<PlayerState>()._team)
+			//	{
+			//		GUILayout.Label("Team: Blue");
+			//	}
+			//	else
+			//	{
+			//		GUILayout.Label("Team: Red");
+			//	}
+			//	GUILayout.Label("Redpoints:" + _gameScore._flagsCapturedTeamRed, new GUILayoutOption[0]);
+			//	GUILayout.Label("Bluepoints:" + _gameScore._flagsCapturedTeamBlue, new GUILayoutOption[0]);
+			//	GUILayout.BeginHorizontal();
+			//	GUILayout.Label("RED FLAG CARRIED BY ", new GUILayoutOption[0]);
+			//	if (_gameScore._playerHoldingFlagRed != null)
+			//	{
+			//		GUILayout.Label("PLAYER " + _gameScore._playerHoldingFlagRed.GetComponent<PlayerState>()._networkPlayer,
+			//			new GUILayoutOption[0]);
+			//	}
+			//	GUILayout.EndHorizontal();
+			//	GUILayout.BeginHorizontal();
+			//	GUILayout.Label("BLUE FLAG CARRIED BY ", new GUILayoutOption[0]);
+			//	if (_gameScore._playerHoldingFlagBlue != null)
+			//	{
+			//		GUILayout.Label("PLAYER " + _gameScore._playerHoldingFlagBlue.GetComponent<PlayerState>()._networkPlayer,
+			//			new GUILayoutOption[0]);
+			//	}
+			//	GUILayout.EndHorizontal();
+			//}
+		}
 	}
 
 	/*! A server-side function to change the health of a player.
@@ -296,16 +285,26 @@ public class GameManager : MonoBehaviour
 
 	private void CheckIfTeamSelectionDone()
 	{
+		bool selectionDone = true;
+		Debug.Log("CheckIfTeamSelectionDone");
 		foreach (var player in _playerList)
 		{
 			Debug.Log("Checking player " + player._playerPrefab.GetComponent<PlayerState>().name + ": if team selected: " + player._playerPrefab.GetComponent<PlayerState>()._teamSelected);
-			if (!player._playerPrefab.GetComponent<PlayerState>()._teamSelected)
+			if (player._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
 			{
-				return;
+				selectionDone = false;
 			}
+
+
+		}
+		Debug.Log("Selection done: " + selectionDone);
+		if (selectionDone)
+		{
+			Debug.Log("SELECTION DONE!!!");
 			networkView.RPC("KillTeamSelectionObject", RPCMode.Others);
 			_teamSelectionDone = true;
 		}
+		
 	}
 
 	/*! This networkfunction syncronizes the attributes of a certain player to all peers
@@ -314,6 +313,7 @@ public class GameManager : MonoBehaviour
 	[RPC]
 	private void KillTeamSelectionObject()
 	{
+		Debug.Log("in killTeamSelectionobject");
 		var teamSelection = Object.FindObjectOfType<GUITeamSelection>();
 		if (teamSelection != null)
 		{

@@ -6,6 +6,7 @@ public class PlayerState : MonoBehaviour
 	public int _dmg = 5;
 	public int _forwardBlock = 0;
 	public Transform _gameManagementObject;
+	public int _maxHp = 100;
 	public int _hp = 100;
 	public bool _isDead = false;
 	public bool _isHoldingAFlag;

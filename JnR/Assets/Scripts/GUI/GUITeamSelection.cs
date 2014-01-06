@@ -74,7 +74,15 @@ public class GUITeamSelection : MonoBehaviour
 				{
 					int offset = countTeamAPlayers * 113;
 
-					GUI.Box(new Rect(168, 282 + offset, 283, 56), "" + player.name, playerSelectedGUIStyle);
+					if (player._teamSelected)
+					{
+						GUI.Box(new Rect(168, 282 + offset, 283, 56), "" + player.name, playerSelectedGUIStyle);
+					}
+					else
+					{
+						GUI.Box(new Rect(168, 282 + offset, 283, 56), "" + player.name, playerNotSelectedGUIStyle);
+					}
+					
 					countTeamAPlayers++;
 				}
 			}
@@ -87,7 +95,15 @@ public class GUITeamSelection : MonoBehaviour
 				{
 					int offset = countTeamBPlayers * 113;
 
-					GUI.Box(new Rect(1473, 282 + offset, 283, 56), "" + player.name, playerSelectedGUIStyle);
+					if (player._teamSelected)
+					{
+						GUI.Box(new Rect(1473, 282 + offset, 283, 56), "" + player.name, playerSelectedGUIStyle);
+					}
+					else
+					{
+						GUI.Box(new Rect(1473, 282 + offset, 283, 56), "" + player.name, playerNotSelectedGUIStyle);
+					}
+					
 					countTeamBPlayers++;
 				}
 			} 

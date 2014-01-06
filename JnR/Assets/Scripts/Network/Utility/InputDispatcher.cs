@@ -232,22 +232,23 @@ public class InputDispatcher : MonoBehaviour
 		//TeamSelection
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
-			_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 0);
+			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
+				_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 0);
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
-
-			_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 1);
+			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
+				_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 1);
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
-
-			_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 2);
+			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
+				_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 2);
 		}
 		if (Input.GetKeyDown(KeyCode.KeypadEnter))
 		{
 			Debug.Log("ID: selection done");
-			_gameManagementObject.networkView.RPC("S_SetTeamSelected", RPCMode.AllBuffered, _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);
+			_gameManagementObject.networkView.RPC("S_SetTeamSelected", RPCMode.All, _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);
 		}
 		_cooldownHandle.UpdateCooldowns(Time.deltaTime);
 	}

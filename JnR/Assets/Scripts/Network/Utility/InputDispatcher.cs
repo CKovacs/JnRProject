@@ -52,6 +52,7 @@ public class InputDispatcher : MonoBehaviour
 		_myself =
 			_currentTarget = _gameManager.GetPlayerObject(_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);
 		_targetRingInstance = Instantiate(_targetRingPrefab) as GameObject;
+		
 		_cooldownHandle = new CooldownHandler();
 	}
 
@@ -230,12 +231,12 @@ public class InputDispatcher : MonoBehaviour
 
 
 		//TeamSelection
-		if (Input.GetKeyDown(KeyCode.Alpha1))
+		if (Input.GetButtonDown(LEFTSELECT) || Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
 				_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 0);
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha2))
+		if (Input.GetButtonDown(LEFTSELECT) || Input.GetKeyDown(KeyCode.Alpha2))
 		{
 			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
 				_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 1);

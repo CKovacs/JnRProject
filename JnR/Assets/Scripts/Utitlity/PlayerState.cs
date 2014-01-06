@@ -17,6 +17,7 @@ public class PlayerState : MonoBehaviour
 	public Team _team;
 	public string name;
 	public bool _teamSelected;
+	public bool _spellsSelected;
 	public IEnumerable<Skill> Skills;
 	//public PlayerObject _target;
 

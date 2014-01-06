@@ -15,7 +15,7 @@ public class InputDispatcher : MonoBehaviour
 	private const string SKILL24 = "Skill24";
 	public AnimationHandle _animHandle;
 	public CooldownHandler _cooldownHandle;
-	private PlayerObject _currentTarget;
+	public PlayerObject _currentTarget;
 	public Transform _gameManagementObject;
 	private GameManager _gameManager;
 	private float _horizontalInput;
@@ -104,7 +104,7 @@ public class InputDispatcher : MonoBehaviour
 
 		UpdateTargetList();
 
-		if (Input.GetButtonDown(LEFTSELECT) || Input.GetKeyDown(KeyCode.Q))
+		if (Input.GetButtonDown(LEFTSELECT) || Input.GetKeyDown(KeyCode.Z))
 		{
 			_currentTarget = GetTarget(false);
 			//Debug.Log("GETTARGET " + _currentTarget._networkPlayer);
@@ -115,7 +115,7 @@ public class InputDispatcher : MonoBehaviour
 			_targetRingInstance.transform.parent = _currentTarget._playerPrefab.transform;
 		}
 
-		if (Input.GetButtonDown(RIGHTSELECT) || Input.GetKeyDown(KeyCode.E))
+		if (Input.GetButtonDown(RIGHTSELECT) || Input.GetKeyDown(KeyCode.U))
 		{
 			_currentTarget = GetTarget(true);
 			//Debug.Log("GETTARGET " + _currentTarget._networkPlayer);
@@ -306,7 +306,7 @@ public class InputDispatcher : MonoBehaviour
 				}
 			}
 		}
-
+		
 		return _currentTarget;
 	}
 

@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +163,7 @@
      <None Include="Assets\3rd Party\JMO Assets\Cartoon FX\CartoonFX2 Readme.txt" />
      <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\Blend.shader" />
      <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\BlendModesOverlay.shader" />
+     <None Include="Assets\3D Stuff\NewShader.shader" />
      <None Include="Assets\3rd Party\NGUI\Resources\Shaders\Unlit - Additive Colored.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
      <None Include="Assets\3rd Party\L_FG_Assets_Pack1.0\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SimpleClear.shader" />

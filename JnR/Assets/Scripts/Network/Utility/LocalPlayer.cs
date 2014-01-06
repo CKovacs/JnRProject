@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+
 
 //Will only be used on the client side
 public class LocalPlayer : MonoBehaviour {

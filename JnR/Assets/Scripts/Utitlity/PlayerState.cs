@@ -16,7 +16,7 @@ public class PlayerState : MonoBehaviour
 	public int _stunCounter = 0;
 	public Team _team;
 	public string name;
-	public bool _teamSelected;
+	public bool _teamSelected = false;
 	public bool _spellsSelected;
 	public IEnumerable<Skill> Skills;
 	//public PlayerObject _target;

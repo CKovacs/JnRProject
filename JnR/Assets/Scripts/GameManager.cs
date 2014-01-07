@@ -95,14 +95,16 @@ public class GameManager : MonoBehaviour
 		var networkView = playerPrefab.GetComponent<NetworkView>();
 		networkView.viewID = transformViewID;
 		
-		if (_playerCount%2 == 0)
-		{
-			playerPrefab.GetComponent<PlayerState>()._team = Team.Red;
-		}
-		else
-		{
-			playerPrefab.GetComponent<PlayerState>()._team = Team.Blue;
-		}
+        playerPrefab.GetComponent<PlayerState>()._team = Team.None;
+        
+		//if (_playerCount%2 == 0)
+        //{
+        //	playerPrefab.GetComponent<PlayerState>()._team = Team.Red;
+        //}
+        //else
+        //{
+        //	playerPrefab.GetComponent<PlayerState>()._team = Team.Blue;
+        //}
 		
 		var po = new PlayerObject();
 		po._networkPlayer = playerIdentifier;
@@ -286,25 +288,25 @@ public class GameManager : MonoBehaviour
 	private void CheckIfTeamSelectionDone()
 	{
 		bool selectionDone = true;
-		Debug.Log("CheckIfTeamSelectionDone");
-		foreach (var player in _playerList)
+        int numberOfPlayersReady = 0;
+        int numberOfPlayersNotReady = 0;
+		foreach (PlayerObject player in _playerList)
 		{
 			Debug.Log("Checking player " + player._playerPrefab.GetComponent<PlayerState>().name + ": if team selected: " + player._playerPrefab.GetComponent<PlayerState>()._teamSelected);
 			if (player._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
 			{
-				selectionDone = false;
-			}
-
-
+                numberOfPlayersNotReady++;
+			} else
+            {
+                numberOfPlayersReady++;
+            }
 		}
-		Debug.Log("Selection done: " + selectionDone);
-		if (selectionDone)
-		{
-			Debug.Log("SELECTION DONE!!!");
-			networkView.RPC("KillTeamSelectionObject", RPCMode.Others);
-			_teamSelectionDone = true;
-		}
-		
+        if(numberOfPlayersReady==_playerListCount && numberOfPlayersNotReady == 0)
+        {
+            Debug.Log("Team Selection is Done");
+            networkView.RPC("KillTeamSelectionObject", RPCMode.OthersBuffered);
+            _teamSelectionDone = true;
+        }	
 	}
 
 	/*! This networkfunction syncronizes the attributes of a certain player to all peers
@@ -322,6 +324,30 @@ public class GameManager : MonoBehaviour
 		}
 		
 	}
+    
+    [RPC]
+    private void SetColorOfPlayer(NetworkPlayer player, int color)
+    {
+        networkView.RPC("InvokeColorOfPlayer", RPCMode.OthersBuffered, player,color );
+    }
+
+    [RPC]
+    private void InvokeColorOfPlayer(NetworkPlayer player, int color)
+    {
+        switch(color)
+        {
+            case 0:
+                GetPlayerObject(player)._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color",Color.blue);
+                break;
+            case 1:
+                GetPlayerObject(player)._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color",Color.red);
+                break;
+            case 2:
+                GetPlayerObject(player)._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color",Color.gray);
+                break;
+        }
+    }
+    
 
 	[RPC]
 	private void SyncValuesForPlayer(NetworkPlayer player, int id, int value)

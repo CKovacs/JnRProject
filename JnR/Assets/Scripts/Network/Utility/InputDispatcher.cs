@@ -234,18 +234,31 @@ public class InputDispatcher : MonoBehaviour
 		if (Input.GetButtonDown(RIGHTSELECT) || Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
+            {
 				_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 0);
-		}
+                _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color",Color.blue);
+                _gameManagementObject.networkView.RPC("SetColorOfPlayer", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,0);
+                
+            }
+        }
 		if (Input.GetButtonDown(LEFTSELECT) || Input.GetKeyDown(KeyCode.Alpha2))
 		{
 			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
+            {
 				_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 1);
-		}
+                _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color",Color.red);
+                _gameManagementObject.networkView.RPC("SetColorOfPlayer", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,1);
+            }
+        }
 		if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
-			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
+			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false) 
+            {
 				_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 2);
-		}
+                _gameManagementObject.networkView.RPC("SetColorOfPlayer", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,2);
+                _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color",Color.gray);
+            }
+        }
 		if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetButtonDown("Jump"))
 		{
 			Debug.Log("ID: selection done");

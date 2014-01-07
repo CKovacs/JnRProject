@@ -30,7 +30,7 @@ public class GUITeamSelection : MonoBehaviour
 
 	private void OnGUI()
 	{
-		if (Network.isClient)
+		if (Network.isClient);
 		{
 			//scaling stuff for different resolutions
 			float rx = Screen.width / _originalWidth;

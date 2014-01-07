@@ -12,12 +12,12 @@ public class InGameHUD : MonoBehaviour
 	private GameManager _gameManager;
 	private const int SkillBarOffset = 94;
 	private const int SkillIconSize = 64;
-	private readonly int _healthbarPositionLeft = Screen.width/2 - 350;
-	private readonly int _healthbarPositionTop = Screen.height - 35;
-	private readonly int _targetHealthbarPositionLeft = Screen.width / 2 - 350;
-	private readonly int _targetHealthbarPositionTop = 35;
-	private readonly int _skillBarPositionLeft = Screen.width/2 - 220;
-	private readonly int _skillBarPositionTop = Screen.height - 100;
+	private readonly int _healthbarPositionLeft = (int) /*Screen.width*/_originalWidth/2 - 350;
+    private readonly int _healthbarPositionTop =  (int)/*Screen.height*/_originalHeight - 35;
+    private readonly int _targetHealthbarPositionLeft =  (int) /*Screen.width*/_originalWidth / 2 - 350;
+    private readonly int _targetHealthbarPositionTop = (int) 35;
+    private readonly int _skillBarPositionLeft =  (int) /*Screen.width*/_originalWidth/2 - 220;
+    private readonly int _skillBarPositionTop = (int)/*Screen.height*/_originalHeight - 100;
 	private int _healthbarHeight = 30;
 	private int _healthbarLength = 600;
 	private int[] _skillIconPositions;

@@ -231,7 +231,7 @@ public class InputDispatcher : MonoBehaviour
 
 
 		//TeamSelection
-		if (Input.GetButtonDown(LEFTSELECT) || Input.GetKeyDown(KeyCode.Alpha1))
+		if (Input.GetButtonDown(RIGHTSELECT) || Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
 				_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 0);
@@ -246,7 +246,7 @@ public class InputDispatcher : MonoBehaviour
 			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
 				_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 2);
 		}
-		if (Input.GetKeyDown(KeyCode.KeypadEnter))
+		if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetButtonDown("Jump"))
 		{
 			Debug.Log("ID: selection done");
 			_gameManagementObject.networkView.RPC("S_SetTeamSelected", RPCMode.All, _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);

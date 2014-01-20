@@ -69,7 +69,7 @@ public class GUITeamSelection : MonoBehaviour
 			int countTeamAPlayers = 0;
 			foreach (PlayerState player in _playerList)
 			{
-				if (player._team == Team.Blue)
+				if (player._team == Team.Red)
 				{
 					int offset = countTeamAPlayers * 113;
 
@@ -90,7 +90,7 @@ public class GUITeamSelection : MonoBehaviour
 			int countTeamBPlayers = 0;
 			foreach (PlayerState player in _playerList)
 			{
-				if (player._team == Team.Red)
+				if (player._team == Team.Blue)
 				{
 					int offset = countTeamBPlayers * 113;
 

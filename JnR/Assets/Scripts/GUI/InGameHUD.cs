@@ -175,7 +175,7 @@ public class InGameHUD : MonoBehaviour
 			}
 			else
 			{
-				Debug.Log("No target selected");
+				//Debug.Log("No target selected");
 			}
 
 		}

@@ -292,7 +292,7 @@ public class GameManager : MonoBehaviour
         int numberOfPlayersNotReady = 0;
 		foreach (PlayerObject player in _playerList)
 		{
-			Debug.Log("Checking player " + player._playerPrefab.GetComponent<PlayerState>().name + ": if team selected: " + player._playerPrefab.GetComponent<PlayerState>()._teamSelected);
+			//Debug.Log("Checking player " + player._playerPrefab.GetComponent<PlayerState>().name + ": if team selected: " + player._playerPrefab.GetComponent<PlayerState>()._teamSelected);
 			if (player._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
 			{
                 numberOfPlayersNotReady++;
@@ -775,12 +775,18 @@ public class GameManager : MonoBehaviour
 	}
 
 	[RPC]
-	private void SC_RemoteAddPlayerToTeam(string name, int team)
+	private void SC_RemoteAddPlayerToTeam(NetworkPlayer player, int team)
 	{
-		foreach (PlayerObject player in _playerList.Where(player => player._playerPrefab.GetComponent<PlayerState>().name == name))
-		{
-			player._playerPrefab.GetComponent<PlayerState>()._team = (Team) team;
-		}
+        Debug.Log("REMOTE Name: " + GetPlayerObject(player)._playerPrefab.GetComponent<PlayerState>().name + " Int Team = " + team);
+        switch(team)
+        {
+            case 0:
+                GetPlayerObject(player)._playerPrefab.GetComponent<PlayerState>()._team = Team.Blue;
+                break;
+            case 1:
+                GetPlayerObject(player)._playerPrefab.GetComponent<PlayerState>()._team = Team.Red;
+                break;
+        }
 	}
 
 	[RPC]
@@ -795,14 +801,19 @@ public class GameManager : MonoBehaviour
 	[RPC]
 	private void AddPlayerToTeam(string name, int team)
 	{
-		Debug.Log("Adding player " + name + " to team " + (Team)team);
+        Debug.Log("Name: " + name  + " Int Team = " + team);
 		foreach (PlayerObject player in _playerList.Where(player => player._playerPrefab.GetComponent<PlayerState>().name == name))
 		{
-			Debug.Log("Adding player " + name + " to team " + (Team)team);
-			player._playerPrefab.GetComponent<PlayerState>()._team = (Team) team;
-
-			networkView.RPC("SC_RemoteAddPlayerToTeam", RPCMode.AllBuffered, player._playerPrefab.GetComponent<PlayerState>().name,
-				(int) player._playerPrefab.GetComponent<PlayerState>()._team);
+            switch(team)
+            {
+                case 0:
+                    player._playerPrefab.GetComponent<PlayerState>()._team = Team.Blue;
+                    break;
+                case 1:
+                    player._playerPrefab.GetComponent<PlayerState>()._team = Team.Red;
+                    break;
+            }
+			networkView.RPC("SC_RemoteAddPlayerToTeam", RPCMode.AllBuffered, player._networkPlayer,team);
 		}
 	}
 

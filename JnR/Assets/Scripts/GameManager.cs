@@ -219,39 +219,40 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-			//var lp = GetComponent<LocalPlayer>();
-			//GUILayout.Label("NetworkPlayer:" + lp._networkPlayer, new GUILayoutOption[0]);
-			//GUILayout.Label("NetworkViewID:" + lp._networkPlayer, new GUILayoutOption[0]);
-			//if (lp._playerPrefab != null)
-			//{
-			//	GUILayout.Label("Healthpoints:" + lp._playerPrefab.GetComponent<PlayerState>()._hp, new GUILayoutOption[0]);
-			//	if (Team.Blue == lp._playerPrefab.GetComponent<PlayerState>()._team)
-			//	{
-			//		GUILayout.Label("Team: Blue");
-			//	}
-			//	else
-			//	{
-			//		GUILayout.Label("Team: Red");
-			//	}
-			//	GUILayout.Label("Redpoints:" + _gameScore._flagsCapturedTeamRed, new GUILayoutOption[0]);
-			//	GUILayout.Label("Bluepoints:" + _gameScore._flagsCapturedTeamBlue, new GUILayoutOption[0]);
-			//	GUILayout.BeginHorizontal();
-			//	GUILayout.Label("RED FLAG CARRIED BY ", new GUILayoutOption[0]);
-			//	if (_gameScore._playerHoldingFlagRed != null)
-			//	{
-			//		GUILayout.Label("PLAYER " + _gameScore._playerHoldingFlagRed.GetComponent<PlayerState>()._networkPlayer,
-			//			new GUILayoutOption[0]);
-			//	}
-			//	GUILayout.EndHorizontal();
-			//	GUILayout.BeginHorizontal();
-			//	GUILayout.Label("BLUE FLAG CARRIED BY ", new GUILayoutOption[0]);
-			//	if (_gameScore._playerHoldingFlagBlue != null)
-			//	{
-			//		GUILayout.Label("PLAYER " + _gameScore._playerHoldingFlagBlue.GetComponent<PlayerState>()._networkPlayer,
-			//			new GUILayoutOption[0]);
-			//	}
-			//	GUILayout.EndHorizontal();
-			//}
+
+			var lp = GetComponent<LocalPlayer>();
+			GUILayout.Label("NetworkPlayer:" + lp._networkPlayer, new GUILayoutOption[0]);
+			GUILayout.Label("NetworkViewID:" + lp._networkPlayer, new GUILayoutOption[0]);
+			if (lp._playerPrefab != null)
+			{
+				GUILayout.Label("Healthpoints:" + lp._playerPrefab.GetComponent<PlayerState>()._hp, new GUILayoutOption[0]);
+				if (Team.Blue == lp._playerPrefab.GetComponent<PlayerState>()._team)
+				{
+					GUILayout.Label("Team: Blue");
+				}
+				else
+				{
+					GUILayout.Label("Team: Red");
+				}
+				//GUILayout.Label("Redpoints:" + _gameScore._flagsCapturedTeamRed, new GUILayoutOption[0]);
+				//GUILayout.Label("Bluepoints:" + _gameScore._flagsCapturedTeamBlue, new GUILayoutOption[0]);
+				GUILayout.BeginHorizontal();
+				GUILayout.Label("RED FLAG CARRIED BY ", new GUILayoutOption[0]);
+				if (_gameScore._playerHoldingFlagRed != null)
+				{
+					GUILayout.Label("PLAYER " + _gameScore._playerHoldingFlagRed.GetComponent<PlayerState>()._networkPlayer,
+						new GUILayoutOption[0]);
+				}
+				GUILayout.EndHorizontal();
+				GUILayout.BeginHorizontal();
+				GUILayout.Label("BLUE FLAG CARRIED BY ", new GUILayoutOption[0]);
+				if (_gameScore._playerHoldingFlagBlue != null)
+				{
+					GUILayout.Label("PLAYER " + _gameScore._playerHoldingFlagBlue.GetComponent<PlayerState>()._networkPlayer,
+						new GUILayoutOption[0]);
+				}
+				GUILayout.EndHorizontal();
+			}
 		}
 	}
 

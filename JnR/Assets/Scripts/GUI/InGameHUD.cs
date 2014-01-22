@@ -51,22 +51,22 @@ public class InGameHUD : MonoBehaviour
 	private void Update()
 	{
 		
-		if (Input.GetKeyDown(KeyCode.Q))
-		{
-			StartCooldown(0);
-		}
-		if (Input.GetKeyDown(KeyCode.W))
-		{
-			StartCooldown(1);
-		}
-		if (Input.GetKeyDown(KeyCode.E))
-		{
-			StartCooldown(2);
-		}
-		if (Input.GetKeyDown(KeyCode.R))
-		{
-			StartCooldown(3);
-		}
+		//if (Input.GetKeyDown(KeyCode.Q))
+		//{
+		//	StartCooldown(0);
+		//}
+		//if (Input.GetKeyDown(KeyCode.W))
+		//{
+		//	StartCooldown(1);
+		//}
+		//if (Input.GetKeyDown(KeyCode.E))
+		//{
+		//	StartCooldown(2);
+		//}
+		//if (Input.GetKeyDown(KeyCode.R))
+		//{
+		//	StartCooldown(3);
+		//}
 
 
 		foreach (Skill skill in _skills)
@@ -224,9 +224,10 @@ public class InGameHUD : MonoBehaviour
 		return positions;
 	}
 
-	private void StartCooldown(int id)
+	public void StartCooldown(int id, float time)
 	{
 		_skills[id]._onCooldown = true;
+		_skills[id]._cooldown = _skills[id]._cooldownCounter = time;
 	}
 
 	private int GetHealthbarLength()

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [RequireComponent(typeof(GUITexture))]
 
@@ -26,8 +27,21 @@ public class InGameHUD : MonoBehaviour
 	public Texture2D currentHealthTexture;
 	public GUIStyle healthBarGUIStyle;
 	public Texture2D healthBarTexture;
+	
+	//score
+	public GUIStyle scoreBlueGuiStyle;
+	public Texture2D scoreBlueTexture;
+	public GUIStyle scoreRedGuiStyle ;
+	public Texture2D scoreRedTexture;
 
-
+	public Texture2D flagSymbolBlue;
+	public Texture2D flagSymbolRed;
+	public Texture2D flagBlueGreen;
+	public Texture2D flagBlueYellow;
+	public Texture2D flagBlueRed;
+	public Texture2D flagRedGreen;
+	public Texture2D flagRedYellow;
+	public Texture2D flagRedRed;
 	//skillbar stuff
 	public Texture2D iconCooldown; //black texture, 50% transparent, .png
 	//todo: remove when skills are loaded dynamically
@@ -51,24 +65,6 @@ public class InGameHUD : MonoBehaviour
 	private void Update()
 	{
 		
-		//if (Input.GetKeyDown(KeyCode.Q))
-		//{
-		//	StartCooldown(0);
-		//}
-		//if (Input.GetKeyDown(KeyCode.W))
-		//{
-		//	StartCooldown(1);
-		//}
-		//if (Input.GetKeyDown(KeyCode.E))
-		//{
-		//	StartCooldown(2);
-		//}
-		//if (Input.GetKeyDown(KeyCode.R))
-		//{
-		//	StartCooldown(3);
-		//}
-
-
 		foreach (Skill skill in _skills)
 		{
 			if (skill._onCooldown)
@@ -84,6 +80,8 @@ public class InGameHUD : MonoBehaviour
 				}
 			}
 		}
+
+		SetFlagIcon();
 	}
 
 	private void OnGUI()
@@ -178,6 +176,14 @@ public class InGameHUD : MonoBehaviour
 				//Debug.Log("No target selected");
 			}
 
+
+			//Score
+			int center = Convert.ToInt32(_originalWidth/2);
+			GUI.Label(new Rect(center - 160, 5, 60, 60), flagSymbolBlue);
+			GUI.Box(new Rect(center - 100, 10, 90, 50), _gameManager._gameScore._flagsCapturedTeamBlue.ToString(), scoreBlueGuiStyle);
+
+			GUI.Label(new Rect(center + 200, 5, 60, 60), flagSymbolRed);
+			GUI.Box(new Rect(center + 100, 10, 90, 50), _gameManager._gameScore._flagsCapturedTeamRed.ToString(), scoreRedGuiStyle);
 		}
 	}
 
@@ -267,5 +273,26 @@ public class InGameHUD : MonoBehaviour
 			health = _healthbarLength - 7;
 		}
 		return health;
+	}
+
+	private void SetFlagIcon()
+	{
+		if (_gameManager._gameScore._playerHoldingFlagBlue == null)
+		{
+			flagSymbolBlue = flagBlueGreen;
+		}
+		else
+		{
+			flagSymbolBlue = flagBlueRed;
+		}
+
+		if (_gameManager._gameScore._playerHoldingFlagRed == null)
+		{
+			flagSymbolRed = flagRedGreen;
+		}
+		else
+		{
+			flagSymbolRed = flagRedRed;
+		}
 	}
 }

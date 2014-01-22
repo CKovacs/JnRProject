@@ -106,11 +106,11 @@ public class InGameHUD : MonoBehaviour
 			{
 				if (skill._onCooldown)
 				{
-
-					GUI.DrawTexture(new Rect(_skillIconPositions[skill._id], _skillBarPositionTop, SkillIconSize, SkillIconSize),
-						iconCooldown);
 					GUI.Label(new Rect(_skillIconPositions[skill._id], _skillBarPositionTop, SkillIconSize, SkillIconSize),
 						"" + (int) (skill._cooldownCounter + 1), cooldownTimerGUIStyle);
+					//GUI.DrawTexture(new Rect(_skillIconPositions[skill._id], _skillBarPositionTop, SkillIconSize, SkillIconSize),
+					//	iconCooldown);
+					
 				}
 			}
 
@@ -132,49 +132,49 @@ public class InGameHUD : MonoBehaviour
 			//GUI.DrawTexture(new Rect(0, 320, SkillIconSize, SkillIconSize), iconMember4);
 
 			//team members
-			int j = 0;
-			foreach (var player in _gameManager._playerList)
-			{
-				if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._team ==
-				    player._playerPrefab.GetComponent<PlayerState>()._team
-				    &&
-				    _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name !=
-				    player._playerPrefab.GetComponent<PlayerState>().name)
-				{
+			//int j = 0;
+			//foreach (var player in _gameManager._playerList)
+			//{
+			//	if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._team ==
+			//		player._playerPrefab.GetComponent<PlayerState>()._team
+			//		&&
+			//		_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name !=
+			//		player._playerPrefab.GetComponent<PlayerState>().name)
+			//	{
 
-					GUI.Label(new Rect(0, 40*j, 100, 20), player._playerPrefab.GetComponent<PlayerState>().name);
-					GUI.Label(new Rect(0, 40*j + 10, 100, 200),
-						player._playerPrefab.GetComponent<PlayerState>()._hp + "/" +
-						player._playerPrefab.GetComponent<PlayerState>()._maxHp);
-					j++;
-				}
-			}
+			//		GUI.Label(new Rect(0, 40*j, 100, 20), player._playerPrefab.GetComponent<PlayerState>().name);
+			//		GUI.Label(new Rect(0, 40*j + 10, 100, 200),
+			//			player._playerPrefab.GetComponent<PlayerState>()._hp + "/" +
+			//			player._playerPrefab.GetComponent<PlayerState>()._maxHp);
+			//		j++;
+			//	}
+			//}
 
 			//draw target info
-			if (_gameManagementObject.GetComponent<LocalPlayer>()
-			._playerPrefab.GetComponent<InputDispatcher>()
-			._currentTarget != null &&
-				_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<InputDispatcher>()._currentTarget._networkViewID != _gameManagementObject.GetComponent<LocalPlayer>()._networkViewID )
-			{
-				GUI.DrawTexture(
-					new Rect(_targetHealthbarPositionLeft, _targetHealthbarPositionTop, _healthbarLength, _healthbarHeight),
-					healthBarTexture);
-				GUI.DrawTexture(
-					new Rect(_targetHealthbarPositionLeft + 3, _targetHealthbarPositionTop + 3, GetTargetHealthbarLength(),
-						_healthbarHeight - 6),
-					currentHealthTexture);
+			//if (_gameManagementObject.GetComponent<LocalPlayer>()
+			//._playerPrefab.GetComponent<InputDispatcher>()
+			//._currentTarget != null &&
+			//	_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<InputDispatcher>()._currentTarget._networkViewID != _gameManagementObject.GetComponent<LocalPlayer>()._networkViewID )
+			//{
+			//	GUI.DrawTexture(
+			//		new Rect(_targetHealthbarPositionLeft, _targetHealthbarPositionTop, _healthbarLength, _healthbarHeight),
+			//		healthBarTexture);
+			//	GUI.DrawTexture(
+			//		new Rect(_targetHealthbarPositionLeft + 3, _targetHealthbarPositionTop + 3, GetTargetHealthbarLength(),
+			//			_healthbarHeight - 6),
+			//		currentHealthTexture);
 
-				GUI.Label(new Rect(_targetHealthbarPositionLeft, _targetHealthbarPositionTop, _healthbarLength, _healthbarHeight),
-					"" + _gameManagementObject.GetComponent<LocalPlayer>()
-				._playerPrefab.GetComponent<InputDispatcher>()
-				._currentTarget._playerPrefab.GetComponent<PlayerState>()
-				._hp,
-					healthBarGUIStyle);
-			}
-			else
-			{
-				//Debug.Log("No target selected");
-			}
+			//	GUI.Label(new Rect(_targetHealthbarPositionLeft, _targetHealthbarPositionTop, _healthbarLength, _healthbarHeight),
+			//		"" + _gameManagementObject.GetComponent<LocalPlayer>()
+			//	._playerPrefab.GetComponent<InputDispatcher>()
+			//	._currentTarget._playerPrefab.GetComponent<PlayerState>()
+			//	._hp,
+			//		healthBarGUIStyle);
+			//}
+			//else
+			//{
+			//	//Debug.Log("No target selected");
+			//}
 
 
 			//Score

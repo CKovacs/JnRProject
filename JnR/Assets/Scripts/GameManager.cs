@@ -8,15 +8,16 @@ public class GameManager : MonoBehaviour
 	public CombatHandler _combatHandler;
 	public GameScore _gameScore;
 	public bool _isRunning;
+	private int _playerCount;
 	public List<PlayerObject> _playerList = new List<PlayerObject>();
 	public int _playerListCount;
 
 	private ServerSkillContainer _skillContainer;
 	public Transform _spawnablePlayerPrefab;
 
-	private bool _teamSelectionDone = false;
-	private int _playerCount = 0;
 	private bool _syncPlayerName = true;
+	private bool _teamSelectionDone;
+
 	private void Start()
 	{
 		_skillContainer = GetComponent<ServerSkillContainer>();
@@ -30,15 +31,15 @@ public class GameManager : MonoBehaviour
 			_combatHandler.Update(Time.deltaTime);
 			if (_teamSelectionDone == false && _playerListCount != 0)
 			{
-				CheckIfTeamSelectionDone();	
+				CheckIfTeamSelectionDone();
 			}
-			
 		}
 		else
 		{
 			if (GetComponent<LocalPlayer>()._isInstantiated && _syncPlayerName)
 			{
-				networkView.RPC("SyncName", RPCMode.AllBuffered, GetComponent<LocalPlayer>()._networkPlayer, GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name);
+				networkView.RPC("SyncName", RPCMode.AllBuffered, GetComponent<LocalPlayer>()._networkPlayer,
+					GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name);
 				_syncPlayerName = true;
 			}
 		}
@@ -94,29 +95,21 @@ public class GameManager : MonoBehaviour
 		var playerPrefab = Instantiate(_spawnablePlayerPrefab, spawnPosition, Quaternion.identity) as Transform;
 		var networkView = playerPrefab.GetComponent<NetworkView>();
 		networkView.viewID = transformViewID;
-		
-        playerPrefab.GetComponent<PlayerState>()._team = Team.None;
-        
-		//if (_playerCount%2 == 0)
-        //{
-        //	playerPrefab.GetComponent<PlayerState>()._team = Team.Red;
-        //}
-        //else
-        //{
-        //	playerPrefab.GetComponent<PlayerState>()._team = Team.Blue;
-        //}
-		
+
+		playerPrefab.GetComponent<PlayerState>()._team = Team.None;
+
+
 		var po = new PlayerObject();
 		po._networkPlayer = playerIdentifier;
 		po._networkViewID = transformViewID;
 		po._playerPrefab = playerPrefab;
 		po._playerPrefab.GetComponent<PlayerState>()._networkPlayer = playerIdentifier;
 		AddPlayerObject(po);
-	
-        
-        playerPrefab.GetComponentInChildren<FloatingHealthBar>()._gameManagementObject = transform;
-    
-    
+
+		playerPrefab.GetComponentInChildren<FloatingHealthBar>().enabled = true;
+		playerPrefab.GetComponentInChildren<FloatingHealthBar>()._gameManagementObject = transform;
+
+
 		if (playerIdentifier == GetComponent<LocalPlayer>()._networkPlayer)
 		{
 			playerPrefab.GetComponent<PlayerState>().name = PlayerPrefs.GetString("playerName");
@@ -149,13 +142,13 @@ public class GameManager : MonoBehaviour
 			playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
 			playerPrefab.GetComponent<AnimationHandle>()._localPlayer = true;
 			playerPrefab.GetComponent<PlayerState>()._gameManagementObject = transform;
-			
-		    //Healthbar for CurrentPlayer
-            playerPrefab.GetComponentInChildren<FloatingHealthBar>().enabled = false;
-            playerPrefab.GetComponentInChildren<FloatingHealthBar>()._gameManagementObject = transform;
+
+			//Healthbar for CurrentPlayer
+			playerPrefab.GetComponentInChildren<FloatingHealthBar>().enabled = false;
+			playerPrefab.GetComponentInChildren<FloatingHealthBar>()._gameManagementObject = transform;
 
 			return;
-		} 
+		}
 		if (Network.isServer)
 		{
 			////////////////////
@@ -182,8 +175,8 @@ public class GameManager : MonoBehaviour
 			playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
 			playerPrefab.GetComponent<PlayerState>()._gameManagementObject = transform;
 			playerPrefab.GetComponent<AnimationHandle>()._localPlayer = false;
-            playerPrefab.GetComponentInChildren<FloatingHealthBar>()._gameManagementObject = transform;
-
+			playerPrefab.GetComponentInChildren<FloatingHealthBar>()._gameManagementObject = transform;
+			playerPrefab.GetComponentInChildren<FloatingHealthBar>().enabled = false;
 			// Add to combat system
 			_combatHandler.AddPlayer(po);
 		}
@@ -192,14 +185,14 @@ public class GameManager : MonoBehaviour
 	//Debug GUI for Client and Server
 	private void OnGUI()
 	{
-		
 		if (Network.isServer)
 		{
 			for (int i = 0; i < _playerList.Count; ++i)
 			{
 				GUILayout.Label("NetworkPlayer:" + _playerList[i]._networkPlayer, new GUILayoutOption[0]);
 				GUILayout.Label("NetworkViewID:" + _playerList[i]._networkViewID, new GUILayoutOption[0]);
-				GUILayout.Label("Selection done: " + _playerList[i]._playerPrefab.GetComponent<PlayerState>()._teamSelected, new GUILayoutOption[0]);
+				GUILayout.Label("Selection done: " + _playerList[i]._playerPrefab.GetComponent<PlayerState>()._teamSelected,
+					new GUILayoutOption[0]);
 				GUILayout.Label("HP = " + _playerList[i]._playerPrefab.GetComponent<PlayerState>()._hp);
 				GUILayout.BeginHorizontal();
 				if (GUILayout.Button("Hurt(51)", new GUILayoutOption[0]))
@@ -226,40 +219,39 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-
-			var lp = GetComponent<LocalPlayer>();
-			GUILayout.Label("NetworkPlayer:" + lp._networkPlayer, new GUILayoutOption[0]);
-			GUILayout.Label("NetworkViewID:" + lp._networkPlayer, new GUILayoutOption[0]);
-			if (lp._playerPrefab != null)
-			{
-				GUILayout.Label("Healthpoints:" + lp._playerPrefab.GetComponent<PlayerState>()._hp, new GUILayoutOption[0]);
-				if (Team.Blue == lp._playerPrefab.GetComponent<PlayerState>()._team)
-				{
-					GUILayout.Label("Team: Blue");
-				}
-				else
-				{
-					GUILayout.Label("Team: Red");
-				}
-				//GUILayout.Label("Redpoints:" + _gameScore._flagsCapturedTeamRed, new GUILayoutOption[0]);
-				//GUILayout.Label("Bluepoints:" + _gameScore._flagsCapturedTeamBlue, new GUILayoutOption[0]);
-				GUILayout.BeginHorizontal();
-				GUILayout.Label("RED FLAG CARRIED BY ", new GUILayoutOption[0]);
-				if (_gameScore._playerHoldingFlagRed != null)
-				{
-					GUILayout.Label("PLAYER " + _gameScore._playerHoldingFlagRed.GetComponent<PlayerState>()._networkPlayer,
-						new GUILayoutOption[0]);
-				}
-				GUILayout.EndHorizontal();
-				GUILayout.BeginHorizontal();
-				GUILayout.Label("BLUE FLAG CARRIED BY ", new GUILayoutOption[0]);
-				if (_gameScore._playerHoldingFlagBlue != null)
-				{
-					GUILayout.Label("PLAYER " + _gameScore._playerHoldingFlagBlue.GetComponent<PlayerState>()._networkPlayer,
-						new GUILayoutOption[0]);
-				}
-				GUILayout.EndHorizontal();
-			}
+			//var lp = GetComponent<LocalPlayer>();
+			//GUILayout.Label("NetworkPlayer:" + lp._networkPlayer, new GUILayoutOption[0]);
+			//GUILayout.Label("NetworkViewID:" + lp._networkPlayer, new GUILayoutOption[0]);
+			//if (lp._playerPrefab != null)
+			//{
+			//	GUILayout.Label("Healthpoints:" + lp._playerPrefab.GetComponent<PlayerState>()._hp, new GUILayoutOption[0]);
+			//	if (Team.Blue == lp._playerPrefab.GetComponent<PlayerState>()._team)
+			//	{
+			//		GUILayout.Label("Team: Blue");
+			//	}
+			//	else
+			//	{
+			//		GUILayout.Label("Team: Red");
+			//	}
+			//	//GUILayout.Label("Redpoints:" + _gameScore._flagsCapturedTeamRed, new GUILayoutOption[0]);
+			//	//GUILayout.Label("Bluepoints:" + _gameScore._flagsCapturedTeamBlue, new GUILayoutOption[0]);
+			//	GUILayout.BeginHorizontal();
+			//	GUILayout.Label("RED FLAG CARRIED BY ", new GUILayoutOption[0]);
+			//	if (_gameScore._playerHoldingFlagRed != null)
+			//	{
+			//		GUILayout.Label("PLAYER " + _gameScore._playerHoldingFlagRed.GetComponent<PlayerState>()._networkPlayer,
+			//			new GUILayoutOption[0]);
+			//	}
+			//	GUILayout.EndHorizontal();
+			//	GUILayout.BeginHorizontal();
+			//	GUILayout.Label("BLUE FLAG CARRIED BY ", new GUILayoutOption[0]);
+			//	if (_gameScore._playerHoldingFlagBlue != null)
+			//	{
+			//		GUILayout.Label("PLAYER " + _gameScore._playerHoldingFlagBlue.GetComponent<PlayerState>()._networkPlayer,
+			//			new GUILayoutOption[0]);
+			//	}
+			//	GUILayout.EndHorizontal();
+			//}
 		}
 	}
 
@@ -296,25 +288,26 @@ public class GameManager : MonoBehaviour
 	private void CheckIfTeamSelectionDone()
 	{
 		bool selectionDone = true;
-        int numberOfPlayersReady = 0;
-        int numberOfPlayersNotReady = 0;
+		int numberOfPlayersReady = 0;
+		int numberOfPlayersNotReady = 0;
 		foreach (PlayerObject player in _playerList)
 		{
 			//Debug.Log("Checking player " + player._playerPrefab.GetComponent<PlayerState>().name + ": if team selected: " + player._playerPrefab.GetComponent<PlayerState>()._teamSelected);
 			if (player._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
 			{
-                numberOfPlayersNotReady++;
-			} else
-            {
-                numberOfPlayersReady++;
-            }
+				numberOfPlayersNotReady++;
+			}
+			else
+			{
+				numberOfPlayersReady++;
+			}
 		}
-        if(numberOfPlayersReady==_playerListCount && numberOfPlayersNotReady == 0)
-        {
-            Debug.Log("Team Selection is Done");
-            networkView.RPC("KillTeamSelectionObject", RPCMode.OthersBuffered);
-            _teamSelectionDone = true;
-        }	
+		if (numberOfPlayersReady == _playerListCount && numberOfPlayersNotReady == 0)
+		{
+			Debug.Log("Team Selection is Done");
+			networkView.RPC("KillTeamSelectionObject", RPCMode.OthersBuffered);
+			_teamSelectionDone = true;
+		}
 	}
 
 	/*! This networkfunction syncronizes the attributes of a certain player to all peers
@@ -324,38 +317,43 @@ public class GameManager : MonoBehaviour
 	private void KillTeamSelectionObject()
 	{
 		Debug.Log("in killTeamSelectionobject");
-		var teamSelection = Object.FindObjectOfType<GUITeamSelection>();
+		var teamSelection = FindObjectOfType<GUITeamSelection>();
 		if (teamSelection != null)
 		{
 			Debug.Log("object found -> delete");
 			Destroy(teamSelection);
 		}
-		
 	}
-    
-    [RPC]
-    private void SetColorOfPlayer(NetworkPlayer player, int color)
-    {
-        networkView.RPC("InvokeColorOfPlayer", RPCMode.OthersBuffered, player,color );
-    }
 
-    [RPC]
-    private void InvokeColorOfPlayer(NetworkPlayer player, int color)
-    {
-        switch(color)
-        {
-            case 0:
-                GetPlayerObject(player)._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color",Color.blue);
-                break;
-            case 1:
-                GetPlayerObject(player)._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color",Color.red);
-                break;
-            case 2:
-                GetPlayerObject(player)._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color",Color.gray);
-                break;
-        }
-    }
-    
+	[RPC]
+	private void SetColorOfPlayer(NetworkPlayer player, int color)
+	{
+		networkView.RPC("InvokeColorOfPlayer", RPCMode.OthersBuffered, player, color);
+	}
+
+	[RPC]
+	private void InvokeColorOfPlayer(NetworkPlayer player, int color)
+	{
+		switch (color)
+		{
+			case 0:
+				GetPlayerObject(player)
+					._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>()
+					.material.SetColor("_Color", Color.blue);
+				break;
+			case 1:
+				GetPlayerObject(player)
+					._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>()
+					.material.SetColor("_Color", Color.red);
+				break;
+			case 2:
+				GetPlayerObject(player)
+					._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>()
+					.material.SetColor("_Color", Color.gray);
+				break;
+		}
+	}
+
 
 	[RPC]
 	private void SyncValuesForPlayer(NetworkPlayer player, int id, int value)
@@ -365,6 +363,7 @@ public class GameManager : MonoBehaviour
 
 	/*! A server-side function to resolve a players death
      */
+
 	[RPC]
 	private void SyncName(NetworkPlayer player, string playername)
 	{
@@ -785,16 +784,17 @@ public class GameManager : MonoBehaviour
 	[RPC]
 	private void SC_RemoteAddPlayerToTeam(NetworkPlayer player, int team)
 	{
-        Debug.Log("REMOTE Name: " + GetPlayerObject(player)._playerPrefab.GetComponent<PlayerState>().name + " Int Team = " + team);
-        switch(team)
-        {
-            case 0:
-                GetPlayerObject(player)._playerPrefab.GetComponent<PlayerState>()._team = Team.Blue;
-                break;
-            case 1:
-                GetPlayerObject(player)._playerPrefab.GetComponent<PlayerState>()._team = Team.Red;
-                break;
-        }
+		Debug.Log("REMOTE Name: " + GetPlayerObject(player)._playerPrefab.GetComponent<PlayerState>().name + " Int Team = " +
+		          team);
+		switch (team)
+		{
+			case 0:
+				GetPlayerObject(player)._playerPrefab.GetComponent<PlayerState>()._team = Team.Blue;
+				break;
+			case 1:
+				GetPlayerObject(player)._playerPrefab.GetComponent<PlayerState>()._team = Team.Red;
+				break;
+		}
 	}
 
 	[RPC]
@@ -809,40 +809,41 @@ public class GameManager : MonoBehaviour
 	[RPC]
 	private void AddPlayerToTeam(string name, int team)
 	{
-        Debug.Log("Name: " + name  + " Int Team = " + team);
-		foreach (PlayerObject player in _playerList.Where(player => player._playerPrefab.GetComponent<PlayerState>().name == name))
+		Debug.Log("Name: " + name + " Int Team = " + team);
+		foreach (
+			PlayerObject player in _playerList.Where(player => player._playerPrefab.GetComponent<PlayerState>().name == name))
 		{
-            switch(team)
-            {
-                case 0:
-                    player._playerPrefab.GetComponent<PlayerState>()._team = Team.Blue;
-                    break;
-                case 1:
-                    player._playerPrefab.GetComponent<PlayerState>()._team = Team.Red;
-                    break;
-            }
-			networkView.RPC("SC_RemoteAddPlayerToTeam", RPCMode.AllBuffered, player._networkPlayer,team);
+			switch (team)
+			{
+				case 0:
+					player._playerPrefab.GetComponent<PlayerState>()._team = Team.Blue;
+					break;
+				case 1:
+					player._playerPrefab.GetComponent<PlayerState>()._team = Team.Red;
+					break;
+			}
+			networkView.RPC("SC_RemoteAddPlayerToTeam", RPCMode.AllBuffered, player._networkPlayer, team);
 		}
 	}
 
-	
+
 	[RPC]
 	private void GetPlayers()
 	{
 		var connectedPlayers = new List<PlayerState>();
 
-		foreach (var player in _playerList)
+		foreach (PlayerObject player in _playerList)
 		{
 			connectedPlayers.Add(player._playerPrefab.GetComponent<PlayerState>());
 		}
 		//return connectedPlayers;
 	}
-	
+
 	public IEnumerable<PlayerState> GetPlayerList()
 	{
 		var connectedPlayers = new List<PlayerState>();
 
-		foreach (var player in _playerList)
+		foreach (PlayerObject player in _playerList)
 		{
 			connectedPlayers.Add(player._playerPrefab.GetComponent<PlayerState>());
 		}
@@ -855,5 +856,4 @@ public class GameManager : MonoBehaviour
 		Debug.Log("RPC: SetTeamSelected");
 		GetPlayerObject(player)._playerPrefab.GetComponent<PlayerState>()._teamSelected = true;
 	}
-
 }

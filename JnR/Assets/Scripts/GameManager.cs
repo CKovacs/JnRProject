@@ -113,6 +113,10 @@ public class GameManager : MonoBehaviour
 		po._playerPrefab.GetComponent<PlayerState>()._networkPlayer = playerIdentifier;
 		AddPlayerObject(po);
 	
+        
+        playerPrefab.GetComponentInChildren<FloatingHealthBar>()._gameManagementObject = transform;
+    
+    
 		if (playerIdentifier == GetComponent<LocalPlayer>()._networkPlayer)
 		{
 			playerPrefab.GetComponent<PlayerState>().name = PlayerPrefs.GetString("playerName");
@@ -146,10 +150,12 @@ public class GameManager : MonoBehaviour
 			playerPrefab.GetComponent<AnimationHandle>()._localPlayer = true;
 			playerPrefab.GetComponent<PlayerState>()._gameManagementObject = transform;
 			
-		
+		    //Healthbar for CurrentPlayer
+            playerPrefab.GetComponentInChildren<FloatingHealthBar>().enabled = false;
+            playerPrefab.GetComponentInChildren<FloatingHealthBar>()._gameManagementObject = transform;
 
 			return;
-		}
+		} 
 		if (Network.isServer)
 		{
 			////////////////////
@@ -176,6 +182,7 @@ public class GameManager : MonoBehaviour
 			playerPrefab.GetComponent<AnimationHandle>()._gameManagementObject = transform;
 			playerPrefab.GetComponent<PlayerState>()._gameManagementObject = transform;
 			playerPrefab.GetComponent<AnimationHandle>()._localPlayer = false;
+            playerPrefab.GetComponentInChildren<FloatingHealthBar>()._gameManagementObject = transform;
 
 			// Add to combat system
 			_combatHandler.AddPlayer(po);

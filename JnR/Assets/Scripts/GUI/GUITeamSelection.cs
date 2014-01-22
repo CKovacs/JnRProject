@@ -36,6 +36,7 @@ public class GUITeamSelection : MonoBehaviour
 			float rx = Screen.width / _originalWidth;
 			float ry = Screen.height / _originalHeight;
 
+			
 			//Background
 			GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(rx, ry, 1));
 			GUI.DrawTexture(new Rect(0, 0, _originalWidth, _originalHeight), teamSelectionBackground);
@@ -61,7 +62,7 @@ public class GUITeamSelection : MonoBehaviour
 						offset = (countNotConnectedPlayers - 5) * 60;
 					}
 
-					GUI.Box(new Rect((Screen.width / 2) + tmp, 280 + offset, 283, 56), "" + player.name, playerNotSelectedGUIStyle);
+					GUI.Box(new Rect((_originalWidth / 2) + tmp, 280 + offset, 283, 56), "" + player.name, playerNotSelectedGUIStyle);
 					countNotConnectedPlayers++;
 				}
 			}

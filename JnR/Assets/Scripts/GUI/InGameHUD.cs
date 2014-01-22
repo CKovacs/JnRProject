@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-[RequireComponent(typeof(GUITexture))]
 
 public class InGameHUD : MonoBehaviour
 {
@@ -43,10 +42,9 @@ public class InGameHUD : MonoBehaviour
 	public Texture2D flagRedYellow;
 	public Texture2D flagRedRed;
 	//skillbar stuff
-	public Texture2D iconCooldown; //black texture, 50% transparent, .png
-	//todo: remove when skills are loaded dynamically
-	//todo: also load dynamically
-	public Texture2D iconMember1, iconMember2, iconMember3, iconMember4;
+	public Texture2D iconCooldown; 
+
+	
 
 	public int playerHp = 100;
 	public Texture2D spell1, spell2, spell3, spell4;
@@ -108,8 +106,8 @@ public class InGameHUD : MonoBehaviour
 				{
 					GUI.Label(new Rect(_skillIconPositions[skill._id], _skillBarPositionTop, SkillIconSize, SkillIconSize),
 						"" + (int) (skill._cooldownCounter + 1), cooldownTimerGUIStyle);
-					//GUI.DrawTexture(new Rect(_skillIconPositions[skill._id], _skillBarPositionTop, SkillIconSize, SkillIconSize),
-					//	iconCooldown);
+					GUI.DrawTexture(new Rect(_skillIconPositions[skill._id], _skillBarPositionTop, SkillIconSize, SkillIconSize),
+						iconCooldown);
 					
 				}
 			}

@@ -37,9 +37,10 @@ public class GUITeamSelection : MonoBehaviour
 			float ry = Screen.height / _originalHeight;
 
 			//Background
-			GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), teamSelectionBackground);
-
 			GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(rx, ry, 1));
+			GUI.DrawTexture(new Rect(0, 0, _originalWidth, _originalHeight), teamSelectionBackground);
+
+			
 
 			//Draw non-connected Players
 			int countNotConnectedPlayers = 0;

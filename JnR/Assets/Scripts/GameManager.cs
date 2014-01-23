@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -17,12 +18,20 @@ public class GameManager : MonoBehaviour
 
 	private bool _syncPlayerName = true;
 	private bool _teamSelectionDone;
-
+	//todo: set value correctly
+	public bool _tutorial = false;
 	private void Start()
 	{
+		if (EditorApplication.currentScene.Contains("Tutorial"))
+		{
+			Debug.Log("tutorial");
+			_tutorial = true;
+		}
+
 		_skillContainer = GetComponent<ServerSkillContainer>();
 		_combatHandler = new CombatHandler(networkView);
 	}
+
 
 	private void Update()
 	{
@@ -111,8 +120,7 @@ public class GameManager : MonoBehaviour
 
 
 		if (playerIdentifier == GetComponent<LocalPlayer>()._networkPlayer)
-		{
-			playerPrefab.GetComponent<PlayerState>().name = PlayerPrefs.GetString("playerName");
+		{playerPrefab.GetComponent<PlayerState>().name = PlayerPrefs.GetString("playerName");
 			////////////////////
 			{
 				string text = string.Empty;

@@ -17,7 +17,7 @@ public class InputDispatcher : MonoBehaviour
 	public CooldownHandler _cooldownHandle;
 	public PlayerObject _currentTarget;
 	public Transform _gameManagementObject;
-	
+
 	private GameManager _gameManager;
 	private float _horizontalInput;
 	private bool _isBlocking = false;
@@ -41,7 +41,7 @@ public class InputDispatcher : MonoBehaviour
 
 	private GameObject _targetRingInstance;
 	public GameObject _targetRingPrefab;
-
+	public bool _tutorial = true;
 
 	//MovementHousekeeping
 	private float _verticalInput;
@@ -53,7 +53,7 @@ public class InputDispatcher : MonoBehaviour
 		_myself =
 			_currentTarget = _gameManager.GetPlayerObject(_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);
 		_targetRingInstance = Instantiate(_targetRingPrefab) as GameObject;
-		
+
 		_cooldownHandle = new CooldownHandler();
 	}
 
@@ -79,7 +79,10 @@ public class InputDispatcher : MonoBehaviour
 					_animHandle.IdleRun(true);
 				}
 				//Send Movement Input to Server
-				networkView.RPC("S_SendUserInput", RPCMode.Server, _verticalInput, _horizontalInput, (!_jumpInput) ? 0 : 1);
+				if (!_tutorial)
+				{
+					networkView.RPC("S_SendUserInput", RPCMode.Server, _verticalInput, _horizontalInput, (!_jumpInput) ? 0 : 1);
+				}
 			}
 		}
 		if (_verticalInput == 0 && _horizontalInput == 0)
@@ -143,9 +146,13 @@ public class InputDispatcher : MonoBehaviour
 			_animHandle.OneHandHit(true);
 
 			Effect3DBuilder.DoEffect(_myself._playerPrefab.transform, _currentTarget._playerPrefab.transform, _skillAutohit);
-			_gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
-				_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-				_currentTarget._networkPlayer, _skillAutohit._id);
+			if (!_tutorial)
+			{
+				_gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+					_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+					_currentTarget._networkPlayer, _skillAutohit._id);
+			}
+
 
 			_cooldownHandle.AddCooldown(AUTOHIT, _skillAutohit._cooldown);
 		}
@@ -161,11 +168,12 @@ public class InputDispatcher : MonoBehaviour
 		if ((Input.GetAxis(LR) == -1 || Input.GetKeyDown(KeyCode.X)) && !_cooldownHandle.HasCooldown(LR))
 		{
 			Debug.Log("Block");
-
-			_gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
-				_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-				_myself._networkPlayer, _skillBlock._id);
-
+			if (!_tutorial)
+			{
+				_gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+					_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+					_myself._networkPlayer, _skillBlock._id);
+			}
 			_cooldownHandle.AddCooldown(LR, _skillBlock._cooldown);
 		}
 
@@ -178,9 +186,12 @@ public class InputDispatcher : MonoBehaviour
 			_animHandle.OneHandHit(true);
 
 			_gameManagementObject.GetComponent<InGameHUD>().StartCooldown(0, _skillStandard._cooldown);
-			_gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
-				_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-				_currentTarget._networkPlayer, _skillStandard._id);
+			if (!_tutorial)
+			{
+				_gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+					_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+					_currentTarget._networkPlayer, _skillStandard._id);
+			}
 
 			_cooldownHandle.AddCooldown(SKILL13 + "1", _skillStandard._cooldown);
 		}
@@ -192,10 +203,12 @@ public class InputDispatcher : MonoBehaviour
 			Debug.Log("Skill 2" + _skillDefence.name);
 			_animHandle.OneHandHit(true);
 			_gameManagementObject.GetComponent<InGameHUD>().StartCooldown(1, _skillDefence._cooldown);
-			_gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
-				_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-				_currentTarget._networkPlayer, _skillDefence._id);
-
+			if (!_tutorial)
+			{
+				_gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+					_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+					_currentTarget._networkPlayer, _skillDefence._id);
+			}
 			_cooldownHandle.AddCooldown(SKILL24 + "1", _skillDefence._cooldown);
 		}
 
@@ -206,10 +219,12 @@ public class InputDispatcher : MonoBehaviour
 			Debug.Log("Skill 3" + _skillUtility.name);
 			_animHandle.OneHandHit(true);
 			_gameManagementObject.GetComponent<InGameHUD>().StartCooldown(2, _skillUtility._cooldown);
-			_gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
-				_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-				_currentTarget._networkPlayer, _skillUtility._id);
-
+			if (!_tutorial)
+			{
+				_gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+					_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+					_currentTarget._networkPlayer, _skillUtility._id);
+			}
 			_cooldownHandle.AddCooldown(SKILL13 + "2", _skillUtility._cooldown);
 		}
 
@@ -220,55 +235,79 @@ public class InputDispatcher : MonoBehaviour
 			Debug.Log("Skill 4" + _skillUltimate.name);
 			_animHandle.OneHandHit(true);
 			_gameManagementObject.GetComponent<InGameHUD>().StartCooldown(3, _skillUltimate._cooldown);
-			_gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
-				_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
-				_currentTarget._networkPlayer, _skillUltimate._id);
-
+			if (!_tutorial)
+			{
+				_gameManagementObject.networkView.RPC("S_RemoteSkillUse", RPCMode.Server,
+					_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,
+					_currentTarget._networkPlayer, _skillUltimate._id);
+			}
 			_cooldownHandle.AddCooldown(SKILL24 + "2", _skillUltimate._cooldown);
 		}
 
 		if (Input.GetKeyDown(KeyCode.T))
 		{
 			Debug.Log("Keycode.T");
-			_gameManagementObject.networkView.RPC("S_ResetPositionToSpawnpoint", RPCMode.Server,
-				_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);
+			if (!_tutorial)
+			{
+				_gameManagementObject.networkView.RPC("S_ResetPositionToSpawnpoint", RPCMode.Server,
+					_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);
+			}
 		}
 
 
 		//TeamSelection
-		if (Input.GetButtonDown(RIGHTSELECT) || Input.GetKeyDown(KeyCode.Alpha1))
+		if (!_tutorial)
 		{
-			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
-            {
-                Debug.Log("Blue");
-                _gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 0);
-                _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color",Color.blue);
-                _gameManagementObject.networkView.RPC("SetColorOfPlayer", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,0);
-            }
-        }
-		if (Input.GetButtonDown(LEFTSELECT) || Input.GetKeyDown(KeyCode.Alpha2))
-		{
-			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false)
-            {
-                Debug.Log("Red");
-                _gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 1);
-                _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color",Color.red);
-                _gameManagementObject.networkView.RPC("SetColorOfPlayer", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,1);
-            }
-        }
-		if (Input.GetKeyDown(KeyCode.Alpha3))
-		{
-			if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected == false) 
-            {
-				_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 2);
-                _gameManagementObject.networkView.RPC("SetColorOfPlayer", RPCMode.Server, _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer,2);
-                _gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>().material.SetColor("_Color",Color.gray);
-            }
-        }
-		if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetButtonDown("Jump"))
-		{
-			Debug.Log("ID: selection done");
-			_gameManagementObject.networkView.RPC("S_SetTeamSelected", RPCMode.All, _gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);
+			if (Input.GetButtonDown(RIGHTSELECT) || Input.GetKeyDown(KeyCode.Alpha1))
+			{
+				if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected ==
+				    false)
+				{
+					Debug.Log("Blue");
+					_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server,
+						_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 0);
+					_gameManagementObject.GetComponent<LocalPlayer>()
+						._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>()
+						.material.SetColor("_Color", Color.blue);
+					_gameManagementObject.networkView.RPC("SetColorOfPlayer", RPCMode.Server,
+						_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer, 0);
+				}
+			}
+			if (Input.GetButtonDown(LEFTSELECT) || Input.GetKeyDown(KeyCode.Alpha2))
+			{
+				if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected ==
+				    false)
+				{
+					Debug.Log("Red");
+					_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server,
+						_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 1);
+					_gameManagementObject.GetComponent<LocalPlayer>()
+						._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>()
+						.material.SetColor("_Color", Color.red);
+					_gameManagementObject.networkView.RPC("SetColorOfPlayer", RPCMode.Server,
+						_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer, 1);
+				}
+			}
+			if (Input.GetKeyDown(KeyCode.Alpha3))
+			{
+				if (_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>()._teamSelected ==
+				    false)
+				{
+					_gameManagementObject.networkView.RPC("AddPlayerToTeam", RPCMode.Server,
+						_gameManagementObject.GetComponent<LocalPlayer>()._playerPrefab.GetComponent<PlayerState>().name, 2);
+					_gameManagementObject.networkView.RPC("SetColorOfPlayer", RPCMode.Server,
+						_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer, 2);
+					_gameManagementObject.GetComponent<LocalPlayer>()
+						._playerPrefab.GetComponentInChildren<SkinnedMeshRenderer>()
+						.material.SetColor("_Color", Color.gray);
+				}
+			}
+			if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetButtonDown("Jump"))
+			{
+				Debug.Log("ID: selection done");
+				_gameManagementObject.networkView.RPC("S_SetTeamSelected", RPCMode.All,
+					_gameManagementObject.GetComponent<LocalPlayer>()._networkPlayer);
+			}
 		}
 		_cooldownHandle.UpdateCooldowns(Time.deltaTime);
 	}
@@ -326,7 +365,7 @@ public class InputDispatcher : MonoBehaviour
 				}
 			}
 		}
-		
+
 		return _currentTarget;
 	}
 
